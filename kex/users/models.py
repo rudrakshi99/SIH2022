@@ -1,0 +1,71 @@
+from random import randint
+import uuid
+from datetime import datetime
+
+from django.contrib.auth.models import AbstractUser
+from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
+from django.db import models
+from rest_framework_simplejwt.tokens import RefreshToken
+
+
+class User(AbstractUser):
+    """
+    Default custom user model for Kex.
+    If adding fields that need to be filled at user signup,
+    check forms.SignupForm and forms.SocialSignupForms accordingly.
+    """
+
+    email = models.EmailField(_("email address"), unique=True)
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False, db_index=True)
+    address = models.CharField(_("Address of User"), max_length=100, blank=True)
+    city = models.CharField(_("City of User"), max_length=50, blank=True)
+    state = models.CharField(_("State of User"), max_length=50, blank=True)
+    pin_code = models.IntegerField(_("Pincode of User"), blank=True, null=True)
+    profile_picture = models.ImageField(_("Image of User"), blank=True)
+    phone_number = models.CharField(
+        _("Phone Number"), max_length=10, null=True, unique=True
+    )
+    secondary_phone_number = models.CharField(
+        _("Secondary Phone Number"), max_length=10, blank=True, null=True
+    )
+    is_verified = models.BooleanField(default=False)
+
+    otp = models.IntegerField(blank=True, null=True)
+    otp_sent_at = models.DateTimeField(blank=True, null=True)
+
+    def tokens(self):
+        refresh = RefreshToken.for_user(self)
+        return {"refresh": str(refresh), "access": str(refresh.access_token)}
+
+    def otp_expired(self):
+        print((datetime.now() - self.otp_sent_at.replace(tzinfo=None)).total_seconds())
+        if (
+            datetime.now() - self.otp_sent_at.replace(tzinfo=None)
+        ).total_seconds() > 900:
+            return True
+        return False
+
+    def get_absolute_url(self):
+        """Get url for user's detail view.
+
+        Returns:
+            str: URL for user detail.
+
+        """
+        return reverse("users:detail", kwargs={"username": self.username})
+
+    def save(self, *args, **kwargs):
+        if not self.username:
+            username = "%s.%s" % (self.first_name.lower(), self.last_name.lower())
+            is_valid = False
+
+            while not is_valid:
+                try:
+                    User.objects.get(username=username)
+                    username += str(randint(0, 9))
+                except User.DoesNotExist:
+                    is_valid = True
+            self.username = username
+
+        super().save(*args, **kwargs)

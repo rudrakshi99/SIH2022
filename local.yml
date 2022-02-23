@@ -1,0 +1,84 @@
+version: '3'
+
+volumes:
+  kex_local_postgres_data: {}
+  kex_local_postgres_data_backups: {}
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: kex_local_django
+    container_name: kex_local_django
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - .:/app:z
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    ports:
+      - "8000:8000"
+    command: /start
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: kex_production_postgres
+    container_name: kex_local_postgres
+    volumes:
+      - kex_local_postgres_data:/var/lib/postgresql/data:Z
+      - kex_local_postgres_data_backups:/backups:z
+    env_file:
+      - ./.envs/.local/.postgres
+
+  docs:
+    image: kex_local_docs
+    container_name: kex_local_docs
+    build:
+      context: .
+      dockerfile: ./compose/local/docs/Dockerfile
+    env_file:
+      - ./.envs/.local/.django
+    volumes:
+      - ./docs:/docs:z
+      - ./config:/app/config:z
+      - ./kex:/app/kex:z
+    ports:
+      - "7000:7000"
+    command: /start-docs
+
+  redis:
+    image: redis:6
+    container_name: kex_local_redis
+
+  celeryworker:
+    <<: *django
+    image: kex_local_celeryworker
+    container_name: kex_local_celeryworker
+    depends_on:
+      - redis
+      - postgres
+    ports: []
+    command: /start-celeryworker
+
+  celerybeat:
+    <<: *django
+    image: kex_local_celerybeat
+    container_name: kex_local_celerybeat
+    depends_on:
+      - redis
+      - postgres
+    ports: []
+    command: /start-celerybeat
+
+  flower:
+    <<: *django
+    image: kex_local_flower
+    container_name: kex_local_flower
+    ports:
+      - "5555:5555"
+    command: /start-flower
