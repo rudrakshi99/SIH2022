@@ -79,11 +79,14 @@ THIRD_PARTY_APPS = [
     "drf_spectacular",
     "rest_framework_simplejwt",
     "drf_yasg",
+    "django_filters",
 ]
 
 LOCAL_APPS = [
     "kex.users",
     "kex.core",
+    "kex.equipment",
+    "kex.brand",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -315,6 +318,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
