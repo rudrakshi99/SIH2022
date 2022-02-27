@@ -4,24 +4,13 @@ from datetime import datetime
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework.exceptions import AuthenticationFailed, ErrorDetail
+from rest_framework.exceptions import AuthenticationFailed
 from django.contrib import auth
-from kex.core.utils import send_otp
+from kex.core.validators import validator_mobile_number
+from kex.core.utils import response_payload
+from kex.users.utils import TwilioHandler
 
 User = get_user_model()
-
-
-class MyTokenObtainPairSerializer:
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-
-        # Add custom claims
-        token["uuid"] = str(user.uuid)
-
-        return token
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -36,8 +25,10 @@ class UserSignupSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(required=True)
     last_name = serializers.CharField(required=True)
     pin_code = serializers.IntegerField(required=True)
-    phone_number = serializers.IntegerField(required=True)
-    email = serializers.EmailField(required=True)
+    phone_number = serializers.IntegerField(
+        required=True, validators=[validator_mobile_number]
+    )
+    email = serializers.EmailField(required=False)
     password = serializers.CharField(required=True, write_only=True)
 
     class Meta:
@@ -57,12 +48,16 @@ class UserSignupSerializer(serializers.ModelSerializer):
 
     def validate_email(self, email):
         if User.objects.filter(email=email).exists():
-            raise serializers.ValidationError(f"Email already exists!")
+            raise serializers.ValidationError(
+                response_payload(success=False, msg="Email already exists!")
+            )
         return email
 
     def validate_phone_number(self, phone_number):
         if User.objects.filter(phone_number=phone_number).exists():
-            raise serializers.ValidationError(f"Phone Number already exists!")
+            raise serializers.ValidationError(
+                response_payload(success=False, msg="Phone Number already exists!")
+            )
         return phone_number
 
     def create(self, validated_data):
@@ -72,18 +67,24 @@ class UserSignupSerializer(serializers.ModelSerializer):
         user.is_active = True
         user.save()
 
-        otp = send_otp(phone_number=user.phone_number)
+        twilio_handler = TwilioHandler()
+        twilio_user_id = twilio_handler.create_or_get_user(
+            email=user.email if user.email else "test@test.com",
+            phone_number=user.phone_number,
+        )
 
-        user.otp = otp
-        user.otp_sent_at = datetime.now()
+        user.twilio_user_id = twilio_user_id
         user.save()
 
+        twilio_handler.send_otp(twilio_user_id)
         return user
 
 
 class UserSignUpOtpSerializer(serializers.ModelSerializer):
     otp = serializers.IntegerField(required=True, write_only=True)
-    phone_number = serializers.CharField(required=True)
+    phone_number = serializers.CharField(
+        required=True, validators=[validator_mobile_number]
+    )
     email = serializers.EmailField(read_only=True)
 
     class Meta:
@@ -94,23 +95,34 @@ class UserSignUpOtpSerializer(serializers.ModelSerializer):
         phone_number = data.get("phone_number", "")
         otp = data.get("otp")
 
-        user = User.objects.get(phone_number=phone_number)
+        user = User.objects.filter(phone_number=phone_number)
+        if not user.exists():
+            raise AuthenticationFailed(
+                response_payload(success=False, msg="Invalid credentials, try again")
+            )
 
-        if not user:
-            raise AuthenticationFailed("Invalid credentials, try again")
+        user = user.first()
+
         if not user.is_active:
-            raise AuthenticationFailed("Account disabled, contact admin")
-        if user.is_verified:
-            raise AuthenticationFailed("Account already Verified")
 
-        if user.otp_expired():
-            raise AuthenticationFailed("Otp has been Expired. Try Again")
-        elif user.otp == otp:
+            raise AuthenticationFailed(
+                response_payload(success=False, msg="Account disabled, contact admin")
+            )
+        if user.is_verified:
+            raise AuthenticationFailed(
+                response_payload(success=False, msg="Account already Verified")
+            )
+
+        twilio_handler = TwilioHandler()
+        otp_verified = twilio_handler.verify_otp(auth_id=user.twilio_user_id, otp=otp)
+
+        if otp_verified:
             user.is_verified = True
-            user.otp = 1000
             user.save()
         else:
-            raise AuthenticationFailed("Incorrect Otp, Try Again")
+            raise AuthenticationFailed(
+                response_payload(success=False, msg="Incorrect Otp, Try Again")
+            )
 
         return user
 
@@ -145,12 +157,19 @@ class LoginSerializer(serializers.ModelSerializer):
         user = auth.authenticate(username=user.username, password=password)
 
         if not user:
-            raise AuthenticationFailed("Invalid credentials, try again")
+            raise AuthenticationFailed(
+                response_payload(success=False, msg="Account disabled, contact admin")
+            )
         if not user.is_active:
-            raise AuthenticationFailed("Account disabled, contact admin")
+            raise AuthenticationFailed(
+                response_payload(success=False, msg="Account disabled, contact admin")
+            )
         if not user.is_verified:
             raise AuthenticationFailed(
-                "Please verify your email. Check your inbox for details."
+                response_payload(
+                    success=False,
+                    msg="Please verify your email. Check your inbox for details.",
+                )
             )
         return {
             "email": user.email,
@@ -166,10 +185,8 @@ class LoginWithOtpSerializer(serializers.Serializer):
 
     def validate(self, attrs):
         user = User.objects.get(phone_number=attrs.get("phone_number", ""))
-        otp = send_otp(user.phone_number)
-        user.otp = otp
-        user.otp_sent_at = datetime.now()
-        user.save()
+        twilio_handler = TwilioHandler()
+        twilio_handler.send_otp(auth_id=user.twilio_user_id)
         return user
 
 
@@ -193,21 +210,37 @@ class LoginVerifyOtpSerializer(serializers.ModelSerializer):
         phone_number = data.get("phone_number", "")
         otp = data.get("otp", "")
 
-        user = User.objects.get(phone_number=phone_number)
-        if not user:
-            raise AuthenticationFailed("Invalid credentials, try again")
+        user = User.objects.filter(phone_number=phone_number)
+        if not user.exists():
+            raise AuthenticationFailed(
+                response_payload(success=False, msg="Invalid credentials, try again")
+            )
+        user = user.first()
         if not user.is_active:
-            raise AuthenticationFailed("Account disabled, contact admin")
+            raise AuthenticationFailed(
+                response_payload(success=False, msg="Account disabled, contact admin")
+            )
         if not user.is_verified:
-            raise AuthenticationFailed("User is not Verified.")
-
-        if user.otp_expired():
-            raise AuthenticationFailed("Otp has been Expired. Try Again")
-        elif user.otp == otp:
-            user.otp = 1000
-            user.save()
-        else:
-            raise AuthenticationFailed("Incorrect Otp, Try Again")
+            raise AuthenticationFailed(
+                response_payload(success=False, msg="User is not Verified.")
+            )
+        twilio_handler = TwilioHandler()
+        otp_verified = twilio_handler.verify_otp(auth_id=user.twilio_user_id, otp=otp)
+        # if user.otp == 1000:
+        #     raise AuthenticationFailed(
+        #         response_payload(success=False, msg="Try Resending the otp.")
+        #     )
+        # elif user.otp_expired():
+        #     raise AuthenticationFailed(
+        #         response_payload(success=False, msg="Otp has been Expired. Try Again")
+        #     )
+        # if user.otp == otp:
+        #     user.otp = 1000
+        #     user.save()
+        if not otp_verified:
+            raise AuthenticationFailed(
+                response_payload(success=False, msg="Incorrect Otp, Try Again")
+            )
 
         return {
             "tokens": user.tokens,
