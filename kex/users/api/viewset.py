@@ -3,7 +3,6 @@ from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets
-from rest_framework import generics
 from .serializers import (
     LoginSerializer,
     LoginVerifyOtpSerializer,
@@ -14,7 +13,7 @@ from .serializers import (
 )
 from rest_framework.permissions import IsAuthenticated
 
-from kex.core.utils import response
+from kex.core.utils import response_payload
 
 User = get_user_model()
 
@@ -42,7 +41,7 @@ class SignUpViewset(viewsets.ViewSet):
         user_data = UserSignupSerializer(user).data
 
         return Response(
-            response(success=True, data=user_data, msg="Otp Has been Sent"),
+            response_payload(success=True, data=user_data, msg="Otp Has been Sent"),
             status=status.HTTP_200_OK,
         )
 
@@ -53,7 +52,7 @@ class SignUpViewset(viewsets.ViewSet):
         serializer.is_valid(raise_exception=True)
 
         return Response(
-            response(
+            response_payload(
                 success=True,
                 data=serializer.data,
                 msg="Otp Has been verified",
@@ -70,7 +69,9 @@ class LoginViewset(viewsets.ViewSet):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         return Response(
-            response(success=True, data=serializer.data, msg="Logged in Successfully!"),
+            response_payload(
+                success=True, data=serializer.data, msg="Logged in Successfully!"
+            ),
             status=status.HTTP_200_OK,
         )
 
@@ -84,7 +85,7 @@ class LoginOtpViewset(viewsets.ViewSet):
         serializer = LoginWithOtpSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         return Response(
-            response(success=True, msg="OTP has been sent Successfully"),
+            response_payload(success=True, msg="OTP has been sent Successfully"),
             status=status.HTTP_200_OK,
         )
 
@@ -99,5 +100,7 @@ class LoginVerifyOtpViewset(viewsets.ViewSet):
         serializer.is_valid(raise_exception=True)
 
         return Response(
-            response(success=True, data=serializer.data, msg="Logged in Successfully")
+            response_payload(
+                success=True, data=serializer.data, msg="Logged in Successfully"
+            )
         )
