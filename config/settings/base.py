@@ -84,6 +84,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "kex.users",
     "kex.core",
+    "kex.enquiry"
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
