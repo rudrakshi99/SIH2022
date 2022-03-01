@@ -1,0 +1,18 @@
+.logo {
+    height: 30px;
+    width: 30px;
+}
+
+input,
+input::-webkit-input-placeholder {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 4;
+    outline: none;
+    border: none;
+}
+
+input:focus {
+    border: none;
+    outline: none;
+}

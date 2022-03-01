@@ -1,9 +1,10 @@
 import "./App.css";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <div className="App">
-      <h1>Kisaan Equipment Exchange</h1>
+      <Home />
     </div>
   );
 }
