@@ -4,6 +4,7 @@ from rest_framework.serializers import (
     SerializerMethodField,
 )
 from kex.equipment.models import Equipment
+from kex.equipment_type.api.serializers import EquipmentTypeListSerializer
 from kex.users.api.serializers import UserSerializer
 from kex.brand.api.serializers import BrandSerializer
 
@@ -11,14 +12,14 @@ from kex.brand.api.serializers import BrandSerializer
 class EquipmentListSerializer(ModelSerializer):
     image = SerializerMethodField()
     url = HyperlinkedIdentityField(view_name="equipment-api:detail", lookup_field="id")
-    brand = BrandSerializer(read_only=True)
+    manufacturer = BrandSerializer(read_only=True)
 
     class Meta:
         model = Equipment
         fields = [
             "id",
             "url",
-            "brand",
+            "manufacturer",
             "title",
             "image",
             "daily_rental",
@@ -42,7 +43,8 @@ class EquipmentDetailSerializer(ModelSerializer):
     image_3 = SerializerMethodField()
     image_4 = SerializerMethodField()
     image_5 = SerializerMethodField()
-    brand = BrandSerializer(read_only=True)
+    manufacturer = BrandSerializer(read_only=True)
+    equipment_type = EquipmentTypeListSerializer(read_only=True)
 
     class Meta:
         model = Equipment
@@ -50,7 +52,7 @@ class EquipmentDetailSerializer(ModelSerializer):
             "id",
             "url",
             "owner",
-            "brand",
+            "manufacturer",
             "title",
             "description",
             "daily_rental",

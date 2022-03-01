@@ -31,7 +31,7 @@ class Equipment(models.Model):
     image_5 = models.ImageField(blank=True, upload_to=upload_location, null=True)
     available_start_time = models.DateField()
     available_end_time = models.DateField()
-    model = models.CharField(max_length=200)
+    model = models.CharField(max_length=200, blank=True)
     manufacturing_year = models.IntegerField(default=0)
     condition = models.CharField(
         max_length=200, choices=condition_choice, default="New"
