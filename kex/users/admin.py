@@ -14,7 +14,17 @@ class UserAdmin(auth_admin.UserAdmin):
     form = UserAdminChangeForm
     add_form = UserAdminCreationForm
     fieldsets = (
-        (None, {"fields": ("profile_picture", "username", "password", "is_verified")}),
+        (
+            None,
+            {
+                "fields": (
+                    "profile_picture",
+                    "username",
+                    "password",
+                    "is_verified",
+                )
+            },
+        ),
         (
             _("Personal info"),
             {"fields": ("first_name", "last_name", "email", "phone_number")},
@@ -48,10 +58,11 @@ class UserAdmin(auth_admin.UserAdmin):
     )
     list_display = [
         "uuid",
+        "user_id",
         "username",
         "first_name",
         "last_name",
-        "is_superuser",
         "is_verified",
+        "phone_number",
     ]
     search_fields = ["first_name", "last_name", "uuid"]
