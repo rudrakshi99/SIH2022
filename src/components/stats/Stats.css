@@ -1,0 +1,15 @@
+.statsImg {
+    max-width: 33%;
+}
+
+.makeUp1 {
+    max-width: 22%;
+    margin-left: 10px;
+}
+
+.makeUp2 {
+    max-width: 19%;
+    position: absolute;
+    top: -6px;
+    right: 160px;
+}

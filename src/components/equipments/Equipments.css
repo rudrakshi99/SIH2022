@@ -1,0 +1,17 @@
+.imageEle {
+    height: 40%;
+    width: 30%;
+    position: relative;
+}
+
+.equipImg {
+    max-width: 84%;
+    background-color: rgba(36,42,53,.5);
+}
+
+.equipTitle {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    color: white;
+}
