@@ -49,6 +49,10 @@ urlpatterns += [
         "api/equipment/", include("kex.equipment.api.urls", namespace="equipment-api")
     ),
     path("api/brand/", include("kex.brand.api.urls", namespace="brand-api")),
+    path(
+        "api/equipment_type/",
+        include("kex.equipment_type.api.urls", namespace="equipment_type-api"),
+    ),
     path("auth-token/", obtain_auth_token),
     path(
         "swagger/",

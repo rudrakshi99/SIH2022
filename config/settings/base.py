@@ -87,6 +87,7 @@ LOCAL_APPS = [
     "kex.core",
     "kex.equipment",
     "kex.brand",
+    "kex.equipment_type",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

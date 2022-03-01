@@ -14,23 +14,23 @@ from rest_framework.permissions import (
     IsAuthenticated,
 )
 
-from kex.brand.api.serializers import BrandSerializer
+from kex.equipment_type.api.serializers import EquipmentTypeListSerializer
 from django_filters import rest_framework as filters
-from kex.brand.models import Brand
+from kex.equipment_type.models import EquipmentType
 
 
-class BrandCreateAPIView(CreateAPIView):
-    queryset = Brand.objects.all()
-    serializer_class = BrandSerializer
+class EquipmentTypeCreateAPIView(CreateAPIView):
+    queryset = EquipmentType.objects.all()
+    serializer_class = EquipmentTypeListSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
 
-class BrandUpdateAPIView(UpdateAPIView):
-    queryset = Brand.objects.all()
-    serializer_class = BrandSerializer
+class EquipmentTypeUpdateAPIView(UpdateAPIView):
+    queryset = EquipmentType.objects.all()
+    serializer_class = EquipmentTypeListSerializer
     lookup_field = "id"
     permission_classes = [IsAuthenticated]
 
@@ -38,9 +38,9 @@ class BrandUpdateAPIView(UpdateAPIView):
         serializer.save(user=self.request.user)
 
 
-class BrandListAPIView(ListAPIView):
-    queryset = Brand.objects.all()
-    serializer_class = BrandSerializer
+class EquipmentTypeListAPIView(ListAPIView):
+    queryset = EquipmentType.objects.all()
+    serializer_class = EquipmentTypeListSerializer
     filter_backends = [SearchFilter, OrderingFilter, filters.DjangoFilterBackend]
     permission_classes = [AllowAny]
-    search_fields = ["name", "equipment_type__name"]
+    search_fields = ["name", "brand__name"]

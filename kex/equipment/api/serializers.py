@@ -11,19 +11,18 @@ from kex.brand.api.serializers import BrandSerializer
 class EquipmentListSerializer(ModelSerializer):
     image = SerializerMethodField()
     url = HyperlinkedIdentityField(view_name="equipment-api:detail", lookup_field="id")
-    owner = UserSerializer(read_only=True)
     brand = BrandSerializer(read_only=True)
 
     class Meta:
         model = Equipment
         fields = [
             "id",
-            "owner",
             "url",
             "brand",
             "title",
             "image",
-            "price",
+            "daily_rental",
+            "hourly_rental",
             "is_available",
         ]
 
@@ -54,15 +53,26 @@ class EquipmentDetailSerializer(ModelSerializer):
             "brand",
             "title",
             "description",
-            "price",
+            "daily_rental",
+            "hourly_rental",
             "image_1",
             "image_2",
             "image_3",
             "image_4",
             "image_5",
+            "equipment_type",
+            "equipment_location",
+            "manufacturing_year",
+            "model",
+            "condition",
+            "Horsepower",
+            "width",
+            "height",
             "is_available",
             "available_start_time",
             "available_end_time",
+            "show_phone_number",
+            "created_at",
         ]
 
     def get_image_1(self, obj):

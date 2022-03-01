@@ -69,8 +69,11 @@ class EquipmentListAPIView(ListAPIView):
     search_fields = [
         "title",
         "description",
-        "brand__name",
-        "price",
+        "manufacturer__name",
+        "equipment_type__name",
+        "horsepower",
+        "hourly_rental",
+        "daily_rental",
         "owner__username",
         "owner__first_name",
         "owner__last_name",
@@ -85,6 +88,8 @@ class EquipmentListAPIView(ListAPIView):
             queryset_list = queryset_list.filter(
                 Q(title__icontains=query)
                 | Q(description__icontains=query)
-                | Q(brand__name__icontains=query)
+                | Q(manufacturer__name__icontains=query)
+                | Q(equipment_type__name__icontains=query)
+                | Q(horsepower__icontains=query)
             ).distinct()
         return queryset_list
