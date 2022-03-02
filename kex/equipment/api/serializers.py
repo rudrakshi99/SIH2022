@@ -12,7 +12,7 @@ from kex.brand.api.serializers import BrandSerializer
 class EquipmentListSerializer(ModelSerializer):
     image = SerializerMethodField()
     url = HyperlinkedIdentityField(view_name="equipment-api:detail", lookup_field="id")
-    manufacturer = BrandSerializer(read_only=True)
+    manufacturer = SerializerMethodField()
 
     class Meta:
         model = Equipment
@@ -27,6 +27,9 @@ class EquipmentListSerializer(ModelSerializer):
             "is_available",
             "equipment_type",
         ]
+
+    def get_manufacturer(self, obj):
+        return obj.manufacturer.name
 
     def get_image(self, obj):
         try:
@@ -44,7 +47,7 @@ class EquipmentDetailSerializer(ModelSerializer):
     image_3 = SerializerMethodField()
     image_4 = SerializerMethodField()
     image_5 = SerializerMethodField()
-    manufacturer = BrandSerializer(read_only=True)
+    manufacturer = SerializerMethodField()
     equipment_type = EquipmentTypeListSerializer(read_only=True)
 
     class Meta:
@@ -77,6 +80,9 @@ class EquipmentDetailSerializer(ModelSerializer):
             "show_phone_number",
             "created_at",
         ]
+
+    def get_manufacturer(self, obj):
+        return obj.manufacturer.name
 
     def get_image_1(self, obj):
         try:
