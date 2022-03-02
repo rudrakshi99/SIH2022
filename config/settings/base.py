@@ -85,6 +85,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "kex.users",
     "kex.core",
+    "kex.enquiry"
     "kex.equipment",
     "kex.brand",
     "kex.equipment_type",

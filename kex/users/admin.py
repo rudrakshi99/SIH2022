@@ -33,7 +33,6 @@ class UserAdmin(auth_admin.UserAdmin):
             _("Secondary info"),
             {
                 "fields": (
-                    "otp",
                     "secondary_phone_number",
                     "address",
                     "city",
