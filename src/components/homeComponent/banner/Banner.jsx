@@ -3,7 +3,7 @@ import './Banner.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import home1 from "../../../img/home1.webp";
-import home2 from "../../../img/home2.png";
+import home2 from "../../../img/home2.webp";
 
 const Banner = () => {
   return (
