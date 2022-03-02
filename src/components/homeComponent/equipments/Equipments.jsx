@@ -11,27 +11,27 @@ const images = [
         "title": "Tillage Equipment"
     },
     {
-        "img": "https://s3.ap-south-1.amazonaws.com/www.beroni.in/farmease-app/categories/Landscaping_Equipment.jpg",
+        "img": "https://s3.ap-south-1.amazonaws.com/www.beroni.in/farmease-app/categories/Seeding_Equipment.jpg",
         "title": "Seeding Equipments"
     },
     {
-        "img": "https://s3.ap-south-1.amazonaws.com/www.beroni.in/farmease-app/categories/Tractors.jpg",
+        "img": "https://s3.ap-south-1.amazonaws.com/www.beroni.in/farmease-app/categories/Landscaping_Equipment.jpg",
         "title": "Landscape Equipment"
     },
     {
-        "img": "https://s3.ap-south-1.amazonaws.com/www.beroni.in/farmease-app/categories/Tractors.jpg",
+        "img": "https://s3.ap-south-1.amazonaws.com/www.beroni.in/farmease-app/categories/Crop_Protection.jpg",
         "title": "Crop Protection"
     },
     {
-        "img": "https://s3.ap-south-1.amazonaws.com/www.beroni.in/farmease-app/categories/Tractors.jpg",
+        "img": "https://s3.ap-south-1.amazonaws.com/www.beroni.in/farmease-app/categories/Harvest_Equipment.jpg",
         "title": "Harvest Equipment"
     },
     {
-        "img": "https://s3.ap-south-1.amazonaws.com/www.beroni.in/farmease-app/categories/Tractors.jpg",
+        "img": "https://s3.ap-south-1.amazonaws.com/www.beroni.in/farmease-app/categories/Post_Harvest.jpg",
         "title": "Post Harvest"
     },
     {
-        "img": "https://s3.ap-south-1.amazonaws.com/www.beroni.in/farmease-app/categories/Tractors.jpg",
+        "img": "https://s3.ap-south-1.amazonaws.com/www.beroni.in/farmease-app/categories/Haulage.jpg",
         "title": "Haulage"
     },
 ]
@@ -39,9 +39,9 @@ const images = [
 const Equipments = () => {
     return (
         <div className='my-6'>
-            <div>
+            <div className='mx-16'>
                 <h1 className='text-center text-3xl font-medium my-10'>Sell New & Used Farm Equipment</h1>
-                <div className='flex mx-[100px] justify-center flex-wrap items-center'>
+                <div className='flex mx-[100px] flex-wrap items-center'>
                     {
                         images.map(image => (
                             <div className='imageEle'>

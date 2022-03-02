@@ -1,20 +1,20 @@
 import React from 'react'
 import './Stats.css';
-import coins2 from '../../img/coins2.png';
-import rupees from '../../img/rupees.png';
-import Frame3 from '../../img/Frame3.png';
+import people from '../../../img/people.png';
+import people1 from '../../../img/people1.png';
+import Frame3 from '../../../img/Frame3.png';
 
 const Stats = () => {
     return (
         <div className='h-2/5 my-6 bg-#E5E5E5'>
             <div className='flex items-center justify-center mx-20'>
                 <div className='flex flex-1 flex-col justify-center items-center'>
-                    <img className='statsImg' src={coins2} alt="" />
+                    <img className='statsImg' src={people1} alt="" />
                     <h1 className='text-lg font-bold'>INR 954.3 Billion</h1>
                     <p className='text-sm font-normal'>Agriculture Equipment <br /> Market Value</p>
                 </div>
                 <div className='flex flex-1 flex-col justify-center items-center'>
-                    <img className='statsImg' src={rupees} alt="" />
+                    <img className='statsImg' src={people} alt="" />
                     <h1 className='text-lg font-bold'>INR 10,218</h1>
                     <p className='text-sm font-normal'>Farmer’s Average <br />  Monthly Income</p>
                 </div>

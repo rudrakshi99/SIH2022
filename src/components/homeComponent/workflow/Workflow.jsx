@@ -1,6 +1,6 @@
 import React from 'react'
 import './Workflow.css';
-import Rectangle73 from '../../img/Rectangle73.png';
+import Rectangle73 from '../../../img/Rectangle73.png';
 
 const Workflow = () => {
     return (

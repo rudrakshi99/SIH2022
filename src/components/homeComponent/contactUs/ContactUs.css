@@ -1,0 +1,10 @@
+.cInput, .cInput::-webkit-input-placeholder {
+    color: #606060;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.cInput {
+    padding: 10px;
+    border: 0.5px solid #f0f0f0;
+}

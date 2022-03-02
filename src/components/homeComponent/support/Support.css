@@ -1,0 +1,10 @@
+.supportImg {
+    height: 50px;
+    width: 50px;
+    margin: auto;
+}
+
+.supportItem {
+    background: #FFFFFF;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.12);
+}

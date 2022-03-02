@@ -1,6 +1,6 @@
 import React from 'react'
 import './Services.css'
-import services4 from '../../img/services4.png';
+import services4 from '../../../img/services4.png';
 
 const Services = () => {
     return (

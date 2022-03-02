@@ -1,0 +1,31 @@
+.imageEle {
+    height: 40%;
+    width: 32.7%;
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.equipImg {
+    max-width: 100%;
+    background-color: rgba(36,42,53,.5);
+    filter: brightness(60%);
+    border-radius: 4px;
+    opacity: 0.92;
+}
+
+.equipImg:hover {
+    transition: all 0.5s ease-in-out;
+    transform: scale(1.1);
+}
+
+.equipTitle {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    color: white;
+    z-index: 999;
+    font-weight: 700;
+    font-size: 22px;
+    padding-top: 15px;
+    padding-left: 12px;
+}
