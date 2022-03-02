@@ -3,6 +3,7 @@ from kex.brand.models import Brand
 from kex.equipment_type.models import EquipmentType
 from kex.users.models import User
 from django.urls import reverse
+from django.db.models import Max
 
 
 def upload_location(instance, filename):
@@ -17,6 +18,7 @@ condition_choice = (
 
 class Equipment(models.Model):
     title = models.CharField(max_length=200)
+    eq_id = models.CharField(editable=False, max_length=10)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     manufacturer = models.ForeignKey(Brand, on_delete=models.CASCADE)
     equipment_type = models.ForeignKey(EquipmentType, on_delete=models.CASCADE)
@@ -36,7 +38,7 @@ class Equipment(models.Model):
     condition = models.CharField(
         max_length=200, choices=condition_choice, default="New"
     )
-    Horsepower = models.IntegerField(default=0)
+    horsepower = models.IntegerField(default=0)
     width = models.IntegerField(default=0)
     height = models.IntegerField(default=0)
     is_available = models.BooleanField(default=True)
@@ -48,3 +50,9 @@ class Equipment(models.Model):
 
     def get_absolute_url(self):
         return reverse("equipment:detail", kwargs={"id": self.id})
+
+    def save(self, *args, **kwargs):
+        if not self.eq_id:
+            max = Equipment.objects.aggregate(id_max=Max("id"))["id_max"]
+            self.eq_id = "{}{:05d}".format("EQ", (max + 1) if max is not None else 1)
+        super().save(*args, **kwargs)

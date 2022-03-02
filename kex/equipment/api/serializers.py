@@ -25,6 +25,7 @@ class EquipmentListSerializer(ModelSerializer):
             "daily_rental",
             "hourly_rental",
             "is_available",
+            "equipment_type",
         ]
 
     def get_image(self, obj):
@@ -67,7 +68,80 @@ class EquipmentDetailSerializer(ModelSerializer):
             "manufacturing_year",
             "model",
             "condition",
-            "Horsepower",
+            "horsepower",
+            "width",
+            "height",
+            "is_available",
+            "available_start_time",
+            "available_end_time",
+            "show_phone_number",
+            "created_at",
+        ]
+
+    def get_image_1(self, obj):
+        try:
+            image = obj.image_1.url
+        except:
+            image = None
+        return image
+
+    def get_image_2(self, obj):
+        try:
+            image = obj.image_2.url
+        except:
+            image = None
+        return image
+
+    def get_image_3(self, obj):
+        try:
+            image = obj.image_3.url
+        except:
+            image = None
+        return image
+
+    def get_image_4(self, obj):
+        try:
+            image = obj.image_4.url
+        except:
+            image = None
+        return image
+
+    def get_image_5(self, obj):
+        try:
+            image = obj.image_5.url
+        except:
+            image = None
+        return image
+
+
+class EquipmentCreateSerializer(ModelSerializer):
+    image_1 = SerializerMethodField()
+    image_2 = SerializerMethodField()
+    image_3 = SerializerMethodField()
+    image_4 = SerializerMethodField()
+    image_5 = SerializerMethodField()
+
+    class Meta:
+        model = Equipment
+        fields = [
+            "id",
+            "owner",
+            "manufacturer",
+            "title",
+            "description",
+            "daily_rental",
+            "hourly_rental",
+            "image_1",
+            "image_2",
+            "image_3",
+            "image_4",
+            "image_5",
+            "equipment_type",
+            "equipment_location",
+            "manufacturing_year",
+            "model",
+            "condition",
+            "horsepower",
             "width",
             "height",
             "is_available",

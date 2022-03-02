@@ -19,6 +19,7 @@ from rest_framework.permissions import (
 )
 
 from kex.equipment.api.serializers import (
+    EquipmentCreateSerializer,
     EquipmentListSerializer,
     EquipmentDetailSerializer,
 )
@@ -27,6 +28,10 @@ from .permissions import IsOwnerOrReadOnly
 from django_filters import rest_framework as filters
 from .filters import EquipmentFilter
 from kex.equipment.models import Equipment
+from rest_framework.response import Response
+from rest_framework import status
+from kex.core.utils import response_payload
+from rest_framework.exceptions import NotFound
 
 
 class EquipmentDetailAPIView(RetrieveAPIView):
@@ -38,21 +43,50 @@ class EquipmentDetailAPIView(RetrieveAPIView):
 
 class EquipmentCreateAPIView(CreateAPIView):
     queryset = Equipment.objects.all()
-    serializer_class = EquipmentDetailSerializer
+    serializer_class = EquipmentCreateSerializer
     permission_classes = [IsAuthenticated]
 
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+    def create(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        equipment = serializer.create(serializer.validated_data)
+        return Response(
+            response_payload(
+                success=True,
+                data=EquipmentCreateSerializer(equipment).data,
+                msg="Equipment has been created",
+            ),
+            status=status.HTTP_200_OK,
+        )
 
 
 class EquipmentUpdateAPIView(UpdateAPIView):
     queryset = Equipment.objects.all()
-    serializer_class = EquipmentDetailSerializer
+    serializer_class = EquipmentCreateSerializer
     lookup_field = "id"
     permission_classes = [IsOwnerOrReadOnly, IsAuthenticated]
 
-    def perform_update(self, serializer):
-        serializer.save(user=self.request.user)
+    def get_queryset(self, *args, **kwargs):
+        try:
+            equipment = self.queryset.get(pk=kwargs.get("pk"))
+            return equipment
+        except Equipment.DoesNotExist:
+            raise NotFound(f"Equipment with id {kwargs.get('pk')} doesn't exist")
+
+    def patch(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        equipment = serializer.update(
+            self.get_queryset(*args, **kwargs), serializer.validated_data
+        )
+        return Response(
+            response_payload(
+                success=True,
+                data=EquipmentCreateSerializer(equipment).data,
+                msg="Equipment has been updated",
+            ),
+            status=status.HTTP_200_OK,
+        )
 
 
 class EquipmentDeleteAPIView(DestroyAPIView):
