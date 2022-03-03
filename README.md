@@ -1,71 +1,197 @@
-# Kex
+# Krishi Sadhan
 
-KISAAN EQUIPMENT EXCHANGE
 
 [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
 [![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
-License: MIT
+## Table of Contents
 
-## Settings
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Technology Stack to be used](#technology-stack-to-be-used)
+4. [GitHub Repository Structure](#github-repository-structure)
+5. [Getting Started](#getting-started)
+	1. [Fork, clone locally and create a branch](#fork-clone-locally--create-a-branch)
+	1. [Setting Environment First Time](#setting-environment-first-time)
+		1. [Basic Requirements](#basic-requirements)
+		1. [Creating Virtual Environment](#creating-virtual-environment)
+		1. [Installing Requirements](#installing-requirements)
+		1. [Setting up Environment File](#setting-up-environment-file)
+		1. [Migrating Database](#migrating-database)
+		1. [Create Superuser](#create-superuser)
+	1. [Starting Development Server](#starting-development-server)
+	1. [Leaving the virtual environment](#leaving-the-virtual-environment)
+	1. [Update requirements file](#update-requirements-file-critical)
+	1. [Update Database](#update-database)  
+6. [Developers](#developers)
+7. [Maintainers](#maintainers)
 
-Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings.html).
 
-## Basic Commands
+## Features
 
-### Setting Up Your Users
+1. Login/Sign Up.
+2. JWT Authentication.
+3. OTP Verification.
+4. Add Equipment details related to various categories like Crop Protection, Harvesting Equipment,etc
+5. Search equipments of a particular category using the title.
+6. Filter equipment based on their category, price, availability, etc.
+7. Book and rent equipment for off-season.
+8. Track booking requests.
+10. View the list of comments and replies related to particular posts.
+11. LimitOffsetPagination for custom pagination style.
+12. Support Centre
+13. Chat with owner and customer.
 
--   To create a **normal user account**, just go to Sign Up and fill out the form. Once you submit it, you'll see a "Verify Your E-mail Address" page. Go to your console to see a simulated email verification message. Copy the link into your browser. Now the user's email should be verified and ready to go.
 
--   To create an **superuser account**, use this command:
+## Technology Stack to be used:
 
-        $ python manage.py createsuperuser
+<img src="https://img.shields.io/badge/python%20-%2314354C.svg?&style=for-the-badge&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/django%20-%23092E20.svg?&style=for-the-badge&logo=django&logoColor=white"/>  <img src="https://img.shields.io/badge/markdown-%23000000.svg?&style=for-the-badge&logo=markdown&logoColor=white"/><img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/> <img src="https://img.shields.io/badge/postgresql-0B96B2?style=for-the-badge&logo=sqlite&logoColor=white"/> <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white"/>
 
-For convenience, you can keep your normal user logged in on Chrome and your superuser logged in on Firefox (or similar), so that you can see how the site behaves for both kinds of users.
+[![View in Swagger](http://jessemillar.github.io/view-in-swagger-button/button.svg)](https://blogwall.herokuapp.com/swagger/)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/14143990/UVXhrHVq)
 
-### Type checks
+## Getting Started
 
-Running type checks with mypy:
+### Fork, clone locally & create a branch
 
-    $ mypy kex
+Fork [Krishi Sadhan Backend](https://github.com/rudrakshi99/SIH2022.git) repository and clone at your local 
 
-### Test coverage
+- Fork and Clone the repo using
+```
+$ git clone https://github.com/rudrakshi99/SIH2022.git
+```
+- Change Branch to `backend` using 
+```
+$ git checkout backend
+```
+### Setting Environment First Time
 
-To run the tests, check your test coverage, and generate an HTML coverage report:
+#### Basic Requirements 
+1. [Python](https://www.python.org/downloads/)
+1. [pip](https://pip.pypa.io/en/stable/installation/)
 
-    $ coverage run -m pytest
-    $ coverage html
-    $ open htmlcov/index.html
+#### Creating [Virtual Environment](https://docs.python.org/3/library/venv.html) 
 
-#### Running tests with pytest
+A virtual environment is a tool that helps keep dependencies required and the project isolated. If you wish to install a new library and write
+```
+pip install name_of_library
+``` 
+on the terminal without activating an environment, all the packages will be installed globally which is not a good practice if you’re working with different projects on your computer.
 
-    $ pytest
+If this sounds a bit complicated, don’t worry so much because a virtual environment is just a directory that will contain all the necessary files for our project to run.
 
-### Live reloading and Sass CSS compilation
+**Installing venv (required once)**
 
-Moved to [Live reloading and SASS compilation](http://cookiecutter-django.readthedocs.io/en/latest/live-reloading-and-sass-compilation.html).
-
-### Celery
-
-This app comes with Celery.
-
-To run a celery worker:
-
-``` bash
-cd kex
-celery -A config.celery_app worker -l info
+**Windows**
+```
+py -m pip install --user virtualenv
+py -m venv env
+```
+**Linux**
+```
+python3 -m pip install --user virtualenv
+python3 -m venv env
 ```
 
-Please note: For Celery's import magic to work, it is important *where* the celery commands are run. If you are in the same folder with *manage.py*, you should be right.
+You have to start virtual environment everytime you start new terminal -
 
-## Deployment
+**Windows**
 
-The following details how to deploy this application.
+Using gitbash
+```
+. env/Scripts/activate
+```
+Using Powershell
+```
+. env\Scripts\activate
+```
+**Linux**
+```
+source env/bin/activate
+```
 
-### Heroku
+#### Installing Requirements 
 
-See detailed [cookiecutter-django Heroku documentation](http://cookiecutter-django.readthedocs.io/en/latest/deployment-on-heroku.html).
+**Windows**
+```
+pip install -r requirements/base.txt
+pip install -r requirements/local.txt
+```
+**Linux**
+```
+pip install -r requirements/base.txt
+pip install -r requirements/local.txt
+```
+#### Setting up Environment File
 
-### Docker
+**Configuring Environment Variables**
 
-See detailed [cookiecutter-django Docker documentation](http://cookiecutter-django.readthedocs.io/en/latest/deployment-with-docker.html).
+Make environment file by copying the example file -
+```
+cd .envs/.local
+cp .django .env
+cp .postgres .env
+``` 
+
+#### Migrating Database
+**Windows**
+```
+py manage.py migrate
+```
+**Linux**
+```
+python3 manage.py migrate
+```
+
+#### Create Superuser
+**Windows**
+```
+py manage.py createsupeser
+```
+**Linux**
+```
+python3 manage.py createsupeser
+```
+
+### Starting Development Server
+**Windows**
+```
+py manage.py runserver
+```
+**Linux**
+```
+python3 manage.py runserver
+``` 
+
+### Leaving the virtual environment
+```
+deactivate
+```
+
+### Update requirements file (Critical)
+If you have installed new dependency, the pip freeze command lists the third-party packages and versions installed in the environment. 
+
+**Windows**
+```
+pip freeze > requirements/local.txt
+```
+**Linux**
+```
+pip3 freeze > requirements/local.txt
+```
+
+### Update Database  
+Everytime you change db models, you need to run makemigrations and migrate to update on database.
+
+**Windows**
+```
+py manage.py makemigrations
+py manage.py migrate
+```
+**Linux**
+```
+python3 manage.py makemigrations
+python3 manage.py migrate
+``` 
+
+
