@@ -6,7 +6,7 @@ import vector33 from '../../../img/Vector33.png';
 
 const Support = () => {
     return (
-        <div className='h-2/5 mt-4'>
+        <div className='h-2/5'>
             <div className='flex justify-center items-center'>
                 <div className='supportItem mx-5 p-9'>
                     <img className='supportImg' src={vector11} alt="" />

@@ -11,8 +11,12 @@
     "react": "^17.0.2",
     "react-cookie": "^4.1.1",
     "react-dom": "^17.0.2",
+<<<<<<< HEAD
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.2",
+=======
+    "react-responsive-carousel": "^3.2.22",
+>>>>>>> fb26a76792e96b178326141a612c4ce80f74fa8c
     "react-scripts": "5.0.0",
     "redux-logger": "^3.0.6",
     "web-vitals": "^2.1.4"

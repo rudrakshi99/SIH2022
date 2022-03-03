@@ -1,96 +1,38 @@
 import React from "react";
+import './Banner.css';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import home1 from "../../../img/home1.webp";
+import home2 from "../../../img/home2.webp";
 
 const Banner = () => {
   return (
-      <div id="carouselExampleCaptions" className="carousel slide relative" data-bs-ride="carousel">
-        <div className="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
-          <button
-            type="button"
-            data-bs-target="#carouselExampleCaptions"
-            data-bs-slide-to="0"
-            className="active"
-            aria-current="true"
-            aria-label="Slide 1"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleCaptions"
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleCaptions"
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-          ></button>
-        </div>
-        <div className="carousel-inner relative w-full overflow-hidden">
-          <div className="carousel-item active relative float-left w-full">
-            <img
-              src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg"
-              className="block w-full"
-              alt="..."
-            />
-            <div className="carousel-caption hidden md:block absolute text-center">
-              <h5 className="text-xl">First slide label</h5>
-              <p>
-                Some representative placeholder content for the first slide.
-              </p>
-            </div>
-          </div>
-          <div className="carousel-item relative float-left w-full">
-            <img
-              src="https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg"
-              className="block w-full"
-              alt="..."
-            />
-            <div className="carousel-caption hidden md:block absolute text-center">
-              <h5 className="text-xl">Second slide label</h5>
-              <p>
-                Some representative placeholder content for the second slide.
-              </p>
-            </div>
-          </div>
-          <div className="carousel-item relative float-left w-full">
-            <img
-              src="https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg"
-              className="block w-full"
-              alt="..."
-            />
-            <div className="carousel-caption hidden md:block absolute text-center">
-              <h5 className="text-xl">Third slide label</h5>
-              <p>
-                Some representative placeholder content for the third slide.
-              </p>
-            </div>
+    <Carousel
+      autoplay={true}
+      infiniteLoop={true}
+      showStatus={false}
+      showIndicators={false}
+      showThumbs={false}
+      interval={3000}
+    >
+      <div className="relative">
+        <div className="absolute w-full h-full bg-gradient-to-r from-green-600/10 to-green-600/10 bottom-0  z-20" />
+        <img src={home1} className="home1Img" />
+        <div>
+          <div className="flex flex-col justify-center wrapper">
+            <p className="text-xl font-light">Namaste, welcome to Krishi Sadhan.</p>
+            <h1 className="text-3xl font-bold text-gray-700"><span className="text-[#68AC5D]">Farmer’s Eqipments</span> at reasonable <br /> and affordable prices.</h1>
+            <p className="text-lg font-light mt-2 mb-4">Start now with just one click.</p>
+            <button className="shadow-md bg-darkgreen mx-auto hover:bg-green-700 text-white font-normal w-[200px] py-2 px-2 rounded">
+              Book Now  <i className="pl-4 w-12 fa-solid fa-arrow-right-long"></i>
+            </button>
           </div>
         </div>
-        <button
-          className="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="prev"
-        >
-          <span
-            className="carousel-control-prev-icon inline-block bg-no-repeat"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button
-          className="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="next"
-        >
-          <span
-            className="carousel-control-next-icon inline-block bg-no-repeat"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Next</span>
-        </button>
       </div>
+      <div>
+        <img src={home2} />
+      </div>
+    </Carousel>
   );
 };
 

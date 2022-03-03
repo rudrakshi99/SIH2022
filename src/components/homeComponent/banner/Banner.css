@@ -1,0 +1,10 @@
+.wrapper {
+    position: absolute;
+    top: 36%;
+    left: 32%;
+    z-index: 999;
+}
+
+.home1Img {
+    opacity: 30%;
+}
