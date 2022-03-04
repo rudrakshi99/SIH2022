@@ -42,14 +42,14 @@ class User(AbstractUser):
         refresh = RefreshToken.for_user(self)
         return {"refresh": str(refresh), "access": str(refresh.access_token)}
 
-    def get_absolute_url(self):
-        """Get url for user's detail view.
+    # def get_absolute_url(self):
+    #     """Get url for user's detail view.
 
-        Returns:
-            str: URL for user detail.
+    #     Returns:
+    #         str: URL for user detail.
 
-        """
-        return reverse("users:detail", kwargs={"username": self.username})
+    #     """
+    #     return reverse("users:detail", kwargs={"username": self.username})
 
     def save(self, *args, **kwargs):
         if not self.username:
