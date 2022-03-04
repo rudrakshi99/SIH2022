@@ -194,15 +194,15 @@ py manage.py migrate
 python3 manage.py makemigrations
 python3 manage.py migrate
 ``` 
-## Developers:
+## Team Members:
 
-> "Alone we can do so little; together we can do so much."
+> "Team Members"
 
 | S.No. | Name | Role | GitHub Username:octocat: |
 | --------------- | --------------- | --------------- | --------------- |
-| 1. | Sarthak Shukla | Frontend Development | [@sarthakshukla1316](https://github.com/sarthakshukla1316) |
-| 2. | Suyash Rastogi | Frontend Development | [@suyashrastogi7](https://github.com/suyashrastogi7) |
-| 3. | Rudrakshi | Backend Development| [@rudrakshi99](https://github.com/rudrakshi99)  |
+| 1. | Rudrakshi (Team Leader) | Backend Development| [@rudrakshi99](https://github.com/rudrakshi99)  |
+| 2. | Sarthak Shukla | Frontend Development | [@sarthakshukla1316](https://github.com/sarthakshukla1316) |
+| 3. | Suyash Rastogi | Frontend Development | [@suyashrastogi7](https://github.com/suyashrastogi7) |
 | 4. | Anmol Srivastava | Backend Development| [@anmolsrivastava1](https://github.com/anmolsrivastava1)  |
 | 5. | Parth Sharma | ML Engineer | [@ParthSharmaT](https://github.com/ParthSharmaT)  |
 | 6. | Kushal Gautam | UI Designer | [@kushalgautam](https://github.com/kushalgautam)  |
