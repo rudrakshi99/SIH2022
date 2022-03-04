@@ -13,7 +13,7 @@ from rest_framework.permissions import (
     AllowAny,
     IsAuthenticated,
 )
-from kex.booking.api.serializers import BookingSerializer
+from kex.booking.api.serializers import BookingCreateSerializer, BookingSerializer
 
 from kex.booking.models import Booking
 from rest_framework import status
@@ -36,20 +36,20 @@ class BookingListAPIView(ListAPIView):
         "equipment__name",
         "equipment__equipment_type__name",
         "equipment__manufacturer__name",
-        "equipment__owner__username",
+        "equipment__customer__username",
         "equipment__eq_id",
-        "equipment__owner__first_name",
-        "equipment__owner__last_name",
+        "equipment__customer__first_name",
+        "equipment__customer__last_name",
     ]
 
     def get_queryset(self, *args, **kwargs):
-        queryset_list = self.queryset.filter(owner=self.request.user)
+        queryset_list = self.queryset.filter(customer=self.request.user)
         return queryset_list
 
 
 class BookingCreateAPIView(CreateAPIView):
     queryset = Booking.objects.all()
-    serializer_class = BookingSerializer
+    serializer_class = BookingCreateSerializer
     permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
@@ -59,7 +59,7 @@ class BookingCreateAPIView(CreateAPIView):
         return Response(
             response_payload(
                 success=True,
-                data=BookingSerializer(booking).data,
+                data=BookingCreateSerializer(booking).data,
                 msg="Booking has been created",
             ),
             status=status.HTTP_200_OK,
