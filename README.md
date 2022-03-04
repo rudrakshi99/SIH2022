@@ -47,8 +47,8 @@
 
 <img src="https://img.shields.io/badge/python%20-%2314354C.svg?&style=for-the-badge&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/django%20-%23092E20.svg?&style=for-the-badge&logo=django&logoColor=white"/>  <img src="https://img.shields.io/badge/markdown-%23000000.svg?&style=for-the-badge&logo=markdown&logoColor=white"/><img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/> <img src="https://img.shields.io/badge/postgres-0B96B2?style=for-the-badge&logo=postgresql&logoColor=white"/> <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white"/>
 
-[![View in Swagger](http://jessemillar.github.io/view-in-swagger-button/button.svg)](https://blogwall.herokuapp.com/swagger/)
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/14143990/UVXhrHVq)
+[![View in Swagger](http://jessemillar.github.io/view-in-swagger-button/button.svg)](https://krishi-sadhan-app.herokuapp.com/swagger/)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/16060695/UVksMudU)
 
 ## Getting Started
 
@@ -212,6 +212,10 @@ python3 manage.py migrate
   <tbody><tr>
     <td align="center"><a href="https://github.com/rudrakshi99"><img alt="" src="https://avatars.githubusercontent.com/rudrakshi99" width="100px;"><br><sub><b>Rudrakshi</b></sub></a><br><a href="https://github.com/rudrakshi99/SIH2022/commits/backend?author=rudrakshi99" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/sarthakshukla1316"><img alt="" src="https://avatars.githubusercontent.com/sarthakshukla1316" width="100px;"><br><sub><b>Sarthak Shukla </b></sub></a><br><a href="https://github.com/rudrakshi99/SIH2022/commits?author=sarthakshukla1316" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/anmolsrivastava1"><img alt="" src="https://avatars.githubusercontent.com/anmolsrivastava1" width="100px;"><br><sub><b>Anmol Srivastava </b></sub></a><br><a href="https://github.com/rudrakshi99/SIH2022/commits/backend?author=anmolsrivastava1" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/ParthSharmaT"><img alt="" src="https://avatars.githubusercontent.com/ParthSharmaT" width="100px;"><br><sub><b>Parth Sharma </b></sub></a><br><a href="https://github.com/rudrakshi99/SIH2022/commits/vociecallapi" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/kushalgautam"><img alt="" src="https://avatars.githubusercontent.com/kushalgautam" width="100px;"><br><sub><b>Kushal Gautam </b></sub></a><br><a href="https://github.com/rudrakshi99/SIH2022/" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/suyashrastogi7"><img alt="" src="https://avatars.githubusercontent.com/suyashrastogi7" width="100px;"><br><sub><b>Suyash Rastogi </b></sub></a><br><a href="https://github.com/rudrakshi99/SIH2022/commits/master?author=suyashrastogi7" title="Code">💻</a></td>
   </tr>
 </tbody></table>
 
