@@ -26,6 +26,7 @@ class PartnerDispute(models.Model):
         _("Phone Number"),
         max_length=10,
     )
+    equipment_id = models.CharField(_("Product Id"), max_length=10)
     partner_id = models.CharField(_("Partner Id"), max_length=10)
     TOPIC = (
         (10, "Financial related"),
