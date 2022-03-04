@@ -2,6 +2,7 @@ from rest_framework import generics
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
+from kex.booking.models import Booking
 
 
 from kex.core.utils import response_payload
@@ -67,7 +68,6 @@ class CancelFormView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         validated_data = serializer.validated_data
         cancel_form = serializer.create(validated_data)
-
         cancel_form = CancelFormSerializer(cancel_form).data
         
         return Response(
