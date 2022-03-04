@@ -18,6 +18,12 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import VerifyOTP from "./components/verify-otp";
 import Help from "./pages/Help";
+import Header from "./components/header/Header";
+import PreHeader from "./components/preheader/PreHeader";
+import Footer from "./components/footer/Footer";
+import Dashboard from "./pages/dashboard/Dashboard";
+import AddProduct from "./pages/addProduct/AddProduct";
+import Product from "./pages/product/Product";
 
 function App() {
   const authState = useSelector((state) => state.authReducer);
@@ -42,15 +48,21 @@ function App() {
 
   return (
     <>
+      <PreHeader />
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="verify-otp" element={<VerifyOTP />} />
         <Route path="help" element={<Help />} />
+        <Route path="Dashboard" element={<Dashboard />} />
+        <Route path="addProduct" element={<AddProduct />} />
+        <Route path="product/:id" element={<Product />} />
         <Route path="support" element={<SupportAdmin />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
+      <Footer />
       <SupportEngine />
     </>
   );

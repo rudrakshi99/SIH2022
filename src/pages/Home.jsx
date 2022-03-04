@@ -14,8 +14,8 @@ const Home = () => {
         <div style={{ overflow: 'hidden'}}>
             <Banner />
             <Support />
-            <Ads />
             <Workflow />
+            <Ads />
             <Services />
             <Stats />
             <Equipments />

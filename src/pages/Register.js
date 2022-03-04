@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
 
 //Components
-import Header from "../components/header/Header";
-import Footer from "../components/footer/Footer";
-import PreHeader from "../components/preheader/PreHeader";
 import InputField from "../components/input/InputField";
 import { ErrorMsg } from "../components/alerts";
 
@@ -80,8 +77,6 @@ const Register = () => {
 
   return (
     <div className="flex flex-col">
-      <PreHeader />
-      <Header />
       <div className="flex justify-center py-9">
         <div>
           <img className="" src={signup_img} alt="signup" />
@@ -165,7 +160,6 @@ const Register = () => {
           </form>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

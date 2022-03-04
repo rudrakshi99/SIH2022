@@ -1,9 +1,6 @@
 import React from "react";
 
 //Components
-import Header from "../components/header/Header";
-import Footer from "../components/footer/Footer";
-import PreHeader from "../components/preheader/PreHeader";
 import ExpandDropdown from "../components/expandText";
 
 const Help = () => {
@@ -26,8 +23,6 @@ const Help = () => {
 
   return (
     <div className="">
-      <PreHeader />
-      <Header />
       <div className="bg-green-700 p-9 content-center">
         <h1 className="font-bold text-5xl text-center text-white m-8">
           How can we Help?
@@ -68,7 +63,6 @@ const Help = () => {
           Contact Us
         </button>
       </div>
-      <Footer />
     </div>
   );
 };
