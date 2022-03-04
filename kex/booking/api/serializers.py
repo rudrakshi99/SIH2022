@@ -60,7 +60,6 @@ class BookingCreateSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "booking_id",
-            "customer",
             "equipment",
             "equipment_type",
             "brand",
@@ -70,16 +69,24 @@ class BookingCreateSerializer(serializers.ModelSerializer):
             "created_at",
             "start_time",
             "end_time",
+            "customer",
         ]
         read_only_fields = [
             "booking_id",
-            # "customer",
+            "customer",
             # "equipment",
             "equipment_type",
             "brand",
             "created_at",
             "status",
         ]
+
+    def create(self, validated_data):
+        booking = Booking.objects.create(
+            **validated_data, customer=self.context["user"]
+        )
+
+        return booking
 
     def get_equipment_type(self, obj):
         return obj.equipment.equipment_type.name

@@ -53,7 +53,9 @@ class BookingCreateAPIView(CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data)
+        serializer = self.serializer_class(
+            data=request.data, context={"user": request.user}
+        )
         serializer.is_valid(raise_exception=True)
         booking = serializer.create(serializer.validated_data)
         return Response(
