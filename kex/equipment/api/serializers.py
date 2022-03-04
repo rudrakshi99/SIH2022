@@ -1,9 +1,11 @@
+from django.forms import ValidationError
 from rest_framework.serializers import (
     HyperlinkedIdentityField,
     ModelSerializer,
     SerializerMethodField,
 )
-from kex.equipment.models import Equipment
+from kex.booking.models import Booking
+from kex.equipment.models import Equipment, EquipmentRating
 from kex.equipment_type.api.serializers import EquipmentTypeListSerializer
 from kex.users.api.serializers import UserSerializer
 from kex.brand.api.serializers import BrandSerializer
@@ -191,3 +193,22 @@ class EquipmentCreateSerializer(ModelSerializer):
         except:
             image = None
         return image
+
+
+class EquipmentRatingSerializer(ModelSerializer):
+    class Meta:
+        model = EquipmentRating
+        fields = "__all__"
+        read_only_fields = ["user"]
+
+    def validate_equipment(self, equipment):
+        if not Booking.objects.filter(customer=self.context["user"],status="Completed",equipment=equipment).exists():
+            raise ValidationError("No Booking with this Equipment")
+            
+        return equipment
+
+    def create(self, validated_data):
+        equipment_rating = EquipmentRating.objects.create(
+            **validated_data, user=self.context["user"]
+        )
+        return equipment_rating
