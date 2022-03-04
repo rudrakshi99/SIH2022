@@ -21,10 +21,10 @@ const Header = () => {
                     </ul>
                 </div>
                 <div className='flex-1 flex justify-evenly items-center'>
-                    <button class="bg-darkgreen hover:bg-green-700 text-white font-bold py-1 px-8 rounded">
+                    <button className="bg-darkgreen hover:bg-green-700 text-white font-bold py-1 px-8 rounded">
                         Login
                     </button>
-                    <button class="bg-darkgreen hover:bg-green-700 text-white font-bold py-1 px-8 rounded">
+                    <button className="bg-darkgreen hover:bg-green-700 text-white font-bold py-1 px-8 rounded">
                         Sign Up
                     </button>
                 </div>

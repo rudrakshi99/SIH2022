@@ -44,7 +44,7 @@ const Equipments = () => {
                 <div className='flex mx-[100px] flex-wrap items-center'>
                     {
                         images.map(image => (
-                            <div className='imageEle'>
+                            <div key={image.title} className='imageEle'>
                                 <h1 className='equipTitle'>{image.title}</h1>
                                 <img className='equipImg' src={image.img} alt="" />
                             </div>
