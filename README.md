@@ -1,8 +1,9 @@
-# Krishi Sadhan
-
-
-[![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
-[![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+# Team-Gryffindor
+# Smart India Hackathon 2022
+![SIH2022](https://user-images.githubusercontent.com/55245862/156772177-691163b0-a0b0-4102-a945-37b4f281e4c4.jpeg)
+## Problem Statement Code: 
+> #### DB887 (Ministry of Skill Development and Entrepreneurship)
+> At a given time farmer equipment are idle during non-seasons. A platform that allows farmers to rent farming equipment for less during the off-season. A simple aggregation platform with call center support can function as booking equipment’s will help farmers make additional income.
 
 ## Table of Contents
 
@@ -47,8 +48,8 @@
 
 <img src="https://img.shields.io/badge/python%20-%2314354C.svg?&style=for-the-badge&logo=python&logoColor=white"/> <img src="https://img.shields.io/badge/django%20-%23092E20.svg?&style=for-the-badge&logo=django&logoColor=white"/>  <img src="https://img.shields.io/badge/markdown-%23000000.svg?&style=for-the-badge&logo=markdown&logoColor=white"/><img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/> <img src="https://img.shields.io/badge/postgres-0B96B2?style=for-the-badge&logo=postgresql&logoColor=white"/> <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white"/>
 
-[![View in Swagger](http://jessemillar.github.io/view-in-swagger-button/button.svg)](https://blogwall.herokuapp.com/swagger/)
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/14143990/UVXhrHVq)
+[![View in Swagger](http://jessemillar.github.io/view-in-swagger-button/button.svg)](https://krishi-sadhan-app.herokuapp.com/swagger/)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/19838458/UVkvHCRB)
 
 ## Getting Started
 
@@ -193,15 +194,15 @@ py manage.py migrate
 python3 manage.py makemigrations
 python3 manage.py migrate
 ``` 
-## Developers:
+## Team Members:
 
-> "Alone we can do so little; together we can do so much."
+> "Team Members"
 
 | S.No. | Name | Role | GitHub Username:octocat: |
 | --------------- | --------------- | --------------- | --------------- |
-| 1. | Sarthak Shukla | Frontend Development | [@sarthakshukla1316](https://github.com/sarthakshukla1316) |
-| 2. | Suyash Rastogi | Frontend Development | [@suyashrastogi7](https://github.com/suyashrastogi7) |
-| 3. | Rudrakshi | Backend Development| [@rudrakshi99](https://github.com/rudrakshi99)  |
+| 1. | Rudrakshi (Team Leader) | Backend Development| [@rudrakshi99](https://github.com/rudrakshi99)  |
+| 2. | Sarthak Shukla | Frontend Development | [@sarthakshukla1316](https://github.com/sarthakshukla1316) |
+| 3. | Suyash Rastogi | Frontend Development | [@suyashrastogi7](https://github.com/suyashrastogi7) |
 | 4. | Anmol Srivastava | Backend Development| [@anmolsrivastava1](https://github.com/anmolsrivastava1)  |
 | 5. | Parth Sharma | ML Engineer | [@ParthSharmaT](https://github.com/ParthSharmaT)  |
 | 6. | Kushal Gautam | UI Designer | [@kushalgautam](https://github.com/kushalgautam)  |
@@ -212,6 +213,10 @@ python3 manage.py migrate
   <tbody><tr>
     <td align="center"><a href="https://github.com/rudrakshi99"><img alt="" src="https://avatars.githubusercontent.com/rudrakshi99" width="100px;"><br><sub><b>Rudrakshi</b></sub></a><br><a href="https://github.com/rudrakshi99/SIH2022/commits/backend?author=rudrakshi99" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/sarthakshukla1316"><img alt="" src="https://avatars.githubusercontent.com/sarthakshukla1316" width="100px;"><br><sub><b>Sarthak Shukla </b></sub></a><br><a href="https://github.com/rudrakshi99/SIH2022/commits?author=sarthakshukla1316" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/anmolsrivastava1"><img alt="" src="https://avatars.githubusercontent.com/anmolsrivastava1" width="100px;"><br><sub><b>Anmol Srivastava </b></sub></a><br><a href="https://github.com/rudrakshi99/SIH2022/commits/backend?author=anmolsrivastava1" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/ParthSharmaT"><img alt="" src="https://avatars.githubusercontent.com/ParthSharmaT" width="100px;"><br><sub><b>Parth Sharma </b></sub></a><br><a href="https://github.com/rudrakshi99/SIH2022/commits/vociecallapi" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/kushalgautam"><img alt="" src="https://avatars.githubusercontent.com/kushalgautam" width="100px;"><br><sub><b>Kushal Gautam </b></sub></a><br><a href="https://github.com/rudrakshi99/SIH2022/" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/suyashrastogi7"><img alt="" src="https://avatars.githubusercontent.com/suyashrastogi7" width="100px;"><br><sub><b>Suyash Rastogi </b></sub></a><br><a href="https://github.com/rudrakshi99/SIH2022/commits/master?author=suyashrastogi7" title="Code">💻</a></td>
   </tr>
 </tbody></table>
 
