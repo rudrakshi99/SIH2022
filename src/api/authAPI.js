@@ -195,3 +195,29 @@ export const postDisputeData = async ({
     return Promise.reject(err.response?.data?.msg);
   }
 };
+
+export const postCancellationData = async ({
+  booking_id,
+  cancel_reason,
+  description,
+  token,
+}) => {
+  try {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    };
+    const res = await axios.post(
+      `${url}/enquiry/cancel-form`,
+      {
+        booking_id,
+        cancel_reason,
+        description,
+      },
+      { headers }
+    );
+    return Promise.resolve(res.data);
+  } catch (err) {
+    return Promise.reject(err.response?.data?.msg);
+  }
+};

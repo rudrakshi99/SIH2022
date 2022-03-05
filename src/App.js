@@ -25,6 +25,7 @@ import AddProduct from "./pages/addProduct/AddProduct";
 import VerifyOTP from "./components/verify-otp";
 import Product from "./pages/product/Product";
 import PartnerDispute from "./pages/PartnerDispute";
+import CancellationForm from "./components/cancellationForm";
 
 function App() {
   const authState = useSelector((state) => state.authReducer);
@@ -62,6 +63,7 @@ function App() {
         <Route path="product/:id" element={<Product />} />
         <Route path="partner-dispute" element={<PartnerDispute />} />
         <Route path="support" element={<SupportAdmin />} />
+        <Route path="cancellation-form" element={<CancellationForm />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
       <Footer />
