@@ -7,7 +7,7 @@
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
+1. [Problem Statement Code](#problem-statement-code)
 2. [Features](#features)
 3. [Technology Stack to be used](#technology-stack-to-be-used)
 4. [GitHub Repository Structure](#github-repository-structure)
@@ -24,7 +24,7 @@
 	1. [Leaving the virtual environment](#leaving-the-virtual-environment)
 	1. [Update requirements file](#update-requirements-file-critical)
 	1. [Update Database](#update-database)  
-6. [Developers](#developers)
+6. [Team Members](#team-members)
 7. [Maintainers](#maintainers)
 
 
@@ -50,6 +50,14 @@
 
 [![View in Swagger](http://jessemillar.github.io/view-in-swagger-button/button.svg)](https://krishi-sadhan-app.herokuapp.com/swagger/)
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/19838458/UVkvHCRB)
+
+## GitHub Repository Structure
+
+| S.No. | Branch Name                                                                  | Purpose                       |
+| ----- | ---------------------------------------------------------------------------- | ----------------------------- |
+| 1.    | [master](https://github.com/rudrakshi99/SIH2022/tree/master)                 | contains all Frontend code    |
+| 2.    | [backend](https://github.com/rudrakshi99/SIH2022/tree/backend)               | contains all Backend code     |
+
 
 ## Getting Started
 
