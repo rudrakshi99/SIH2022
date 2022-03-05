@@ -29,7 +29,7 @@
 - **Frontend**: React, Redux
 - **Backend**: Django, Django Rest Framework
 - **IDE**: VS Code
-- **Design**: Adobe Photoshop, Canva
+- **Design**: Figma, Canva
 - **API Testing & Documentation**: Postman, Swagger
 - **Version Control**: Git and GitHub
 - **Machine Learning**: Python, Jupyter Notebook
