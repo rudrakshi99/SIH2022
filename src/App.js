@@ -11,7 +11,7 @@ import {
   getSaveTokenActionAccess,
 } from "./redux/actions";
 import { Routes, Route } from "react-router-dom";
-import SupportAdmin from './components/ChatSupport/SupportAdmin/index';
+import SupportAdmin from "./components/ChatSupport/SupportAdmin/index";
 
 //Pages
 import Register from "./pages/Register";
@@ -22,7 +22,9 @@ import PreHeader from "./components/preheader/PreHeader";
 import Footer from "./components/footer/Footer";
 import Dashboard from "./pages/dashboard/Dashboard";
 import AddProduct from "./pages/addProduct/AddProduct";
+import VerifyOTP from "./components/verify-otp";
 import Product from "./pages/product/Product";
+import PartnerDispute from "./pages/PartnerDispute";
 
 function App() {
   const authState = useSelector((state) => state.authReducer);
@@ -58,6 +60,7 @@ function App() {
         <Route path="Dashboard" element={<Dashboard />} />
         <Route path="addProduct" element={<AddProduct />} />
         <Route path="product/:id" element={<Product />} />
+        <Route path="partner-dispute" element={<PartnerDispute />} />
         <Route path="support" element={<SupportAdmin />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>

@@ -37,8 +37,6 @@ const PartnerDispute = () => {
 
   return (
     <div>
-      <PreHeader />
-      <Header />
       <div className="text-center">
         <div className="p-9" style={{ backgroundColor: "#68AC5D" }}>
           <h1 className="text-4xl font-bold text-white">
