@@ -5,9 +5,6 @@ import Cookies from "js-cookie";
 
 //Components
 import InputField from "../components/input/InputField";
-import Header from "../components/header/Header";
-import Footer from "../components/footer/Footer";
-import PreHeader from "../components/preheader/PreHeader";
 import Loader from "../components/loader/";
 
 //Functions
@@ -158,8 +155,6 @@ const Login = () => {
         </div>
       )}
       <div className={`${loading && "blur-sm"} flex flex-col`}>
-        <PreHeader />
-        <Header />
         <div className="flex justify-center py-9 rounded-2xl">
           <div>
             <img className="" src={login_img} alt="signup" />
@@ -240,7 +235,6 @@ const Login = () => {
             </form>
           </div>
         </div>
-        <Footer />
       </div>
     </div>
   );
