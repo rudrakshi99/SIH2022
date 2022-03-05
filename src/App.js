@@ -30,21 +30,45 @@ function App() {
   const tokenState = useSelector((state) => state.tokenReducer);
   const dispatch = useDispatch();
 
-  useEffect(async () => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    if (isLoggedIn) {
-      const data = await renewAccessToken();
-      dispatch(getSaveTokenActionAccess(data.accessToken));
+  useEffect(() => {
+    const loggedIn = async () => {
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+      if (isLoggedIn) {
+        const data = await renewAccessToken();
+        dispatch(getSaveTokenActionAccess(data.accessToken));
+      }
     }
+    loggedIn();
   }, [authState.isLoggedIn]);
+  
 
-  useEffect(async () => {
-    if (tokenState) {
-      dispatch(getLoginAction());
-      const data = await getProfile(tokenState);
-      dispatch(getSaveProfileAction(data.user));
+  // useEffect(async () => {
+  //   const isLoggedIn = localStorage.getItem("isLoggedIn");
+  //   if (isLoggedIn) {
+  //     const data = await renewAccessToken();
+  //     dispatch(getSaveTokenActionAccess(data.accessToken));
+  //   }
+  // }, [authState.isLoggedIn]);
+
+  useEffect(() => {
+    const tokenSt = async () => {
+         if (tokenState) {
+          dispatch(getLoginAction());
+          const data = await getProfile(tokenState);
+          dispatch(getSaveProfileAction(data.user));
+        }
     }
+    tokenSt();
   }, [tokenState]);
+  
+
+  // useEffect(async () => {
+  //   if (tokenState) {
+  //     dispatch(getLoginAction());
+  //     const data = await getProfile(tokenState);
+  //     dispatch(getSaveProfileAction(data.user));
+  //   }
+  // }, [tokenState]);
 
   return (
     <>
