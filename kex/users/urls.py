@@ -1,4 +1,5 @@
 from django.urls import path
+from kex.users.api.views import UserRetrieveUpdateView
 from kex.users.api.viewset import (
     LoginVerifyOtpViewset,
     LoginViewset,
@@ -29,5 +30,10 @@ urlpatterns = [
         "login/verify-otp",
         view=LoginVerifyOtpViewset.as_view({"post": "verify_otp_login"}),
         name="verify_otp_login",
+    ),
+    path(
+        "<slug:uuid>/",
+        view=UserRetrieveUpdateView.as_view(),
+        name="user_update",
     ),
 ]

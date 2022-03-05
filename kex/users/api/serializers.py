@@ -18,7 +18,28 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ["username", "first_name", "last_name"]
 
-    extra_kwargs = {"url": {"view_name": "api:user-detail", "lookup_field": "username"}}
+    # extra_kwargs = {"url": {"view_name": "api:user-detail", "lookup_field": "username"}}
+
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(required=False)
+
+    class Meta:
+        model = User
+        fields = [
+            "id",
+            "uuid",
+            "user_id",
+            "first_name",
+            "last_name",
+            "email",
+            "address",
+            "city",
+            "state",
+            "pin_code",
+            "profile_picture",
+        ]
+        read_only_fields = ["uuid", "id", "user_id"]
 
 
 class UserSignupSerializer(serializers.ModelSerializer):
@@ -34,6 +55,9 @@ class UserSignupSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
+            "id",
+            "user_id",
+            "uuid",
             "email",
             "password",
             "first_name",
@@ -45,6 +69,7 @@ class UserSignupSerializer(serializers.ModelSerializer):
             "phone_number",
             "secondary_phone_number",
         ]
+        read_only_fields = ["id", "user_id", "uuid"]
 
     def validate_email(self, email):
         if User.objects.filter(email=email).exists():
@@ -89,7 +114,34 @@ class UserSignUpOtpSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["phone_number", "otp", "first_name", "last_name", "email"]
+        fields = [
+            "phone_number",
+            "otp",
+            "first_name",
+            "last_name",
+            "email",
+            "uuid",
+            "user_id",
+            "id",
+            "address",
+            "city",
+            "state",
+            "pin_code",
+            "secondary_phone_number",
+        ]
+        read_only_fields = [
+            "uuid",
+            "user_id",
+            "id",
+            "first_name",
+            "last_name",
+            "email",
+            "address",
+            "city",
+            "state",
+            "pin_code",
+            "secondary_phone_number",
+        ]
 
     def validate(self, data):
         phone_number = data.get("phone_number", "")
@@ -148,6 +200,9 @@ class LoginSerializer(serializers.ModelSerializer):
             "last_name",
             "email",
             "phone_number",
+            "uuid",
+            "user_id",
+            "id",
         ]
 
     def validate(self, attrs):
@@ -177,6 +232,9 @@ class LoginSerializer(serializers.ModelSerializer):
             "first_name": user.first_name,
             "last_name": user.last_name,
             "phone_number": user.phone_number,
+            "uuid": user.uuid,
+            "user_id": user.user_id,
+            "id": user.id,
         }
 
 
@@ -198,7 +256,18 @@ class LoginVerifyOtpSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["phone_number", "tokens", "otp", "first_name", "last_name", "email"]
+        fields = [
+            "phone_number",
+            "tokens",
+            "otp",
+            "first_name",
+            "last_name",
+            "email",
+            "user_id",
+            "uuid",
+            "id",
+        ]
+        read_only_fields = ["user_id", "uuid", "id", "email"]
 
     def get_tokens(self, obj):
 
@@ -248,4 +317,7 @@ class LoginVerifyOtpSerializer(serializers.ModelSerializer):
             "phone_number": user.phone_number,
             "first_name": user.first_name,
             "last_name": user.last_name,
+            "uuid": user.uuid,
+            "user_id": user.user_id,
+            "id": user.id,
         }
