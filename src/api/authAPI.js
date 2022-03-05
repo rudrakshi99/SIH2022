@@ -9,16 +9,16 @@ export const postRegisterData = async ({
   email,
   password,
   last_name,
-  pincode,
+  pin_code,
   phone_number,
 }) => {
   try {
-    const res = await axios.post(`${url}/users/signup`, {
+    const res = await axios.post(`${url}/users/signup/`, {
       first_name,
       last_name,
       email,
       password,
-      pincode,
+      pin_code,
       phone_number,
     });
     return Promise.resolve(res.data);
@@ -27,10 +27,23 @@ export const postRegisterData = async ({
   }
 };
 
-export const postLoginData = async (formData) => {
+export const postLoginDataEmail = async ({ email, password }) => {
   try {
-    const { email, password } = formData;
-    const res = await axios.post(`${url}/api/auth/login`, { email, password });
+    const res = await axios.post(`${url}/users/login/email`, {
+      email,
+      password,
+    });
+    return Promise.resolve(res.data);
+  } catch (err) {
+    return Promise.reject(err.response?.data?.msg);
+  }
+};
+
+export const postLoginDataPhone = async ({ phone_number }) => {
+  try {
+    const res = await axios.post(`${url}/users/login/otp`, {
+      phone_number,
+    });
     return Promise.resolve(res.data);
   } catch (err) {
     return Promise.reject(err.response?.data?.msg);
@@ -49,10 +62,11 @@ export const verifyOtp = async ({ phone_number, OTP }) => {
   }
 };
 
-export const activateAccount = async (activationToken) => {
+export const verifyOtpLogin = async ({ phone_number, OTP }) => {
   try {
-    const res = await axios.post(`${url}/api/auth/activate-account`, {
-      activationToken,
+    const res = await axios.post(`${url}/users/login/verify-otp`, {
+      phone_number,
+      OTP,
     });
     return Promise.resolve(res.data);
   } catch (err) {
@@ -151,6 +165,31 @@ export const updatePassword = async (password, accessToken) => {
         headers: { Authorization: accessToken },
       }
     );
+    return Promise.resolve(res.data);
+  } catch (err) {
+    return Promise.reject(err.response?.data?.msg);
+  }
+};
+
+export const postDisputeData = async ({
+  partner_id,
+  email,
+  name,
+  phone_number,
+  description,
+  topic,
+  equipment_id,
+}) => {
+  try {
+    const res = await axios.post(`${url}/enquiry/partner-dispute`, {
+      partner_id,
+      email,
+      name,
+      phone_number,
+      description,
+      topic,
+      equipment_id,
+    });
     return Promise.resolve(res.data);
   } catch (err) {
     return Promise.reject(err.response?.data?.msg);
