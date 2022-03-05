@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import InputField from "../input/InputField";
 
-import Header from "../header/Header";
-import PreHeader from "../preheader/PreHeader";
-import Footer from "../footer/Footer";
-
 //Functions
 import { verifyOtp } from "../../api/authAPI";
 
@@ -36,10 +32,8 @@ const VerifyOTP = () => {
   }
 
   return (
-    <div>
-      <PreHeader />
-      <Header />
-      <div className="bg-gray-300 h-screen flex justify-center align-center p-9">
+    <div className="">
+      <div className="bg-gray-300 h-screen w-screen flex justify-center align-center p-9">
         <div className=" rounded-xl bg-white w-1/4 h-auto p-9 ">
           <form onSubmit={verify} className="flex flex-col ">
             <h1 className="mb-5 text-center text-xl">
@@ -48,7 +42,7 @@ const VerifyOTP = () => {
             <InputField
               placeholder="OTP"
               value={OTP}
-              onChange={setOTP}
+              onChange={(e) => setOTP(e.target.value)}
               type="text"
               required={true}
             />
@@ -78,7 +72,6 @@ const VerifyOTP = () => {
           </p>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

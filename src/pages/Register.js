@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 //Components
 import Header from "../components/header/Header";
@@ -11,6 +12,7 @@ import { ErrorMsg } from "../components/alerts";
 //Functions
 import { postRegisterData } from "../api/authAPI";
 import { isEmail, isEmpty, isValidPassword } from "../utils/validation";
+import { getSaveProfileAction } from "../redux/actions";
 
 //Images
 import signup_img from "../img/signup_img.jpg";
@@ -21,7 +23,7 @@ const Register = () => {
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
   const [password, setPassword] = useState("");
-  const [pincode, setPincode] = useState("");
+  const [pin_code, setPincode] = useState("");
   const [phone_number, setPhoneNumber] = useState("");
 
   const [loading, setLoading] = useState(true);
@@ -37,7 +39,7 @@ const Register = () => {
       isEmpty(first_name) ||
       isEmpty(email) ||
       isEmpty(password) ||
-      isEmpty(pincode) ||
+      isEmpty(pin_code) ||
       isEmpty(phone_number) ||
       isEmpty(last_name)
     ) {
@@ -59,15 +61,16 @@ const Register = () => {
         email,
         password,
         last_name,
-        pincode,
+        pin_code,
         phone_number,
       });
       console.log(data);
+      // useDispatch(getSaveProfileAction(data.data));
       setSuccess(data.success);
       setMessage(data.message);
       setLoading(false);
       navigate({
-        pathname: "./verify-otp",
+        pathname: "../verify-otp",
         search: `?${createSearchParams({
           phone_number: phone_number,
         })}`,
@@ -138,7 +141,7 @@ const Register = () => {
             />
             <InputField
               placeholder="Pincode*"
-              value={pincode}
+              value={pin_code}
               onChange={(e) => setPincode(e.target.value)}
               type="text"
               required={true}

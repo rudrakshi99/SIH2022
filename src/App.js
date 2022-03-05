@@ -13,8 +13,10 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import VerifyOTP from "./components/verify-otp";
 import Help from "./pages/Help";
+import FAQ from "./pages/FAQ";
+import VerifyOTP from "./components/verify-otp";
+import PartnerDispute from "./pages/PartnerDispute";
 
 function App() {
   const authState = useSelector((state) => state.authReducer);
@@ -42,8 +44,10 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
-      <Route path="verify-otp" element={<VerifyOTP />} />
       <Route path="help" element={<Help />} />
+      <Route path="faq" element={<FAQ />} />
+      <Route path="verify-otp" element={<VerifyOTP />} />
+      <Route path="partner-dispute" element={<PartnerDispute />} />
       <Route path="*" element={<div>Not Found</div>} />
     </Routes>
   );
