@@ -1,5 +1,6 @@
 import React from 'react'
 import './Footer.css';
+import { useNavigate } from 'react-router-dom'
 import logo from '../../img//logo.png'
 import Vector from '../../img//Vector.png'
 import Vector1 from '../../img//Vector1.png'
@@ -7,6 +8,7 @@ import Vector2 from '../../img//Vector2.png'
 import footerBg from '../../img//footerBg.png'
 
 const Footer = () => {
+    const navigate = useNavigate();
     return (
         <div className='bg-darkgreen py-20'>
             <div className='flex justify-center items-center'>
@@ -29,7 +31,7 @@ const Footer = () => {
                         <ul>
                             <li className='text-lg text-white font-bold'>Support Center</li>
                             <li className='text-lg text-white font-medium'>Help Center</li>
-                            <li className='text-lg text-white font-medium'>Partner Dispute</li>
+                            <li className='text-lg text-white font-medium cursor-pointer' onClick={() => navigate('/partner-dispute')}>Partner Dispute</li>
                             <li className='text-lg text-white font-medium'>FAQs</li>
                         </ul>
                     </div>

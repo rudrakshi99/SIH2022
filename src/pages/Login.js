@@ -9,7 +9,11 @@ import Loader from "../components/loader/";
 
 //Functions
 import { SuccessMsg, ErrorMsg } from "../components/alerts";
-import { postLoginData } from "../api/authAPI";
+import {
+  postLoginDataEmail,
+  postLoginDataPhone,
+  verifyOtp,
+} from "../api/authAPI";
 import {
   getLoginAction,
   getSaveTokenActionAccess,
@@ -27,6 +31,11 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
+  const [showOTP, setShowOTP] = useState(false);
+  const [data, setData] = useState();
+  const [OTP, setOTP] = useState("");
+  const [success2, setSuccess2] = useState(false);
+  const [error, setError] = useState(false);
 
   // const [isLoggedIn, setIsLoggedIn] = useCookies(["isLoggedIn"]);
 
@@ -38,23 +47,9 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const data = await postLoginData({ email, password });
-      setSuccess(data.success);
-      setMessage(data.message);
-      localStorage.setItem("isLoggedIn", true);
-      Cookies.set("access-token", data.data.tokens.access, {
-        path: "/",
-        expires: "24h",
-      });
-      Cookies.set("refresh-token", data.data.tokens.refresh, {
-        path: "/",
-        expires: "48h",
-      });
-      dispatch(getLoginAction());
-      dispatch(getSaveTokenActionAccess(data.data.tokens.access));
-      dispatch(getSaveTokenActionRefresh(data.data.tokens.refresh));
-      navigate("/");
-      setLoading(false);
+      const data2 = await postLoginDataEmail({ email, password });
+      saveData(data2);
+      return;
     } catch (err) {
       setSuccess(false);
       setLoading(false);
@@ -63,9 +58,102 @@ const Login = () => {
     }
   }
 
+  async function handleLoginPhone() {
+    //request to server
+    // e.preventDefault();
+    setShowOTP(true);
+    try {
+      const data = await postLoginDataPhone({ phone_number });
+      setData(data);
+      setShowOTP(true);
+    } catch (err) {
+      setSuccess(false);
+      setLoading(false);
+      setMessage("Server Issue, Try again later");
+      console.log(err);
+    }
+  }
+
+  async function verify(e) {
+    e.preventDefault();
+    try {
+      const data2 = await verifyOtp(phone_number, OTP);
+      if (data2.success) {
+        saveData(data);
+        setSuccess2(true);
+        setLoading(false);
+        navigate("/");
+      } else {
+        setOTP("");
+        setError(true);
+      }
+      console.log(data);
+    } catch (err) {}
+  }
+  async function saveData(data) {
+    setSuccess(data.success);
+    setMessage(data.message);
+    localStorage.setItem("isLoggedIn", true);
+    Cookies.set("access-token", data.data.tokens.access, {
+      path: "/",
+      expires: "24h",
+    });
+    Cookies.set("refresh-token", data.data.tokens.refresh, {
+      path: "/",
+      expires: "48h",
+    });
+    console.log(Cookies.get("access-token"));
+    dispatch(getLoginAction());
+    dispatch(getSaveTokenActionAccess(data.data.tokens.access));
+    dispatch(getSaveTokenActionRefresh(data.data.tokens.refresh));
+    navigate("/");
+    setLoading(false);
+  }
+
   return (
     <div>
       {loading && <Loader />}
+      {showOTP && (
+        <div className="absolute z-40">
+          <div className="bg-gray-300 h-screen w-screen flex justify-center align-center p-9">
+            <div className=" rounded-xl bg-white w-1/4 h-auto p-9 ">
+              <form onSubmit={() => verify} className="flex flex-col ">
+                <h1 className="mb-5 text-center text-xl">
+                  Enter the OTP sent to your Registered Number
+                </h1>
+                <InputField
+                  placeholder="OTP"
+                  value={OTP}
+                  onChange={(e) => setOTP(e.target.value)}
+                  type="text"
+                  required={true}
+                />
+                <button
+                  className="px-6 py-1 mx-auto rounded-lg text-white text-lg font-semibold"
+                  style={{ backgroundColor: "#68AC5D" }}
+                  type="submit"
+                >
+                  Verify OTP
+                </button>
+                {success2 && (
+                  <p className="text-center text-green-400">
+                    OTP verified successfully!
+                  </p>
+                )}
+                {error && (
+                  <p className="text-center text-red-400">
+                    Wrong OTP, plase try again!
+                  </p>
+                )}
+              </form>
+              <p className="my-5 text-center">
+                Didn't recieve OTP?{" "}
+                <p className="text-blue-600 underline">Resend</p>
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
       <div className={`${loading && "blur-sm"} flex flex-col`}>
         <div className="flex justify-center py-9 rounded-2xl">
           <div>
@@ -132,7 +220,13 @@ const Login = () => {
               <InputField
                 placeholder="Mobile No."
                 value={phone_number}
-                onChange={(e) => setPhoneNumber(e.target.value)}
+                onChange={(e) => {
+                  setPhoneNumber(e.target.value);
+                  console.log(phone_number);
+                  if (phone_number.length === 9) {
+                    handleLoginPhone();
+                  }
+                }}
                 type="text"
               />
               <p className="my-3">
