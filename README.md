@@ -87,6 +87,10 @@ $ npm start
   </tr>
 </tbody></table>
 
+# License :memo:
+
+This project follows the [MIT License](https://choosealicense.com/licenses/mit/).
+
 [![Uses Git](https://forthebadge.com/images/badges/uses-git.svg)](https://github.com/rudrakshi99/SIH2022.git) 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://github.com/rudrakshi99/SIH2022.git)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://github.com/rudrakshi99/SIH2022.git)
