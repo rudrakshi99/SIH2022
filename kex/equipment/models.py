@@ -4,6 +4,7 @@ from kex.equipment_type.models import EquipmentType
 from kex.users.models import User
 from django.urls import reverse
 from django.db.models import Max
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 def upload_location(instance, filename):
@@ -56,3 +57,17 @@ class Equipment(models.Model):
             max = Equipment.objects.aggregate(id_max=Max("id"))["id_max"]
             self.eq_id = "{}{:05d}".format("EQ", (max + 1) if max is not None else 1)
         super().save(*args, **kwargs)
+
+
+class EquipmentRating(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
+    rating = models.IntegerField(
+        validators=[MaxValueValidator(5), MinValueValidator(1)], blank=True
+    )
+
+    def __str__(self):
+        return f"{self.user.first_name} - {self.equipment.title} : {self.rating}"
+
+    class Meta:
+        unique_together = ("user", "equipment")

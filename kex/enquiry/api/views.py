@@ -1,12 +1,17 @@
 from rest_framework import generics
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
+from kex.booking.models import Booking
 
 
 from kex.core.utils import response_payload
-from kex.enquiry.models import HelpCentre, PartnerDispute
-from kex.enquiry.api.serializers import HelpCentreSerializer, PartnerDisputeSerializer
+from kex.enquiry.models import CancelForm, HelpCentre, PartnerDispute
+from kex.enquiry.api.serializers import (
+    HelpCentreSerializer,
+    PartnerDisputeSerializer,
+    CancelFormSerializer,
+)
 
 
 class HelpCentreView(generics.CreateAPIView):
@@ -46,6 +51,28 @@ class PartnerDisputeView(generics.CreateAPIView):
         return Response(
             response_payload(
                 success=True, data=partner_dispute, msg="Your Request Has been raised."
+            ),
+            status=status.HTTP_200_OK,
+        )
+
+
+class CancelFormView(generics.CreateAPIView):
+    queryset = CancelForm.objects.all()
+    serializer_class = CancelFormSerializer
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(
+            data=request.data, context={"user": request.user}
+        )
+        serializer.is_valid(raise_exception=True)
+        validated_data = serializer.validated_data
+        cancel_form = serializer.create(validated_data)
+        cancel_form = CancelFormSerializer(cancel_form).data
+        
+        return Response(
+            response_payload(
+                success=True, data=cancel_form, msg="Your Booking has been cancelled"
             ),
             status=status.HTTP_200_OK,
         )

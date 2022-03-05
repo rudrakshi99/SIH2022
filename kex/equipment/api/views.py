@@ -10,7 +10,7 @@ from rest_framework.generics import (
     UpdateAPIView,
     RetrieveAPIView,
 )
-
+from rest_framework.views import APIView
 
 from rest_framework.permissions import (
     AllowAny,
@@ -22,12 +22,13 @@ from kex.equipment.api.serializers import (
     EquipmentCreateSerializer,
     EquipmentListSerializer,
     EquipmentDetailSerializer,
+    EquipmentRatingSerializer,
 )
 from .pagination import LimitOffsetPagination
 from .permissions import IsOwnerOrReadOnly
 from django_filters import rest_framework as filters
 from .filters import EquipmentFilter
-from kex.equipment.models import Equipment
+from kex.equipment.models import Equipment, EquipmentRating
 from rest_framework.response import Response
 from rest_framework import status
 from kex.core.utils import response_payload
@@ -127,3 +128,24 @@ class EquipmentListAPIView(ListAPIView):
                 | Q(horsepower__icontains=query)
             ).distinct()
         return queryset_list
+
+
+class EquipmentRatingView(CreateAPIView):
+    queryset = EquipmentRating.objects.all()
+    serializer_class = EquipmentRatingSerializer
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.serializer_class(
+            data=request.data, context={"user": request.user}
+        )
+        serializer.is_valid(raise_exception=True)
+        equipment_rating = serializer.create(serializer.validated_data)
+        return Response(
+            response_payload(
+                success=True,
+                data=EquipmentRatingSerializer(equipment_rating).data,
+                msg="Thanks for the Rating",
+            ),
+            status=status.HTTP_200_OK,
+        )

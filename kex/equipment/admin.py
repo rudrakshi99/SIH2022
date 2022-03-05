@@ -1,5 +1,5 @@
 from django.contrib import admin
-from kex.equipment.models import Equipment
+from kex.equipment.models import Equipment, EquipmentRating
 
 
 class EquipmentAdmin(admin.ModelAdmin):
@@ -12,3 +12,4 @@ class EquipmentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Equipment, EquipmentAdmin)
+admin.site.register(EquipmentRating)

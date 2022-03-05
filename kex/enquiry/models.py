@@ -2,6 +2,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from kex.users.admin import User
+
 # Third party imports
 
 
@@ -35,3 +37,16 @@ class PartnerDispute(models.Model):
     )
     topic = models.PositiveIntegerField(choices=TOPIC)
     description = models.TextField(_("Description"), blank=False)
+
+
+class CancelForm(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    booking_id = models.CharField(max_length=10)
+    CANCEL_REASON = (
+        (10, "Others"),
+        (20, "Quality Related"),
+        (30, "Found a better deal"),
+        (40, "Owner Related"),
+    )
+    cancel_reason = models.PositiveIntegerField(choices=CANCEL_REASON)
+    description = models.TextField(_("Description"), blank=True)
