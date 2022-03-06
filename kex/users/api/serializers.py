@@ -16,7 +16,19 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["username", "first_name", "last_name"]
+        fields = [
+            "id",
+            "uuid",
+            "user_id",
+            "first_name",
+            "last_name",
+            "email",
+            "address",
+            "city",
+            "state",
+            "pin_code",
+            "profile_picture",
+        ]
 
     # extra_kwargs = {"url": {"view_name": "api:user-detail", "lookup_field": "username"}}
 
@@ -213,7 +225,7 @@ class LoginSerializer(serializers.ModelSerializer):
 
         if not user:
             raise AuthenticationFailed(
-                response_payload(success=False, msg="Account disabled, contact admin")
+                response_payload(success=False, msg="Invalid Email or Password")
             )
         if not user.is_active:
             raise AuthenticationFailed(
