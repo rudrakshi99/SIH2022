@@ -20,6 +20,7 @@ class EquipmentListSerializer(ModelSerializer):
         model = Equipment
         fields = [
             "id",
+            "eq_id",
             "url",
             "manufacturer",
             "title",
