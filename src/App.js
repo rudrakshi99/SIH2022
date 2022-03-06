@@ -47,6 +47,7 @@ function App() {
         })
       );
     }
+    loggedIn();
   }, [authState.isLoggedIn]);
 
   useEffect(async () => {

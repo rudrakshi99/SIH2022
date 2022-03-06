@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Dashboard.css';
 import ProductItem from '../../components/dashboardComponent/product/ProductItem';
 import Dropdown from '../../components/dropdown/Dropdown';
-import Slider from '../../components/slider/Slider';
+import { getEquips } from '../../api/equipments';
+import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
+    const [equipments, setEquipments] = useState(null);
+    useEffect(() => {
+      const getEquipments = async () => {
+        const { data } = await getEquips();
+        setEquipments(data);
+        // console.log(data);
+      }
+      getEquipments();
+    }, [])
+
     return (
         <>
             <div className='h-4 w-full my-4 bg-[#D8F5DE]'></div>
@@ -74,11 +85,30 @@ const Dashboard = () => {
 
                                 <span className='text-lg mb-4 font-semibold text-[#4F4F4F] border-b-2 border-[#68AC5D] pb-1 ml-6'>Availability Date</span>
 
-                                <p className='text-md py-2 font-normal text-[#4F4F4F] pl-6'>From</p>
+                                <p className='text-md pt-2 font-normal text-[#4F4F4F] pl-6'>From</p>
+
+                                <div className='flex justify-center items-center'>
+                                    <button className="bg-darkgreen hover:bg-green-700 text-white font-normal text-sm py-1 text-center w-1/2 my-4 px-2 rounded">
+                                        DD-MM-YYYY
+                                    </button>
+                                    <i className="ml-4 text-lg text-[#68AC5D] fa-solid fa-calendar"></i>
+                                </div>
 
 
-                                <p className='text-md py-2 font-normal text-[#4F4F4F] pl-6'>To</p>
+                                <p className='text-md font-normal text-[#4F4F4F] pl-6'>To</p>
+                                <div className='flex justify-center items-center'>
+                                    <button className="bg-darkgreen hover:bg-green-700 text-white font-normal text-sm py-1 text-center w-1/2 my-4 px-2 rounded">
+                                        DD-MM-YYYY
+                                    </button>
+                                    <i className="ml-4 text-lg text-[#68AC5D] fa-solid fa-calendar"></i>
+                                </div>
 
+                            </div>
+
+                            <div className='w-11/12'>
+                                <div className='bg-[#68AC5D] -mt-5 py-4 ml-10 px-1 prFilter'>
+                                    <h1 className='text-lg font-bold text-center text-white'>Set Date</h1>
+                                </div>
                             </div>
                             
 
@@ -95,9 +125,11 @@ const Dashboard = () => {
 
                             <div className='flex flex-wrap items-center'>
                                 <div className='flex justify-around flex-wrap my-12'>
-                                    <ProductItem />
-                                    <ProductItem />
-                                    <ProductItem />
+                                    {
+                                        equipments?.map(equipment => (
+                                            <ProductItem key={equipment.id} equipment={equipment} />
+                                        ))
+                                    }
                                 </div>
                             </div>
 
@@ -108,15 +140,11 @@ const Dashboard = () => {
 
                             <div className='flex flex-wrap items-center'>
                                 <div className='flex justify-around flex-wrap my-12'>
-                                    <ProductItem />
-                                    <ProductItem />
-                                    <ProductItem />
-                                    <ProductItem />
-                                    <ProductItem />
-                                    <ProductItem />
-                                    <ProductItem />
-                                    <ProductItem />
-                                    <ProductItem />
+                                    {
+                                        equipments?.map(equipment => (
+                                            <ProductItem key={equipment.id} equipment={equipment} />
+                                        ))
+                                    }
                                 </div>
                             </div>
 
