@@ -76,6 +76,7 @@ const CancellationForm = () => {
             >
               Confirm
             </button>
+            <p>{message}</p>
           </form>
         </div>
       </div>

@@ -4,17 +4,10 @@ export const getLoginAction = () => {
   };
 };
 
-export const getSaveTokenActionAccess = (accessToken) => {
+export const getSaveTokenAction = (tokens) => {
   return {
-    type: "SAVE_TOKEN_ACCESS",
-    payload: accessToken,
-  };
-};
-
-export const getSaveTokenActionRefresh = (accessToken) => {
-  return {
-    type: "SAVE_TOKEN_REFRESH",
-    payload: accessToken,
+    type: "SAVE_TOKEN",
+    payload: tokens,
   };
 };
 

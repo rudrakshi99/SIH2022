@@ -50,11 +50,11 @@ export const postLoginDataPhone = async ({ phone_number }) => {
   }
 };
 
-export const verifyOtp = async ({ phone_number, OTP }) => {
+export const verifyOtp = async ({ phone_number, otp }) => {
   try {
     const res = await axios.post(`${url}/users/signup/verify-otp`, {
       phone_number,
-      OTP,
+      otp,
     });
     return Promise.resolve(res.data);
   } catch (err) {
@@ -75,27 +75,37 @@ export const verifyOtpLogin = async ({ phone_number, OTP }) => {
 };
 
 export const renewAccessToken = async () => {
-  axios.interceptors.response.use(undefined, function axiosRetryInspector(err) {
-    const refresh_token = Cookies.get("refresh-token");
-    if (err.response.status === 401 && refresh_token) {
-      axios
-        .post(`${url}/api/token/refresh/`, { refresh: refresh_token })
-        .then((res) => res.data)
-        .then((res) => {
-          err.config.headers["Authorization"] = "Bearer " + res.token;
-          Cookies.set("access-token", res.data.token, { path: "/" });
-          err.config.__isRetryRequest = true;
-          return axios(err.config);
-        });
-    }
-  });
+  const refresh_token = Cookies.get("refresh-token");
+  console.log(refresh_token);
   try {
-    const res = await axios.post(`${url}/api/token/refresh`, null);
+    const res = await axios.post(`${url}/api/token/refresh/`, {
+      refresh: refresh_token,
+    });
     return Promise.resolve(res.data);
   } catch (err) {
     return Promise.reject(err.response?.data?.msg);
   }
 };
+
+// export const renewAccessToken = async () => {
+//   axios.interceptors.response.use(
+//     undefined,
+//     async function axiosRetryInspector(err) {
+//       const refresh_token = Cookies.get("refresh-token");
+//       console.log(refresh_token);
+//       if (err.response.status === 401 && refresh_token) {
+//         try {
+//           const res = await axios.post(`${url}/api/token/refresh/`, {
+//             refresh: refresh_token,
+//           });
+//           return Promise.resolve(res.data);
+//         } catch (err) {
+//           return Promise.reject(err.response?.data?.msg);
+//         }
+//       }
+//     }
+//   );
+// };
 
 export const logoutUser = async () => {
   try {
@@ -130,11 +140,15 @@ export const resetPassword = async (password, accessToken) => {
   }
 };
 
-export const getProfile = async (accessToken) => {
+export const getProfile = async ({ uuid, accessToken }) => {
+  console.log(accessToken);
+  const data = await renewAccessToken();
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${data.access}`,
+  };
   try {
-    const res = await axios.get(`${url}/api/profile`, {
-      headers: { Authorization: accessToken },
-    });
+    const res = await axios.get(`${url}/users/${uuid}/`, { headers });
     return Promise.resolve(res.data);
   } catch (err) {
     return Promise.reject(err.response?.data?.msg);

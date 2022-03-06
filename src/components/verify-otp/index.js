@@ -17,7 +17,7 @@ const VerifyOTP = () => {
   async function verify(e) {
     e.preventDefault();
     try {
-      const data = await verifyOtp(phone_number, OTP);
+      const data = await verifyOtp({ phone_number: phone_number, otp: OTP });
       if (data.success) {
         setSuccess(true);
         setTimeout(() => {

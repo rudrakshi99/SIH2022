@@ -9,7 +9,7 @@ import { ErrorMsg } from "../components/alerts";
 //Functions
 import { postRegisterData } from "../api/authAPI";
 import { isEmail, isEmpty, isValidPassword } from "../utils/validation";
-import { getSaveProfileAction } from "../redux/actions";
+// import { getSaveProfileAction } from "../redux/actions";
 
 //Images
 import signup_img from "../img/signup_img.jpg";

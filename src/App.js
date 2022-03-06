@@ -8,10 +8,11 @@ import { getProfile, renewAccessToken } from "./api/authAPI";
 import {
   getLoginAction,
   getSaveProfileAction,
-  getSaveTokenActionAccess,
+  getSaveTokenAction,
 } from "./redux/actions";
 import { Routes, Route } from "react-router-dom";
 import SupportAdmin from "./components/ChatSupport/SupportAdmin/index";
+import Cookies from "js-cookie";
 
 //Pages
 import Register from "./pages/Register";
@@ -26,6 +27,7 @@ import VerifyOTP from "./components/verify-otp";
 import Product from "./pages/product/Product";
 import PartnerDispute from "./pages/PartnerDispute";
 import CancellationForm from "./components/cancellationForm";
+import UpdateProfile from "./pages/updateProfile/index";
 
 function App() {
   const authState = useSelector((state) => state.authReducer);
@@ -33,20 +35,35 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(async () => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    if (isLoggedIn) {
+    const refreshCookie = Cookies.get("refresh-token");
+    if (refreshCookie !== "") {
       const data = await renewAccessToken();
-      dispatch(getSaveTokenActionAccess(data.accessToken));
+      console.log(data);
+      const refresh = Cookies.get("refresh-token");
+      dispatch(
+        getSaveTokenAction({
+          accessToken: data.access,
+          refreshToken: refresh,
+        })
+      );
     }
   }, [authState.isLoggedIn]);
 
   useEffect(async () => {
-    if (tokenState) {
+    console.log(tokenState.token.accessToken);
+    if (!authState.isLoggedIn) {
       dispatch(getLoginAction());
-      const data = await getProfile(tokenState);
+      const uuid = Cookies.get("uuid");
+      const accessToken = tokenState.token.accessToken;
+      console.log(uuid, accessToken);
+      const data = await getProfile({
+        uuid: uuid,
+        accessToken: accessToken,
+      });
+      console.log(data);
       dispatch(getSaveProfileAction(data.user));
     }
-  }, [tokenState]);
+  }, []);
 
   return (
     <>
@@ -62,6 +79,7 @@ function App() {
         <Route path="addProduct" element={<AddProduct />} />
         <Route path="product/:id" element={<Product />} />
         <Route path="partner-dispute" element={<PartnerDispute />} />
+        <Route path="update-profile" element={<UpdateProfile />} />
         <Route path="support" element={<SupportAdmin />} />
         <Route path="cancellation-form" element={<CancellationForm />} />
         <Route path="*" element={<div>Not Found</div>} />
