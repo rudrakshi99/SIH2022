@@ -1,4 +1,5 @@
 import axios from "axios";
+import instance from "./config";
 import Cookies from "js-cookie";
 
 // const url = "http://localhost:5000";
@@ -29,12 +30,14 @@ export const postRegisterData = async ({
 
 export const postLoginDataEmail = async ({ email, password }) => {
   try {
-    const res = await axios.post(`${url}/users/login/email`, {
+    console.log(email, password);
+    const res = await instance.post(`/users/login/email`, {
       email,
       password,
     });
     return Promise.resolve(res.data);
   } catch (err) {
+    console.log(err);
     return Promise.reject(err.response?.data?.msg);
   }
 };
@@ -76,7 +79,6 @@ export const verifyOtpLogin = async ({ phone_number, OTP }) => {
 
 export const renewAccessToken = async () => {
   const refresh_token = Cookies.get("refresh-token");
-  console.log(refresh_token);
   try {
     const res = await axios.post(`${url}/api/token/refresh/`, {
       refresh: refresh_token,
@@ -127,7 +129,7 @@ export const forgotPassword = async (email) => {
 
 export const resetPassword = async (password, accessToken) => {
   try {
-    const res = await axios.post(
+    const res = await instance.post(
       `${url}/api/auth/reset-password`,
       { password },
       {
@@ -141,14 +143,12 @@ export const resetPassword = async (password, accessToken) => {
 };
 
 export const getProfile = async ({ uuid, accessToken }) => {
-  console.log(accessToken);
-  const data = await renewAccessToken();
   const headers = {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${data.access}`,
+    Authorization: `Bearer ${accessToken}`,
   };
   try {
-    const res = await axios.get(`${url}/users/${uuid}/`, { headers });
+    const res = await instance.get(`${url}/users/${uuid}/`, { headers });
     return Promise.resolve(res.data);
   } catch (err) {
     return Promise.reject(err.response?.data?.msg);
@@ -172,7 +172,7 @@ export const updateProfile = async (name, accessToken) => {
 
 export const updatePassword = async (password, accessToken) => {
   try {
-    const res = await axios.post(
+    const res = await instance.post(
       `${url}/api/auth/reset-password`,
       { password },
       {
@@ -221,7 +221,7 @@ export const postCancellationData = async ({
       "Content-Type": "application/json",
       Authorization: "Bearer " + token,
     };
-    const res = await axios.post(
+    const res = await instance.post(
       `${url}/enquiry/cancel-form`,
       {
         booking_id,

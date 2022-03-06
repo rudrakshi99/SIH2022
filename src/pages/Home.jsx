@@ -7,7 +7,6 @@ import Stats from '../components/homeComponent/stats/Stats'
 import Workflow from '../components/homeComponent/workflow/Workflow'
 import Support from '../components/homeComponent/support/Support'
 import ContactUs from '../components/homeComponent/contactUs/ContactUs'
-import Faqs from '../components/homeComponent/faqs/Faqs'
 
 const Home = () => {
     return (
@@ -19,7 +18,6 @@ const Home = () => {
             <Services />
             <Stats />
             <Equipments />
-            <Faqs />
             <ContactUs />
         </div>
     )

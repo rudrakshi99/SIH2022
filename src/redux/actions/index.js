@@ -4,6 +4,12 @@ export const getLoginAction = () => {
   };
 };
 
+export const getLogoutAction = () => {
+  return {
+    type: "LOGOUT",
+  };
+};
+
 export const getSaveTokenAction = (tokens) => {
   return {
     type: "SAVE_TOKEN",

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../../img/logo.png";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {getLogoutAction} from '../../redux/actions'
 import Cookies from "js-cookie";
 
 //images
@@ -10,11 +11,9 @@ import userIcon from "../../img/user_icon.svg";
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const tokenState = useSelector((state) => state.tokenReducer);
   const authState = useSelector((state) => state.authReducer);
-
-  console.log(tokenState);
-  console.log(authState);
 
   const [show, setShow] = useState(false);
 
@@ -56,7 +55,7 @@ const Header = () => {
             </li>
           </ul>
         </div>
-        {!authState.user ? (
+        {!Cookies.get("refresh-token") ? (
           <div className="flex-1 flex justify-evenly items-center">
             <button
               onClick={() => navigate("/login")}
@@ -84,7 +83,7 @@ const Header = () => {
                 alt="profile_pic"
               />
               <p className="text-lg font-semibold">
-                {/* {"Hi, " + authState.user.data.first_name || ""} */}
+                {"Hi, " + authState.user.data.first_name}
               </p>
               {/* <p className="text-lg font-semibold">{"Hi, Gajendra"}</p> */}
             </div>
@@ -104,8 +103,9 @@ const Header = () => {
                   onClick={() => {
                     Cookies.remove("access-token");
                     Cookies.remove("refresh-token");
-                    localStorage.setItem("isLoggedIn", false);
-                    navigate("/");
+                    Cookies.remove('uuid');
+                    dispatch(getLogoutAction());
+                    navigate("/login");
                   }}
                   className="px-5 text-gray-600 py-2 bg-white cursor-pointer border-solid  border-slate-400 hover:bg-gray-200"
                 >

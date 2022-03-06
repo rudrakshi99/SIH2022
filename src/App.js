@@ -19,6 +19,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Help from "./pages/Help";
 import Header from "./components/header/Header";
+import FAQ from "./pages/FAQ";
 import PreHeader from "./components/preheader/PreHeader";
 import Footer from "./components/footer/Footer";
 import Dashboard from "./pages/dashboard/Dashboard";
@@ -28,41 +29,35 @@ import Product from "./pages/product/Product";
 import PartnerDispute from "./pages/PartnerDispute";
 import CancellationForm from "./components/cancellationForm";
 import UpdateProfile from "./pages/updateProfile/index";
+import BookingHistory from "./pages/bookingHistory";
 
 function App() {
   const authState = useSelector((state) => state.authReducer);
   const tokenState = useSelector((state) => state.tokenReducer);
   const dispatch = useDispatch();
 
-  useEffect(async () => {
-    const refreshCookie = Cookies.get("refresh-token");
-    if (refreshCookie !== "") {
-      const data = await renewAccessToken();
-      console.log(data);
-      const refresh = Cookies.get("refresh-token");
-      dispatch(
-        getSaveTokenAction({
-          accessToken: data.access,
-          refreshToken: refresh,
-        })
-      );
-    }
-    loggedIn();
-  }, [authState.isLoggedIn]);
+  useEffect(() => {
+    const access = Cookies.get("access-token");
+    const refresh = Cookies.get("refresh-token");
+    dispatch(
+      getSaveTokenAction({
+        accessToken: access,
+        refreshToken: refresh,
+      })
+    );
+  }, [tokenState.token.accessToken]);
 
   useEffect(async () => {
-    console.log(tokenState.token.accessToken);
-    if (!authState.isLoggedIn) {
-      dispatch(getLoginAction());
+    const access = Cookies.get("access-token");
+    if (access) {
       const uuid = Cookies.get("uuid");
-      const accessToken = tokenState.token.accessToken;
-      console.log(uuid, accessToken);
+      dispatch(getLoginAction());
       const data = await getProfile({
         uuid: uuid,
-        accessToken: accessToken,
+        accessToken: access,
       });
       console.log(data);
-      dispatch(getSaveProfileAction(data.user));
+      dispatch(getSaveProfileAction(data));
     }
   }, []);
 
@@ -78,7 +73,9 @@ function App() {
         <Route path="help" element={<Help />} />
         <Route path="Dashboard" element={<Dashboard />} />
         <Route path="addProduct" element={<AddProduct />} />
+        <Route path="faq" element={<FAQ />} />
         <Route path="product/:id" element={<Product />} />
+        <Route path="booking-history" element={<BookingHistory />} />
         <Route path="partner-dispute" element={<PartnerDispute />} />
         <Route path="update-profile" element={<UpdateProfile />} />
         <Route path="support" element={<SupportAdmin />} />

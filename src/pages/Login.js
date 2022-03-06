@@ -48,7 +48,7 @@ const Login = () => {
       const data2 = await postLoginDataEmail({ email, password });
       if (!data2.success) {
         setLoading(false);
-        setError(true);
+        setSuccess(true);
         setMessage(data2.message);
       }
       saveData(data2);
@@ -112,6 +112,8 @@ const Login = () => {
       path: "/",
       expires: new Date().setDate(new Date().getDate() + 1),
     });
+    Cookies.set("user", data);
+    console.log(Cookies.get("user"));
     dispatch(getLoginAction());
     dispatch(
       getSaveTokenAction({
