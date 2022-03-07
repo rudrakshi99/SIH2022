@@ -16,3 +16,34 @@ input:focus {
     border: none;
     outline: none;
 }
+
+body > .skiptranslate {
+    display: none;
+  }
+
+  .goog-logo-link {
+    display: none !important;
+  }
+
+  .goog-te-gadget {
+    color: transparent !important;
+    height: 30px;
+    margin-top: 4px;
+    overflow: hidden;
+  }
+
+  .goog-te-gadget .goog-te-combo {
+    color: #000 !important;
+    border: 1px solid darkgray;
+  }
+
+  .goog-te-combo {
+      height: 26px;
+      font-size: 15px;
+      margin-top: 4px !important;
+      padding: 2px 0;
+      font-weight: 500;
+      color: green !important;
+      border: 1px solid green !important;
+      outline: none;
+  }

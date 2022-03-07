@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 
 //Components
-import Header from "../components/header/Header";
-import Footer from "../components/footer/Footer";
-import PreHeader from "../components/preheader/PreHeader";
 import InputField from "../components/input/InputField";
 
 //Functions
@@ -116,6 +113,7 @@ const PartnerDispute = () => {
             <p className="text-center text-green-300">{message}</p>
           </form>
         </div>
+        {/* <Footer /> */}
       </div>
     </div>
   );

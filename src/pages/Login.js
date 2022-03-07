@@ -130,7 +130,7 @@ const Login = () => {
     <div>
       {loading && <Loader />}
       {showOTP && (
-        <div className="absolute z-40">
+        <div className="absolute my-20 z-40">
           <div className="bg-gray-300 h-screen w-screen flex justify-center align-center p-9">
             <div className=" rounded-xl bg-white w-1/4 h-auto p-9 ">
               <form onSubmit={verify} className="flex flex-col ">

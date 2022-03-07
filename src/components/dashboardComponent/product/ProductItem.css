@@ -1,3 +1,4 @@
 .itemDiv {
-    box-shadow: 5px 5px 5px rgba(68, 182, 40, 0.12);
+    /* box-shadow: 5px 5px 5px rgba(68, 182, 40, 0.12); */
+    box-shadow: 5px 5px 5px rgba(24, 29, 23, 0.12);
 }

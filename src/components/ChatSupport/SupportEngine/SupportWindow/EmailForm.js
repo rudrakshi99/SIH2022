@@ -25,7 +25,7 @@ const EmailForm = props => {
     function getOrCreateChat(callback) {
         axios.put(
             'https://api.chatengine.io/chats/',
-            {usernames: [email, 'parth'], is_direct_chat: true},
+            {usernames: [email, 'admin'], is_direct_chat: true},
             {headers: {
                 "Project-ID": process.env.REACT_APP_CE_PROJECT_ID,
                 "User-Name": email,
@@ -109,8 +109,8 @@ const EmailForm = props => {
                     style={{ position: 'relative', width: '100%', top: '19.75%' }}
                 >
                     <input 
-                        placeholder='Your Email'
-                        onChange={e => setEmail(e.target.value)}
+                        placeholder='Your Phone number'
+                        onChange={e => setEmail(`${e.target.value}@kisaan.com`)}
                         style={styles.emailInput}
                     />
                 </form>

@@ -2,36 +2,74 @@ import React, { useEffect, useState } from 'react'
 import './Dashboard.css';
 import ProductItem from '../../components/dashboardComponent/product/ProductItem';
 import Dropdown from '../../components/dropdown/Dropdown';
-import { getEquips } from '../../api/equipments';
-// import { useSelector } from 'react-redux';
+import { getEquips, getEquipsList } from '../../api/equipments';
+import { DateRangePicker } from 'react-date-range';
 
 const Dashboard = () => {
     const [equipments, setEquipments] = useState(null);
+    const [equipList, setEquipList] = useState([]);
+    const [searchInput, setSearchInput] = useState('');
+    const [visible1, setVisible1] = useState(false);
+    const [visible2, setVisible2] = useState(false);
+    const [change, setChange] = useState(false);
+    const [perDay, setPerDay] = useState(10000);
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
+    const [filteredEquipments, setFilteredEquipments] = useState(null);
     useEffect(() => {
       const getEquipments = async () => {
         const { data } = await getEquips();
         setEquipments(data);
+        setFilteredEquipments(data);
         // console.log(data);
       }
       getEquipments();
     }, [])
 
+    useEffect(() => {
+        const getEquipmentsList = async () => {
+            const { data } = await getEquipsList();
+            // console.log(data, "list");
+            setEquipList(data);
+          }
+          getEquipmentsList();
+    }, []);
+    
+
+    useEffect(() => {
+        if(searchInput)
+            setFilteredEquipments(equipments?.filter(equipment => equipment?.title?.toLowerCase().includes(searchInput.toLowerCase())));
+        if(perDay)
+            setFilteredEquipments(equipments?.filter(equipment => equipment?.daily_rental<=(perDay)));
+    }, [change]);
+
+    const selectionRange = {
+        startDate: startDate,
+        endDate: endDate,
+        key: 'selection'
+    }
+
     return (
         <>
-            <div className='h-4 w-full my-4 bg-[#D8F5DE]'></div>
-            <div className='max-w-6xl my-10 mx-auto'>
+            {/* <div className='h-4 w-full my-4 bg-[#D8F5DE]'></div> */}
+            <div className='max-w-7xl my-10 mx-auto'>
                 <div className='mt-4'>
                     <div className='flex justify-around'>
                         <h1 className='text-2xl font-bold text-gray-600 text-right'>Search Equipments</h1>
                         <div className=''>
                             <div className="input-group relative flex items-stretch w-full mb-4">
-                                    <input type="search" className="searchInput form-control relative flex-auto min-w-0 block w-full px-3 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Enter your Equipment here......" aria-label="Search" aria-describedby="button-addon3" />
-                                    <button className="searchBtn btn inline-block px-6 py-3 text-green-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 cursor-pointer focus:outline-none focus:ring-0 transition duration-150 ease-in-out" type="button" id="button-addon3">Search</button>
+                                    <input onChange={(e) => {setSearchInput(e.target.value); setChange(!change)}} type="search" className="searchInput form-control relative flex-auto min-w-0 block w-full px-3 py-3 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Enter your Equipment here......" aria-label="Search" aria-describedby="button-addon3" />
+                                    <button className="searchBtn btn inline-block px-6 py-2 text-green-600 font-medium text-sm leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 cursor-pointer focus:outline-none focus:ring-0 transition duration-150 ease-in-out" type="button" id="button-addon3">Search</button>
                             </div>
                         </div>
                     </div>
-
-                    <h1 className='mt-4 mb-10 text-md font-semibold text-gray-500 text-center'>Search your desired Equipments directly by entering a keyword or the whole name.</h1>
+                    <div className='flex mb-10 justify-around'>
+                        <div className="flex w-[240px] h-[40px] items-center border-2 rounded-lg border-[#68AC5D] px-1">
+                            <i className="text-[#68AC5D] pl-4 pr-2 fa-solid fa-location-dot"></i>
+                            <input className="searchDash appearance-none bg-transparent w-full text-gray-800 font-semibold mr-1 py-0.5 px-1 leading-tight focus:outline-none" type="text" placeholder="Enter Pincode (eg 201301)" aria-label="Full name" />
+                        </div>
+                        <h1 className='mt-3 mb-3 text-md font-semibold text-gray-500 text-center'>Search your desired Equipments directly by entering a keyword or the whole name.</h1>
+                    </div>
 
                     <div className='flex justify-around w-full'>
                         <div className='w-1/4'>
@@ -43,14 +81,11 @@ const Dashboard = () => {
                                 <span className='text-lg mb-4 font-semibold text-[#4F4F4F] border-b-2 border-[#68AC5D] pb-1 ml-6'>Categories:</span>
 
                                 <div className='my-5'>
-                                    <Dropdown title="Tractors" />
-                                    <Dropdown title="Tillage Equipment" />
-                                    <Dropdown title="Seeding Equipment" />
-                                    <Dropdown title="Landscaping Equip" />
-                                    <Dropdown title="Landscaping Equip" />
-                                    <Dropdown title="Landscaping Equip" />
-                                    <Dropdown title="Landscaping Equip" />
-                                    <Dropdown title="Landscaping Equip" />
+                                    {
+                                        equipList?.map(list => (
+                                        <Dropdown key={list.id} title={list.name} />
+                                        ))
+                                    }
                                 </div>
 
                                 <span className='text-lg mb-4 font-semibold text-[#4F4F4F] border-b-2 border-[#68AC5D] pb-1 ml-6'>Brands</span>
@@ -65,21 +100,25 @@ const Dashboard = () => {
 
                                 <div className='my-5'>
                                     <p className='text-md font-semibold text-[#4F4F4F] pl-8'>Price per day</p>
-                                    <input type="range" id="customRange1"
-                                        className="form-range text-green-100 appearance-none w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
+                                    <input type="range" id="perDay" min="0" max="1000" onChange={(e) => {setPerDay(e.target.value); setChange(!change)}}
+                                        className="rangeInput form-range text-green-100 appearance-none w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
                                     />
                                     <p className='text-md mb-3 font-normal text-[#4F4F4F] pl-8'>Rs. 0 to 1,49,827</p>
 
                                     <p className='text-md font-semibold text-[#4F4F4F] pl-8'>Price per hour</p>
                                     <input type="range" id="customRange1"
-                                        className="form-range text-green-100 appearance-none w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
+                                        className="rangeInput form-range text-green-100 appearance-none w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
                                     />
                                     <p className='text-md mb-3 font-normal text-[#4F4F4F] pl-8'>Rs. 42 to 49,827</p>
 
                                     <p className='text-md font-semibold text-[#4F4F4F] pl-8'>Distance from You</p>
                                     <input type="range" id="customRange1"
-                                        className="form-range text-green-100 appearance-none w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
+                                        className="rangeInput form-range text-green-100 appearance-none w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
                                     />
+                                    {/* <input type="range" id="customRange1"
+                                        className="rangeInput form-range text-green-100 appearance-none w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
+                                    /> */}
+                                    {/* <input type="range" className='rangeInput' name="" id="" /> */}
                                     <p className='text-md font-normal text-[#4F4F4F] pl-8'>0 KM to 6.6 KM</p>
                                 </div>
 
@@ -88,28 +127,48 @@ const Dashboard = () => {
                                 <p className='text-md pt-2 font-normal text-[#4F4F4F] pl-6'>From</p>
 
                                 <div className='flex justify-center items-center'>
-                                    <button className="bg-darkgreen hover:bg-green-700 text-white font-normal text-sm py-1 text-center w-1/2 my-4 px-2 rounded">
+                                    <button onClick={() => setVisible1(!visible1)} className="bg-darkgreen hover:bg-green-700 text-white font-normal text-sm py-1 text-center w-1/2 my-4 px-2 rounded">
                                         DD-MM-YYYY
                                     </button>
                                     <i className="ml-4 text-lg text-[#68AC5D] fa-solid fa-calendar"></i>
+                                </div>
+                                <div style={{ display: visible1 ? 'block' : 'none', height: '400px', width: '200px', 'zIndex': 1 }}>
+                                    <DateRangePicker style={{ height: '300px', width: '280px' }}
+                                        ranges={[selectionRange]}
+                                        minDate={new Date()}
+                                        // disabledDates={getDaysArray(new Date(),new Date())}
+                                        rangeColors={["#68AC5D"]}
+                                        // onChange={handleSelect}
+                                        // maxDate={new Date()}
+                                    />
                                 </div>
 
 
                                 <p className='text-md font-normal text-[#4F4F4F] pl-6'>To</p>
                                 <div className='flex justify-center items-center'>
-                                    <button className="bg-darkgreen hover:bg-green-700 text-white font-normal text-sm py-1 text-center w-1/2 my-4 px-2 rounded">
+                                    <button onClick={() => setVisible2(!visible2)} className="bg-darkgreen hover:bg-green-700 text-white font-normal text-sm py-1 text-center w-1/2 my-4 px-2 rounded">
                                         DD-MM-YYYY
                                     </button>
                                     <i className="ml-4 text-lg text-[#68AC5D] fa-solid fa-calendar"></i>
                                 </div>
+                                <div style={{ display: visible2 ? 'block' : 'none', height: '400px', width: '200px', 'zIndex': 1 }}>
+                                    <DateRangePicker style={{ height: '300px', width: '280px' }}
+                                        ranges={[selectionRange]}
+                                        minDate={new Date()}
+                                        // disabledDates={getDaysArray(new Date(),new Date())}
+                                        rangeColors={["#68AC5D"]}
+                                        // onChange={handleSelect}
+                                        // maxDate={new Date()}
+                                    />
+                                </div>
 
                             </div>
 
-                            <div className='w-11/12'>
+                            {/* <div className='w-11/12'>
                                 <div className='bg-[#68AC5D] -mt-5 py-4 ml-10 px-1 prFilter'>
                                     <h1 className='text-lg font-bold text-center text-white'>Set Date</h1>
                                 </div>
-                            </div>
+                            </div> */}
                             
 
 
@@ -124,12 +183,22 @@ const Dashboard = () => {
                             </div>
 
                             <div className='flex flex-wrap items-center'>
-                                <div className='flex justify-around flex-wrap my-12'>
+                                <div className='flex flex-wrap my-12'>
                                     {
-                                        equipments?.map(equipment => (
+                                        equipments?.filter(equipment => equipment?.title?.toLowerCase().includes(searchInput.toLowerCase()))?.map(equipment => (
                                             <ProductItem key={equipment.id} equipment={equipment} />
                                         ))
                                     }
+                                    {/* {
+                                        filteredEquipments?.map(equipment => (
+                                            <ProductItem key={equipment.id} equipment={equipment} />
+                                        ))
+                                    } */}
+                                    {/* {
+                                        equipments?.filter(equipment => equipment?.daily_rental<=(perDay))?.map(equipment => (
+                                            <ProductItem key={equipment.id} equipment={equipment} />
+                                        ))
+                                    } */}
                                 </div>
                             </div>
 
@@ -139,11 +208,17 @@ const Dashboard = () => {
                             </div>
 
                             <div className='flex flex-wrap items-center'>
-                                <div className='flex justify-around flex-wrap my-12'>
+                                <div className='flex flex-wrap my-12'>
                                     {
-                                        equipments?.map(equipment => (
-                                            <ProductItem key={equipment.id} equipment={equipment} />
-                                        ))
+                                        !searchInput ? (
+                                            equipments?.map(equipment => (
+                                                <ProductItem key={equipment.id} equipment={equipment} />
+                                            ))
+                                        ) : (
+                                            equipments?.filter(equipment => equipment?.title?.toLowerCase().includes(searchInput.toLowerCase()))?.map(equipment => (
+                                                <ProductItem key={equipment.id} equipment={equipment} />
+                                            ))
+                                        )
                                     }
                                 </div>
                             </div>

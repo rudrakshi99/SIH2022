@@ -1,6 +1,5 @@
 import "./App.css";
 import Home from "./pages/Home";
-import SupportEngine from "./components/ChatSupport/SupportEngine/index";
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +12,7 @@ import {
 // import ProtectedRoute from "./components/ProtectedRoute";
 import { Routes, Route } from "react-router-dom";
 import SupportAdmin from "./components/ChatSupport/SupportAdmin/index";
+import SupportEngine from "./components/ChatSupport/SupportEngine/index";
 import Cookies from "js-cookie";
 
 //Pages
@@ -29,8 +29,13 @@ import VerifyOTP from "./components/verify-otp";
 import Product from "./pages/product/Product";
 import PartnerDispute from "./pages/PartnerDispute";
 import CancellationForm from "./components/cancellationForm";
+import ContactUs from "./pages/ContactUs/ContactUs";
+import Chat from "./pages/chat/Chat";
+import BookingRequest from "./pages/bookingRequest/BookingRequest";
+import CancellationPolicy from "./pages/cancellationPage/CancellationPolicy";
 import UpdateProfile from "./pages/updateProfile/index";
 import BookingHistory from "./pages/bookingHistory";
+import Feedback from "./pages/feedback/Feedback";
 
 function App() {
   const authState = useSelector((state) => state.authReducer);
@@ -76,11 +81,15 @@ function App() {
         <Route path="addProduct" element={<AddProduct />} />
         <Route path="update-profile" element={<UpdateProfile />} />
         <Route path="product/:id" element={<Product />} />
+        <Route path="contact" element={<ContactUs />} />
+        <Route path="bookingRequest/:id" element={<BookingRequest />} />
+        <Route path="chat" element={<Chat />} />
         <Route path="booking-history" element={<BookingHistory />} />
         <Route path="faq" element={<FAQ />} />
         <Route path="partner-dispute" element={<PartnerDispute />} />
         <Route path="support" element={<SupportAdmin />} />
-        <Route path="cancellation-form" element={<CancellationForm />} />
+        <Route path="policy" element={<CancellationPolicy />} />
+        <Route path="feedback" element={<Feedback />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
       <Footer />

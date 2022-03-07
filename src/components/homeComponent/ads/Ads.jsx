@@ -1,7 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import './Ads.css';
 
 const Ads = () => {
+    const navigate = useNavigate();
     return (
         <div className='h-1/2 my-20'>
             <div className=''>

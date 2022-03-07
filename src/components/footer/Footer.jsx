@@ -25,7 +25,7 @@ const Footer = () => {
                     <div className='flex'>
                         <ul className='list-none mr-24'>
                             <li className='text-lg text-white font-bold cursor-pointer' onClick={() => navigate('/')}>Home</li>
-                            <li className='text-lg text-white font-medium cursor-pointer'>Menu</li>
+                            {/* <li className='text-lg text-white font-medium cursor-pointer'>Menu</li> */}
                             <li className='text-lg text-white font-medium cursor-pointer'>Market</li>
                         </ul>
                         <ul>
@@ -35,7 +35,7 @@ const Footer = () => {
                             <li className='text-lg text-white font-medium cursor-pointer' onClick={() => navigate('faq')}>FAQs</li>
                         </ul>
                     </div>
-                    <p className='text-md text-medium text-white mt-4'>Please provide us Feedback at: Link Name</p>
+                    <p className='text-md text-medium text-white mt-4'>Please provide us Feedback <a className='text-xl underline' href="/feedback">HERE</a></p>
                 </div>
                 <div className='flex-1 px-16 border-r-2 border-black-600'>
                     <h1 className='text-xl ml-6 text-white font-bold w-2/3'>Give us a follow on social media</h1>
