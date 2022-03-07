@@ -97,7 +97,7 @@ const Header = () => {
                   onClick={() => navigate("/update-profile")}
                   className="px-5 text-gray-600 py-2 bg-white cursor-pointer border-solid border-b border-slate-400 hover:bg-gray-200"
                 >
-                  Update Profile
+                  Profile
                 </p>
                 <p
                   onClick={() => {

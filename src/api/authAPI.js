@@ -155,15 +155,16 @@ export const getProfile = async ({ uuid, accessToken }) => {
   }
 };
 
-export const updateProfile = async (name, accessToken) => {
+export const updateProfile = async ({ formData, accessToken }) => {
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${accessToken}`,
+  };
   try {
-    const res = await axios.put(
-      `${url}/api/profile`,
-      { name },
-      {
-        headers: { Authorization: accessToken },
-      }
-    );
+    const uuid = Cookies.get("uuid");
+    const res = await instance.put(`${url}/users/${uuid}/`, formData, {
+      headers,
+    });
     return Promise.resolve(res.data);
   } catch (err) {
     return Promise.reject(err.response?.data?.msg);
