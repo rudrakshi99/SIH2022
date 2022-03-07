@@ -65,6 +65,8 @@ const BookingHistory = () => {
           setItems(data);
           return;
         }
+        default:
+          return;
       }
     }
   };
@@ -199,7 +201,7 @@ const BookingHistory = () => {
                   <input
                     type="range"
                     id="customRange1"
-                    className="form-range w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none "
+                    className="form-range w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
                     min={0}
                     max={149000}
                     value={filter_data.price_per_km}
