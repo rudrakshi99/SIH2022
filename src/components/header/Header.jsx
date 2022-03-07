@@ -39,7 +39,7 @@ const Header = () => {
             >
               Home
             </li>
-            <li className="text-lg cursor-pointer font-semibold text-darkgreen mx-4">
+            <li className="text-lg cursor-pointer font-semibold text-darkgreen mx-4" onClick={() => navigate('/dashboard')}>
               Dashboard
             </li>
             <li className="text-lg cursor-pointer font-semibold text-darkgreen mx-4">
@@ -89,13 +89,19 @@ const Header = () => {
               <div
                 onMouseOver={() => setShow(true)}
                 onMouseLeave={() => setShow(false)}
-                className="absolute bg-white rounded-2xl z-40 border-2 border-slate-400 p-1"
+                className="absolute bg-white rounded-lg z-40 border-2 border-slate-400 p-1"
               >
                 <p
                   onClick={() => navigate("/update-profile")}
                   className="px-5 text-gray-600 py-2 bg-white cursor-pointer border-solid border-b border-slate-400 hover:bg-gray-200"
                 >
                   Profile
+                </p>
+                <p
+                  onClick={() => navigate("/booking-history")}
+                  className="px-5 text-gray-600 py-2 bg-white cursor-pointer border-solid border-b border-slate-400 hover:bg-gray-200"
+                >
+                  Booking History
                 </p>
                 <p
                   onClick={() => {

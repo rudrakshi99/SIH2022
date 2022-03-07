@@ -14,7 +14,6 @@ instance.interceptors.response.use(
       // will loop if refreshToken returns 401
       const token = await renewAccessToken();
       Cookies.set("access-token", token.access);
-      console.log(token);
       error.config.headers["Authorization"] = "Bearer " + token.access;
       error.config.baseURL = undefined;
       return axios.request(error.config);

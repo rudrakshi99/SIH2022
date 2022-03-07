@@ -3,7 +3,7 @@ import './Dashboard.css';
 import ProductItem from '../../components/dashboardComponent/product/ProductItem';
 import Dropdown from '../../components/dropdown/Dropdown';
 import { getEquips } from '../../api/equipments';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
     const [equipments, setEquipments] = useState(null);

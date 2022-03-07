@@ -2,7 +2,6 @@ import axios from "axios";
 import instance from "./config";
 import Cookies from "js-cookie";
 
-// const url = "http://localhost:5000";
 const url = "https://krishi-sadhan-app.herokuapp.com";
 
 export const postRegisterData = async ({
@@ -89,26 +88,6 @@ export const renewAccessToken = async () => {
   }
 };
 
-// export const renewAccessToken = async () => {
-//   axios.interceptors.response.use(
-//     undefined,
-//     async function axiosRetryInspector(err) {
-//       const refresh_token = Cookies.get("refresh-token");
-//       console.log(refresh_token);
-//       if (err.response.status === 401 && refresh_token) {
-//         try {
-//           const res = await axios.post(`${url}/api/token/refresh/`, {
-//             refresh: refresh_token,
-//           });
-//           return Promise.resolve(res.data);
-//         } catch (err) {
-//           return Promise.reject(err.response?.data?.msg);
-//         }
-//       }
-//     }
-//   );
-// };
-
 export const logoutUser = async () => {
   try {
     const res = await axios.get(`${url}/api/auth/logout`);
@@ -136,19 +115,6 @@ export const resetPassword = async (password, accessToken) => {
         headers: { Authorization: accessToken },
       }
     );
-    return Promise.resolve(res.data);
-  } catch (err) {
-    return Promise.reject(err.response?.data?.msg);
-  }
-};
-
-export const getProfile = async ({ uuid, accessToken }) => {
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${accessToken}`,
-  };
-  try {
-    const res = await instance.get(`${url}/users/${uuid}/`, { headers });
     return Promise.resolve(res.data);
   } catch (err) {
     return Promise.reject(err.response?.data?.msg);

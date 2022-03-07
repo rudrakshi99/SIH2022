@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 
-//Data
-import { Data } from "./data";
+//Functions
+import { getBooking } from "../../api/bookingAPI";
 
 const BookingHistory = () => {
   const [tab, setTab] = useState(false);
+  const [Data, setData] = useState([]);
   const [items, setItems] = useState(Data);
   const [all, setAll] = useState(true);
   const [filter_data, setFilterData] = useState({
@@ -24,6 +26,17 @@ const BookingHistory = () => {
     "Cancelled",
   ];
   const filter_by_brands = ["Mahindra", "John Deer", "CLAAS"];
+
+  useEffect(() => {
+    async function Booking() {
+      console.log();
+      const data = await getBooking({
+        accessToken: Cookies.get("access-token"),
+      });
+      setData(data);
+    }
+    Booking();
+  }, []);
 
   const filter = ({ type }) => {
     if (all) {
@@ -131,7 +144,10 @@ const BookingHistory = () => {
                   Price Range
                 </h1>
                 <div>
-                  <label for="customRange1" class="form-label font-semibold">
+                  <label
+                    htmlFor="customRange1"
+                    className="form-label font-semibold"
+                  >
                     Per Day Price
                   </label>
                   <input
@@ -151,7 +167,10 @@ const BookingHistory = () => {
                   <p>Rs 0 to {filter_data.per_day_price}</p>
                 </div>
                 <div>
-                  <label for="customRange1" class="form-label font-semibold">
+                  <label
+                    htmlFor="customRange1"
+                    className="form-label font-semibold"
+                  >
                     Per Hour Price
                   </label>
                   <input
@@ -171,7 +190,10 @@ const BookingHistory = () => {
                   <p>Rs 49 to {filter_data.per_hour_price}</p>
                 </div>
                 <div>
-                  <label for="customRange1" class="form-label font-semibold">
+                  <label
+                    htmlFor="customRange1"
+                    className="form-label font-semibold"
+                  >
                     Distance from You
                   </label>
                   <input
@@ -193,10 +215,10 @@ const BookingHistory = () => {
                 <h1 className="font-bold text-lg text-[#4F4F4F] underline mb-3 mt-6">
                   Booking Date
                 </h1>
-                <div class="datepicker relative form-floating mb-3">
+                <div className="datepicker relative form-floating mb-3">
                   <input
                     type="date"
-                    class="form-contdol block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded tdansition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    className="form-contdol block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded tdansition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Select a date"
                     value={filter_data.date}
                     onChange={(e) => {
@@ -206,7 +228,7 @@ const BookingHistory = () => {
                       filter({ type: "date" });
                     }}
                   />
-                  <label for="floatingInput" class="text-gray-700">
+                  <label htmlFor="floatingInput" className="text-gray-700">
                     {filter_data.date}
                   </label>
                 </div>
@@ -222,12 +244,14 @@ const BookingHistory = () => {
                 <div>
                   <table className="w-full mt-4">
                     <thead className="border-b bg-gray-200">
-                      <th>Date</th>
-                      <th>Booking ID</th>
-                      <th>Equipment Name</th>
-                      <th>Manufacturer</th>
-                      <th>Request Status</th>
-                      <th>All Details</th>
+                      <tr>
+                        <th>Date</th>
+                        <th>Booking ID</th>
+                        <th>Equipment Name</th>
+                        <th>Manufacturer</th>
+                        <th>Request Status</th>
+                        <th>All Details</th>
+                      </tr>
                     </thead>
                     <tbody>
                       {items.map((item, i) => {

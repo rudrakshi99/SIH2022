@@ -4,12 +4,13 @@ import SupportEngine from "./components/ChatSupport/SupportEngine/index";
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfile, renewAccessToken } from "./api/authAPI";
+import { getProfile } from "./api/profileAPI";
 import {
   getLoginAction,
   getSaveProfileAction,
   getSaveTokenAction,
 } from "./redux/actions";
+// import ProtectedRoute from "./components/ProtectedRoute";
 import { Routes, Route } from "react-router-dom";
 import SupportAdmin from "./components/ChatSupport/SupportAdmin/index";
 import Cookies from "js-cookie";
@@ -73,11 +74,11 @@ function App() {
         <Route path="help" element={<Help />} />
         <Route path="Dashboard" element={<Dashboard />} />
         <Route path="addProduct" element={<AddProduct />} />
-        <Route path="faq" element={<FAQ />} />
+        <Route path="update-profile" element={<UpdateProfile />} />
         <Route path="product/:id" element={<Product />} />
         <Route path="booking-history" element={<BookingHistory />} />
+        <Route path="faq" element={<FAQ />} />
         <Route path="partner-dispute" element={<PartnerDispute />} />
-        <Route path="update-profile" element={<UpdateProfile />} />
         <Route path="support" element={<SupportAdmin />} />
         <Route path="cancellation-form" element={<CancellationForm />} />
         <Route path="*" element={<div>Not Found</div>} />
