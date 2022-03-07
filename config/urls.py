@@ -33,6 +33,7 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path("users/", include("kex.users.urls", namespace="users")),
+    path("", include("kex.recommendations.urls", namespace="recommendations")),
     path("enquiry/", include("kex.enquiry.urls", namespace="enquiry")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
