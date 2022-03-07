@@ -56,12 +56,20 @@ const CancellationForm = () => {
               onChange={(e) => setBookingId(e.target.value)}
               placeholder="Booking ID"
             />
-            <InputField
-              type="text"
+            <select
+              id="topic"
+              name="topic"
+              autoComplete="topic-name"
               value={cancel_reason}
               onChange={(e) => setCancelReason(e.target.value)}
-              placeholder="Cancel Reason"
-            />
+              className="mt-1 block mb-4 w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            >
+              <option value={0}>Select Suitable option</option>
+              <option value={20}>Quality Related</option>
+              <option value={30}>Found a better deal</option>
+              <option value={40}>Owner Related</option>
+              <option value={10}>Others</option>
+            </select>
             <textarea
               type="text"
               value={description}
@@ -76,6 +84,7 @@ const CancellationForm = () => {
             >
               Confirm
             </button>
+            <p>{message}</p>
           </form>
         </div>
       </div>

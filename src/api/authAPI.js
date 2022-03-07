@@ -1,7 +1,7 @@
 import axios from "axios";
+import instance from "./config";
 import Cookies from "js-cookie";
 
-// const url = "http://localhost:5000";
 const url = "https://krishi-sadhan-app.herokuapp.com";
 
 export const postRegisterData = async ({
@@ -29,12 +29,14 @@ export const postRegisterData = async ({
 
 export const postLoginDataEmail = async ({ email, password }) => {
   try {
-    const res = await axios.post(`${url}/users/login/email`, {
+    console.log(email, password);
+    const res = await instance.post(`/users/login/email`, {
       email,
       password,
     });
     return Promise.resolve(res.data);
   } catch (err) {
+    console.log(err);
     return Promise.reject(err.response?.data?.msg);
   }
 };
@@ -50,11 +52,11 @@ export const postLoginDataPhone = async ({ phone_number }) => {
   }
 };
 
-export const verifyOtp = async ({ phone_number, OTP }) => {
+export const verifyOtp = async ({ phone_number, otp }) => {
   try {
     const res = await axios.post(`${url}/users/signup/verify-otp`, {
       phone_number,
-      OTP,
+      otp,
     });
     return Promise.resolve(res.data);
   } catch (err) {
@@ -75,22 +77,11 @@ export const verifyOtpLogin = async ({ phone_number, OTP }) => {
 };
 
 export const renewAccessToken = async () => {
-  axios.interceptors.response.use(undefined, function axiosRetryInspector(err) {
-    const refresh_token = Cookies.get("refresh-token");
-    if (err.response.status === 401 && refresh_token) {
-      axios
-        .post(`${url}/api/token/refresh/`, { refresh: refresh_token })
-        .then((res) => res.data)
-        .then((res) => {
-          err.config.headers["Authorization"] = "Bearer " + res.token;
-          Cookies.set("access-token", res.data.token, { path: "/" });
-          err.config.__isRetryRequest = true;
-          return axios(err.config);
-        });
-    }
-  });
+  const refresh_token = Cookies.get("refresh-token");
   try {
-    const res = await axios.post(`${url}/api/token/refresh`, null);
+    const res = await axios.post(`${url}/api/token/refresh/`, {
+      refresh: refresh_token,
+    });
     return Promise.resolve(res.data);
   } catch (err) {
     return Promise.reject(err.response?.data?.msg);
@@ -117,7 +108,7 @@ export const forgotPassword = async (email) => {
 
 export const resetPassword = async (password, accessToken) => {
   try {
-    const res = await axios.post(
+    const res = await instance.post(
       `${url}/api/auth/reset-password`,
       { password },
       {
@@ -130,26 +121,16 @@ export const resetPassword = async (password, accessToken) => {
   }
 };
 
-export const getProfile = async (accessToken) => {
+export const updateProfile = async ({ formData, accessToken }) => {
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${accessToken}`,
+  };
   try {
-    const res = await axios.get(`${url}/api/profile`, {
-      headers: { Authorization: accessToken },
+    const uuid = Cookies.get("uuid");
+    const res = await instance.put(`${url}/users/${uuid}/`, formData, {
+      headers,
     });
-    return Promise.resolve(res.data);
-  } catch (err) {
-    return Promise.reject(err.response?.data?.msg);
-  }
-};
-
-export const updateProfile = async (name, accessToken) => {
-  try {
-    const res = await axios.put(
-      `${url}/api/profile`,
-      { name },
-      {
-        headers: { Authorization: accessToken },
-      }
-    );
     return Promise.resolve(res.data);
   } catch (err) {
     return Promise.reject(err.response?.data?.msg);
@@ -158,7 +139,7 @@ export const updateProfile = async (name, accessToken) => {
 
 export const updatePassword = async (password, accessToken) => {
   try {
-    const res = await axios.post(
+    const res = await instance.post(
       `${url}/api/auth/reset-password`,
       { password },
       {
@@ -207,7 +188,7 @@ export const postCancellationData = async ({
       "Content-Type": "application/json",
       Authorization: "Bearer " + token,
     };
-    const res = await axios.post(
+    const res = await instance.post(
       `${url}/enquiry/cancel-form`,
       {
         booking_id,

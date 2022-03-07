@@ -40,7 +40,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <div className='h-4 w-full my-4 bg-[#D8F5DE]'></div>
+            {/* <div className='h-4 w-full my-4 bg-[#D8F5DE]'></div> */}
             <div className='max-w-7xl my-10 mx-auto'>
                 <div className='mt-4'>
                     <div className='flex justify-around'>

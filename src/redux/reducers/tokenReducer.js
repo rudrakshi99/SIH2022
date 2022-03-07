@@ -7,18 +7,12 @@ const initialState = {
 
 const tokenReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "SAVE_TOKEN_ACCESS":
+    case "SAVE_TOKEN":
       return {
         ...state,
         token: {
-          accessToken: action.payload,
-        },
-      };
-    case "SAVE_TOKEN_REFRESH":
-      return {
-        ...state,
-        token: {
-          refreshToken: action.payload,
+          accessToken: action.payload.accessToken,
+          refreshToken: action.payload.refreshToken,
         },
       };
     default:

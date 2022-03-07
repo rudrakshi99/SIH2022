@@ -110,6 +110,7 @@ const PartnerDispute = () => {
             >
               Submit Dispute
             </button>
+            <p className="text-center text-green-300">{message}</p>
           </form>
         </div>
         {/* <Footer /> */}

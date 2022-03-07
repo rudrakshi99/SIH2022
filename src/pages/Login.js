@@ -16,8 +16,8 @@ import {
 } from "../api/authAPI";
 import {
   getLoginAction,
-  getSaveTokenActionAccess,
-  getSaveTokenActionRefresh,
+  getSaveTokenAction,
+  getSaveProfileAction,
 } from "../redux/actions";
 
 //Images
@@ -37,8 +37,6 @@ const Login = () => {
   const [success2, setSuccess2] = useState(false);
   const [error, setError] = useState(false);
 
-  // const [isLoggedIn, setIsLoggedIn] = useCookies(["isLoggedIn"]);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -48,6 +46,11 @@ const Login = () => {
     setLoading(true);
     try {
       const data2 = await postLoginDataEmail({ email, password });
+      if (!data2.success) {
+        setLoading(false);
+        setSuccess(true);
+        setMessage(data2.message);
+      }
       saveData(data2);
       return;
     } catch (err) {
@@ -63,9 +66,11 @@ const Login = () => {
     // e.preventDefault();
     setShowOTP(true);
     try {
-      const data = await postLoginDataPhone({ phone_number });
-      setData(data);
-      setShowOTP(true);
+      const data = await postLoginDataPhone({ phone_number: phone_number });
+      if (data.success) {
+        setData(data);
+        setShowOTP(true);
+      }
     } catch (err) {
       setSuccess(false);
       setLoading(false);
@@ -77,7 +82,7 @@ const Login = () => {
   async function verify(e) {
     e.preventDefault();
     try {
-      const data2 = await verifyOtp(phone_number, OTP);
+      const data2 = await verifyOtp({ phone_number: phone_number, otp: OTP });
       if (data2.success) {
         saveData(data);
         setSuccess2(true);
@@ -96,18 +101,29 @@ const Login = () => {
     localStorage.setItem("isLoggedIn", true);
     Cookies.set("access-token", data.data.tokens.access, {
       path: "/",
-      expires: "24h",
+      expires: new Date().setDate(new Date().getDate() + 1),
     });
     Cookies.set("refresh-token", data.data.tokens.refresh, {
       path: "/",
-      expires: "48h",
+      expires: new Date().setDate(new Date().getDate() + 1),
     });
-    console.log(Cookies.get("access-token"));
+    console.log(data);
+    Cookies.set("uuid", data.data.uuid, {
+      path: "/",
+      expires: new Date().setDate(new Date().getDate() + 1),
+    });
+    Cookies.set("user", data);
+    console.log(Cookies.get("user"));
     dispatch(getLoginAction());
-    dispatch(getSaveTokenActionAccess(data.data.tokens.access));
-    dispatch(getSaveTokenActionRefresh(data.data.tokens.refresh));
-    navigate("/");
+    dispatch(
+      getSaveTokenAction({
+        accessToken: data.data.tokens.access,
+        refreshToken: data.data.tokens.refresh,
+      })
+    );
+    dispatch(getSaveProfileAction(data));
     setLoading(false);
+    navigate("/");
   }
 
   return (
@@ -117,7 +133,7 @@ const Login = () => {
         <div className="absolute my-20 z-40">
           <div className="bg-gray-300 h-screen w-screen flex justify-center align-center p-9">
             <div className=" rounded-xl bg-white w-1/4 h-auto p-9 ">
-              <form onSubmit={() => verify} className="flex flex-col ">
+              <form onSubmit={verify} className="flex flex-col ">
                 <h1 className="mb-5 text-center text-xl">
                   Enter the OTP sent to your Registered Number
                 </h1>
@@ -184,7 +200,7 @@ const Login = () => {
                 Login Here
               </h1>
               {success && <SuccessMsg msg={message} />}
-              {!success && <ErrorMsg msg={message} />}
+              {error && <ErrorMsg msg={message} />}
               <p className="font mb-4">Login Using Email</p>
               <InputField
                 placeholder="Email"
@@ -223,7 +239,7 @@ const Login = () => {
                 onChange={(e) => {
                   setPhoneNumber(e.target.value);
                   console.log(phone_number);
-                  if (phone_number.length === 9) {
+                  if (phone_number.length === 10) {
                     handleLoginPhone();
                   }
                 }}
