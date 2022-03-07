@@ -81,7 +81,7 @@ export const styles = {
     bottomText: { 
         position: 'absolute', 
         width: '100%', 
-        top: '60%', 
+        top: '70%', 
         color: '#68AC5D', 
         fontSize: '24px', 
         fontWeight: '600' 

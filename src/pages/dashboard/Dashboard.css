@@ -12,12 +12,14 @@
     border-bottom-right-radius: 10px;
     background: #68AC5D;
     color: #fff;
+    padding-bottom: 14px !important;
 }
 
 .searchInput::placeholder {
     font-size: 13px;
     font-weight: 400;
     color: #636060;
+    padding-bottom: 8px;
 }
 
 .leftWrapper {
@@ -36,3 +38,33 @@
     width: 200px;
     color: #68AC5D;
 }
+
+.rangeInput {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 4;
+    outline: none;
+    width: 80% !important;
+    height: 25% !important;
+    border: none;
+    border-radius: 20px;
+    margin: 10%;
+    background-color: #68AC5D !important;
+}
+.rangeInput::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    width: 10px;
+    height: 10px;
+    background: #FFFFFF !important;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  
+  .rangeInput::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    background: #FFFFFF !important;
+    cursor: pointer;
+    border-radius: 50%;
+  }

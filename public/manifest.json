@@ -1,0 +1,25 @@
+{
+    "short_name": "KEX",
+    "name": "Krishi Sadhan",
+    "icons": [
+      {
+        "src": "logo.png",
+        "sizes": "64x64 32x32 24x24 16x16",
+        "type": "image/x-icon"
+      },
+      {
+        "src": "logo.png",
+        "type": "image/png",
+        "sizes": "241x241"
+      },
+      {
+        "src": "logo.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#D8F5DE",
+    "background_color": "#ffffff"
+  }

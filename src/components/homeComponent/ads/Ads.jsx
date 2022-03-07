@@ -1,7 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import './Ads.css';
 
 const Ads = () => {
+    const navigate = useNavigate();
     return (
         <div className='h-1/2 my-20'>
             <div className=''>
@@ -16,7 +18,7 @@ const Ads = () => {
                         <p className='text-md font-medium mb-4'>As an owner, start posting rent offers for the agricultural equipments by providing available timeline to the buyers/customers and get rapid reactions from nearby interested customers.</p>
                         <div className='flex justify-content items-center'>
                             <p className='text-xs text-darkgreen font-medium'>*Register now and start posting Ads with one click.</p>
-                            <button className="bg-darkgreen ml-8 hover:bg-green-700 text-white font-normal py-1 px-8 rounded">
+                            <button onClick={() => navigate('/register')} className="bg-darkgreen ml-8 hover:bg-green-700 text-white font-bold py-1 px-8 rounded">
                                 Register
                             </button>
                         </div>
@@ -27,7 +29,7 @@ const Ads = () => {
                         <p className='text-md font-medium mb-4'>As a customer, start exploring and filter the various agri- cultural equipments for you. Communicate with the owner for negotiation/offers, and book great deals while experiencing satisfaction.</p>
                         <div className='flex justify-content items-center'>
                             <p className='text-xs text-darkgreen font-medium'>*Start exploring the equipments with one click.</p>
-                            <button className="bg-darkgreen ml-8 hover:bg-green-700 text-white font-bold py-1 px-8 rounded">
+                            <button onClick={() => navigate('/dashboard')} className="bg-darkgreen ml-8 hover:bg-green-700 text-white font-bold py-1 px-8 rounded">
                                 Explore
                             </button>
                         </div>

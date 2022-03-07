@@ -6,7 +6,7 @@ import logo from '../../img/logo.png';
 const Header = () => {
     const navigate = useNavigate();
     return (
-        <div className='h-16'>
+        <div className='h-16 z-50'>
             <div className='flex justify-center items-around'>
                 <div className='flex-1'>
                 <Link to='/'>
@@ -22,6 +22,7 @@ const Header = () => {
                         <Link to='/dashboard'><li className='text-lg cursor-pointer font-semibold text-darkgreen mr-7'>Dashboard</li></Link>
                         <li className='text-lg cursor-pointer font-semibold text-darkgreen mr-7'>Our Services</li>
                         <Link to='/help'><li className='text-lg cursor-pointer font-semibold text-darkgreen mr-7'>Help</li></Link>
+                        <Link to='/contact'><li className='text-lg cursor-pointer font-semibold text-darkgreen mr-7'>Contact Us</li></Link>
                     </ul>
                 </div>
                 <div className='flex-1 flex justify-evenly items-center'>

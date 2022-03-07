@@ -24,12 +24,12 @@ const Footer = () => {
                 <div className='flex-1 px-16 border-r-2 border-black-600'>
                     <div className='flex'>
                         <ul className='list-none mr-24'>
-                            <li className='text-lg text-white font-bold'>Home</li>
-                            <li className='text-lg text-white font-medium'>Menu</li>
+                            <li className='text-xl text-white font-bold'>Home</li>
+                            {/* <li className='text-lg text-white font-medium'>Menu</li> */}
                             <li className='text-lg text-white font-medium'>Market</li>
                         </ul>
                         <ul>
-                            <li className='text-lg text-white font-bold'>Support Center</li>
+                            <li className='text-xl text-white font-bold'>Support Center</li>
                             <li className='text-lg text-white font-medium'>Help Center</li>
                             <li className='text-lg text-white font-medium cursor-pointer' onClick={() => navigate('/partner-dispute')}>Partner Dispute</li>
                             <li className='text-lg text-white font-medium'>FAQs</li>
@@ -38,7 +38,7 @@ const Footer = () => {
                     <p className='text-sm text-medium text-white mt-4'>Please provide us Feedback at: Link Name</p>
                 </div>
                 <div className='flex-1 px-16 border-r-2 border-black-600'>
-                    <h1 className='text-xl ml-6 text-white font-bold'>GIve us a follow <br /> on social media</h1>
+                    <h1 className='text-xl ml-6 text-white font-bold'>Give us a follow <br /> on social media</h1>
                     <div className='flex justify-around my-5'>
                         <img className='socialIcons' src={Vector} alt="" />
                         <img className='socialIcons' src={Vector1} alt="" />
