@@ -44,7 +44,8 @@ class EquipmentListSerializer(ModelSerializer):
 
 class EquipmentDetailSerializer(ModelSerializer):
     url = HyperlinkedIdentityField(view_name="equipment-api:detail", lookup_field="id")
-    owner = UserSerializer(read_only=True)
+    # owner = UserSerializer(read_only=True)
+    owner = SerializerMethodField()
     image_1 = SerializerMethodField()
     image_2 = SerializerMethodField()
     image_3 = SerializerMethodField()
@@ -121,6 +122,21 @@ class EquipmentDetailSerializer(ModelSerializer):
         except:
             image = None
         return image
+
+    def get_owner(self, obj):
+        owner = obj.owner
+        detail = {
+            "first_name": owner.first_name,
+            "last_name": owner.last_name,
+            "address": owner.address,
+            "city": owner.city,
+            "state": owner.state,
+            "pin_code": owner.pin_code,
+        }
+        if obj.show_phone_number:
+            detail["phone_number"] = owner.phone_number
+
+        return detail
 
 
 class EquipmentCreateSerializer(ModelSerializer):
@@ -203,9 +219,11 @@ class EquipmentRatingSerializer(ModelSerializer):
         read_only_fields = ["user"]
 
     def validate_equipment(self, equipment):
-        if not Booking.objects.filter(customer=self.context["user"],status="Completed",equipment=equipment).exists():
+        if not Booking.objects.filter(
+            customer=self.context["user"], status="Completed", equipment=equipment
+        ).exists():
             raise ValidationError("No Booking with this Equipment")
-            
+
         return equipment
 
     def create(self, validated_data):

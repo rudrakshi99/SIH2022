@@ -40,13 +40,13 @@ class BookingListAPIView(ListAPIView):
     pagination_class = LimitOffsetPagination
 
     search_fields = [
-        "equipment__name",
+        "equipment__title",
         "equipment__equipment_type__name",
         "equipment__manufacturer__name",
-        "equipment__customer__username",
+        "customer__username",
         "equipment__eq_id",
-        "equipment__customer__first_name",
-        "equipment__customer__last_name",
+        "customer__first_name",
+        "customer__last_name",
     ]
 
     def get_queryset(self, *args, **kwargs):
@@ -126,13 +126,13 @@ class BookingRequestListAPIView(ListAPIView):
     pagination_class = LimitOffsetPagination
 
     search_fields = [
-        "equipment__name",
+        "equipment__title",
         "equipment__equipment_type__name",
         "equipment__manufacturer__name",
-        "equipment__customer__username",
+        "customer__username",
         "equipment__eq_id",
-        "equipment__customer__first_name",
-        "equipment__customer__last_name",
+        "customer__first_name",
+        "customer__last_name",
     ]
 
     def get_queryset(self, *args, **kwargs):

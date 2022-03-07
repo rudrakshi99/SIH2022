@@ -28,6 +28,7 @@ class UserSerializer(serializers.ModelSerializer):
             "state",
             "pin_code",
             "profile_picture",
+            "phone_number",
         ]
 
     # extra_kwargs = {"url": {"view_name": "api:user-detail", "lookup_field": "username"}}
@@ -197,8 +198,12 @@ class LoginSerializer(serializers.ModelSerializer):
     tokens = serializers.SerializerMethodField()
 
     def get_tokens(self, obj):
-
-        user = User.objects.get(email=obj["email"])
+        try:
+            user = User.objects.get(email=obj["email"])
+        except:
+            raise serializers.ValidationError(
+                f"User with email {obj['email']} doesn't exists."
+            )
 
         return {"refresh": user.tokens()["refresh"], "access": user.tokens()["access"]}
 
@@ -220,7 +225,12 @@ class LoginSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         email = attrs.get("email", "")
         password = attrs.get("password", "")
-        user = User.objects.get(email=email)
+        try:
+            user = User.objects.get(email=email)
+        except:
+            raise serializers.ValidationError(
+                f"User with email {email} doesn't exists."
+            )
         user = auth.authenticate(username=user.username, password=password)
 
         if not user:
@@ -254,7 +264,12 @@ class LoginWithOtpSerializer(serializers.Serializer):
     phone_number = serializers.CharField(required=True)
 
     def validate(self, attrs):
-        user = User.objects.get(phone_number=attrs.get("phone_number", ""))
+        try:
+            user = User.objects.get(phone_number=attrs.get("phone_number", ""))
+        except:
+            raise serializers.ValidationError(
+                f"User with phone_number {attrs.get('phone_number', '')} doesn't exists."
+            )
         twilio_handler = TwilioHandler()
         twilio_handler.send_otp(auth_id=user.twilio_user_id)
         return user
@@ -282,8 +297,12 @@ class LoginVerifyOtpSerializer(serializers.ModelSerializer):
         read_only_fields = ["user_id", "uuid", "id", "email"]
 
     def get_tokens(self, obj):
-
-        user = User.objects.get(phone_number=obj["phone_number"])
+        try:
+            user = User.objects.get(phone_number=obj["phone_number"])
+        except:
+            raise serializers.ValidationError(
+                f"User with phone_number {obj['phone_number']} doesn't exists."
+            )
 
         return {"refresh": user.tokens()["refresh"], "access": user.tokens()["access"]}
 

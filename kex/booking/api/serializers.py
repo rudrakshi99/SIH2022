@@ -1,9 +1,10 @@
 from rest_framework import serializers
 from kex import equipment
 from datetime import datetime, date, time
-
+from django.db.models import Q
 from kex.booking.models import Booking, booking_status_choice
 from kex.equipment.api.serializers import EquipmentListSerializer
+from kex.equipment.models import Equipment
 from kex.users.api.serializers import UserSerializer
 
 
@@ -93,9 +94,59 @@ class BookingCreateSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        booking = Booking.objects.create(
-            **validated_data, customer=self.context["user"]
-        )
+        start_date = validated_data.get("start_date")
+        end_date = validated_data.get("end_date")
+        equipment = validated_data.get("equipment")
+
+        if Equipment.objects.filter(id=equipment.id).exists():
+            eq_obj = Equipment.objects.get(id=equipment.id)
+            if eq_obj.is_available == False:
+                raise serializers.ValidationError(
+                    "Equipment is not available for booking"
+                )
+            else:
+                if (
+                    eq_obj.available_start_time
+                    <= start_date
+                    <= eq_obj.available_end_time
+                    and eq_obj.available_start_time
+                    <= end_date
+                    <= eq_obj.available_end_time
+                ):
+
+                    booking_obj = Booking.objects.filter(equipment__id=equipment.id)
+
+                    if not booking_obj.filter(
+                        Q(
+                            equipment__id=equipment.id,
+                            start_date__lte=start_date,
+                            end_date__gte=start_date,
+                        )
+                        | Q(
+                            equipment__id=equipment.id,
+                            start_date__lte=end_date,
+                            end_date__gte=end_date,
+                        )
+                        | Q(
+                            equipment__id=equipment.id,
+                            start_date__gte=start_date,
+                            end_date__lte=end_date,
+                        )
+                    ).exists():
+                        booking = Booking.objects.create(
+                            **validated_data, customer=self.context["user"]
+                        )
+                    else:
+                        raise serializers.ValidationError(
+                            "Slot not Available. Please choose another slot"
+                        )
+                else:
+                    raise serializers.ValidationError(
+                        "Slot not Available. Please choose another slot"
+                    )
+
+        else:
+            raise serializers.ValidationError("Equipment does not exist")
 
         return booking
 
