@@ -6,7 +6,7 @@ const Ads = () => {
         <div className='h-1/2 my-20'>
             <div className=''>
                 <div className='flex justify-center flex-col'>
-                    <h1 className='mx-auto tracking-wide text-2xl font-bold uppercase opacity-[0.7]'>Get Started</h1>
+                    <h1 className='mx-auto tracking-wide text-4xl font-bold uppercase opacity-[0.7]'>Get Started</h1>
                     <p className='mx-48 leading-7 tracking-wide my-6 text-md font-medium'>We open the door to thousands of farmers. Rent your equipment for the off-season, and create an advertisement on our platform. Through our rigorous customer compliance, we make sure that only reliable users gain access to our digital marketplace. <span className='text-darkgreen'>There are two ways to get started</span>:</p>
                 </div>
 

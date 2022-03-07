@@ -31,7 +31,7 @@ const Header = () => {
               Krishi <br /> Sadhan
             </h3>
           </div>
-        <div className="ml-auto">
+        <div className="mx-auto">
           <ul className="flex mt-4 items-center">
             <li
               onClick={() => navigate("/")}
@@ -39,11 +39,11 @@ const Header = () => {
             >
               Home
             </li>
-            <li className="text-lg cursor-pointer font-semibold text-darkgreen mx-4" onClick={() => navigate('/dashboard')}>
+            <li className="text-lg cursor-pointer font-semibold text-darkgreen mx-4 cursor-pointer" onClick={() => navigate('/dashboard')}>
               Dashboard
             </li>
-            <li className="text-lg cursor-pointer font-semibold text-darkgreen mx-4">
-              Our Services
+            <li className="text-lg cursor-pointer font-semibold text-darkgreen mx-4 cursor-pointer" onClick={() => navigate('/booking-history')}>
+              Bookings
             </li>
             <li
               onClick={() => navigate("/help")}
@@ -54,16 +54,16 @@ const Header = () => {
           </ul>
         </div>
         {!Cookies.get("refresh-token") ? (
-          <div className="flex-1 flex justify-evenly items-center">
+          <div className="flex items-center">
             <button
               onClick={() => navigate("/login")}
-              className="bg-darkgreen hover:bg-green-700 text-white font-bold py-1 px-8 rounded"
+              className="bg-darkgreen hover:bg-green-700 text-white font-bold py-1 px-8 rounded mx-2"
             >
               Login
             </button>
             <button
               onClick={() => navigate("/register")}
-              className="bg-darkgreen hover:bg-green-700 text-white font-bold py-1 px-8 rounded"
+              className="bg-darkgreen hover:bg-green-700 text-white font-bold py-1 px-8 rounded mx-4"
             >
               Sign Up
             </button>
@@ -96,12 +96,6 @@ const Header = () => {
                   className="px-5 text-gray-600 py-2 bg-white cursor-pointer border-solid border-b border-slate-400 hover:bg-gray-200"
                 >
                   Profile
-                </p>
-                <p
-                  onClick={() => navigate("/booking-history")}
-                  className="px-5 text-gray-600 py-2 bg-white cursor-pointer border-solid border-b border-slate-400 hover:bg-gray-200"
-                >
-                  Booking History
                 </p>
                 <p
                   onClick={() => {
