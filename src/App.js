@@ -35,6 +35,7 @@ import BookingRequest from "./pages/bookingRequest/BookingRequest";
 import CancellationPolicy from "./pages/cancellationPage/CancellationPolicy";
 import UpdateProfile from "./pages/updateProfile/index";
 import BookingHistory from "./pages/bookingHistory";
+import Feedback from "./pages/feedback/Feedback";
 
 function App() {
   const authState = useSelector((state) => state.authReducer);
@@ -88,6 +89,7 @@ function App() {
         <Route path="partner-dispute" element={<PartnerDispute />} />
         <Route path="support" element={<SupportAdmin />} />
         <Route path="policy" element={<CancellationPolicy />} />
+        <Route path="feedback" element={<Feedback />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
       <Footer />

@@ -75,7 +75,7 @@ const CancellationForm = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Enter your message ..."
-              className="shadow-inner border-none w-100 rounded-2xl placeholder:font-semibold placeholder:text-gray-400 placeholder:text-md h-10 input-style mb-3 px-3 h-32 "
+              className="shadow-inner border-none w-100 rounded-2xl placeholder:font-semibold placeholder:text-gray-400 placeholder:text-md h-10 input-style mb-3 p-3 h-32 "
             />
             <p className="text-center">{message}</p>
             <button

@@ -102,7 +102,7 @@ const BookingHistory = () => {
             </div>
             <div className="border-x-2 p-4">
               <div className="flex flex-col">
-                <h1 className="font-bold text-lg text-[#4F4F4F] underline mb-3">
+                <h1 className="font-bold text-lg text-[#4F4F4F] underline mb-3 decoration-[#68AC5D]">
                   Status
                 </h1>
                 {filter_by_status.map((item, i) => {
@@ -121,7 +121,7 @@ const BookingHistory = () => {
                     </button>
                   );
                 })}
-                <h1 className="font-bold text-lg text-[#4F4F4F] underline mb-3 mt-6">
+                <h1 className="font-bold text-lg text-[#4F4F4F] underline mb-3 mt-6 decoration-[#68AC5D]">
                   Brands
                 </h1>
                 {filter_by_brands.map((item, i) => {
@@ -140,7 +140,7 @@ const BookingHistory = () => {
                     </button>
                   );
                 })}
-                <h1 className="font-bold text-lg text-[#4F4F4F] underline mb-3 mt-6">
+                <h1 className="font-bold text-lg text-[#4F4F4F] underline mb-3 mt-6 decoration-[#68AC5D]">
                   Price Range
                 </h1>
                 <div>
@@ -199,7 +199,7 @@ const BookingHistory = () => {
                   <input
                     type="range"
                     id="customRange1"
-                    className="form-range w-full h-6 p-0 bg-tdansparent focus:outline-none focus:ring-0 focus:shadow-none"
+                    className="form-range w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none "
                     min={0}
                     max={149000}
                     value={filter_data.price_per_km}
@@ -228,9 +228,6 @@ const BookingHistory = () => {
                       filter({ type: "date" });
                     }}
                   />
-                  <label htmlFor="floatingInput" className="text-gray-700">
-                    {filter_data.date}
-                  </label>
                 </div>
               </div>
             </div>

@@ -52,8 +52,13 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-
-                    <h1 className='mt-4 mb-10 text-md font-semibold text-gray-500 text-center'>Search your desired Equipments directly by entering a keyword or the whole name.</h1>
+                    <div className='flex mb-10 justify-around'>
+                        <div className="flex w-[240px] h-[40px] items-center border-2 rounded-lg border-[#68AC5D] px-1">
+                            <i className="text-[#68AC5D] pl-4 pr-2 fa-solid fa-location-dot"></i>
+                            <input className="searchDash appearance-none bg-transparent w-full text-gray-800 font-semibold mr-1 py-0.5 px-1 leading-tight focus:outline-none" type="text" placeholder="Enter Pincode (eg 201301)" aria-label="Full name" />
+                        </div>
+                        <h1 className='mt-3 mb-3 text-md font-semibold text-gray-500 text-center'>Search your desired Equipments directly by entering a keyword or the whole name.</h1>
+                    </div>
 
                     <div className='flex justify-around w-full'>
                         <div className='w-1/4'>

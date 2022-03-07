@@ -5,7 +5,8 @@ import { Carousel } from "react-responsive-carousel";
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker } from 'react-date-range';
-import { createBooking, getEquip } from '../../api/equipments';
+import { getEquip } from '../../api/equipments';
+import { createBooking } from '../../api/bookingAPI';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 
@@ -38,22 +39,22 @@ const Product = () => {
         key: 'selection'
     }
 
-    const formattedStartDate = format(new Date(startDate), "yyyy-mm-dd");
-    const formattedEndDate = format(new Date(endDate), "yyyy-mm-dd");
+    const formattedStartDate = format(new Date(startDate), "yyyy-MM-dd");
+    const formattedEndDate = format(new Date(endDate), "yyyy-MM-dd");
     // const formattedStartTime = format(new Date(startDate), "hh-mm-dd");
-    // console.log(formattedStartTime, "format start time");
+    // console.log(formattedStartDate, "format start date");
 
     const bookingData = {
         equipment: equipment?.id,
         start_data: formattedStartDate,
         end_date: formattedEndDate,
-        start_time: '',
-        end_time: ''
+        start_time: '22:22',
+        end_time: '01:01'
     }
 
     const handleBooking = async () => {
-        const { data } = await createBooking(bookingData);
-        console.log(data);
+        await createBooking(equipment?.id, formattedStartDate, formattedEndDate, "22:22", "01:01");
+        // console.log(data);
     }
 
 
@@ -182,7 +183,7 @@ const Product = () => {
                             Chat now <i className="pl-4 fa-solid fa-comment"></i>
                         </button>
                     </div>
-                    <p className='text-center'><i className="pr-2 text-red-500 fa-solid fa-flag"></i> <a className='text-red-500 font-semibold text-md underline-offset-2' href="/report">Report this equipment</a></p>
+                    <p className='text-center'><i className="pr-2 text-red-500 fa-solid fa-flag"></i> <a className='text-red-500 font-semibold text-md underline-offset-2' href="/equipment-report">Report this equipment</a></p>
                 </div>
             </div>
         </div>

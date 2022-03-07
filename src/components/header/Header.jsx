@@ -50,7 +50,7 @@ const Header = () => {
   return (
     <div className="h-16">
       <div className="flex content-center">
-          <div className="flex flex-1 items-center justify-center lg:ml-20">
+          <div className="flex items-center cursor-pointer ml-auto lg:ml-32">
             <img
               onClick={() => navigate("/")}
               src={logo}
@@ -65,41 +65,41 @@ const Header = () => {
           <ul className="flex mt-4 items-center">
             <li
               onClick={() => navigate("/")}
-              className="text-lg cursor-pointer font-semibold text-darkgreen lg:ml-7 mx-4"
+              className="text-lg cursor-pointer font-semibold text-darkgreen lg:ml-7 mx-6"
             >
               Home
             </li>
-            <li className="text-lg cursor-pointer font-semibold text-darkgreen mx-4" onClick={() => navigate('/dashboard')}>
+            <li className="text-lg cursor-pointer font-semibold text-darkgreen mx-6" onClick={() => navigate('/dashboard')}>
               Dashboard
             </li>
-            <li className="text-lg cursor-pointer font-semibold text-darkgreen mx-4">
+            <li className="text-lg cursor-pointer font-semibold text-darkgreen mx-6" onClick={() => navigate('/booking-history')}>
               Bookings
             </li>
             <li
               onClick={() => navigate("/help")}
-              className="text-lg cursor-pointer font-semibold text-darkgreen mx-4"
+              className="text-lg cursor-pointer font-semibold text-darkgreen mx-6"
             >
               Help
             </li>
             <li
               onClick={() => navigate("/contact")}
-              className="text-lg cursor-pointer font-semibold text-darkgreen mx-4"
+              className="text-lg cursor-pointer font-semibold text-darkgreen mx-6"
             >
               Contact Us
             </li>
           </ul>
         </div>
         {!Cookies.get("refresh-token") ? (
-          <div className="flex-1 flex justify-evenly items-center">
+          <div className="flex items-center">
             <button
               onClick={() => navigate("/login")}
-              className="bg-darkgreen hover:bg-green-700 text-white font-bold py-1 px-8 rounded"
+              className="bg-darkgreen hover:bg-green-700 text-white font-bold py-1 px-8 rounded mx-2"
             >
               Login
             </button>
             <button
               onClick={() => navigate("/register")}
-              className="bg-darkgreen hover:bg-green-700 text-white font-bold py-1 px-8 rounded"
+              className="bg-darkgreen hover:bg-green-700 text-white font-bold py-1 px-8 rounded mx-4"
             >
               Sign Up
             </button>
@@ -132,12 +132,6 @@ const Header = () => {
                   className="px-5 text-gray-600 py-2 bg-white cursor-pointer border-solid border-b border-slate-400 hover:bg-gray-200"
                 >
                   Profile
-                </p>
-                <p
-                  onClick={() => navigate("/booking-history")}
-                  className="px-5 text-gray-600 py-2 bg-white cursor-pointer border-solid border-b border-slate-400 hover:bg-gray-200"
-                >
-                  Booking History
                 </p>
                 <p
                   onClick={() => {

@@ -3,12 +3,15 @@ import React, { useState } from "react";
 //Components
 // import InputField from "../../components/input/InputField";
 import UpdateForm from "./UpdateForm";
+//images
+import userIcon from "../../img/user_icon.svg";
 //Functions
 import { useSelector } from "react-redux";
 
 const Profile = () => {
   const authState = useSelector((state) => state.authReducer);
   const user = authState.user.data;
+  console.log(user);
   const [edit, setEdit] = useState(false);
   return (
     <div>
@@ -40,7 +43,7 @@ const Profile = () => {
                   <img
                     id="showImage"
                     className="max-w-xs w-64 items-center border"
-                    src={user.profile_image}
+                    src={user.profile_image ? user.profile_image : userIcon}
                     alt=""
                   />
                 </div>

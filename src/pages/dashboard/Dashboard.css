@@ -68,3 +68,8 @@
     cursor: pointer;
     border-radius: 50%;
   }
+
+.searchDash::placeholder {
+    font-weight: 600;
+    color: #524d4d;
+}

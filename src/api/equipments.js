@@ -1,4 +1,5 @@
 import axios from './config';
+// import instance from "./config";
 import Cookies from "js-cookie";
 
 export const getEquips = async () => {
@@ -28,20 +29,6 @@ export const getEquipsList = async () => {
 
 
 // Booking api
-
-export const createBooking = async (data) => {
-    try {
-        const headers = {
-            "Content-Type": "application/json",
-            Authorization: `"Bearer ${Cookies.get('access-token')}`
-        };
-        console.log(data, "data in api");
-        console.log(headers, "headers in api");
-        return await axios.get('/api/booking/create' , { data }, { headers });
-    } catch(error) {
-        console.log('Error while calling createBooking API', error);
-    }
-}
 
 
 export const getBookings = async () => {
@@ -79,5 +66,20 @@ export const updateBooking = async (data, id) => {
         return await axios.get(`/api/booking/update/${id}` , { data }, { headers });
     } catch(error) {
         console.log('Error while calling getBookingDetail API', error);
+    }
+}
+
+
+
+//  Feedback
+export const submitFeedback = async (data) => {
+    try {
+        let formData = new FormData();
+        formData.append('name', data.name);
+        formData.append('phone_number', data.phone_number);
+        formData.append('description', data.description);
+        return await axios.post(`/enquiry/feedback` , { formData });
+    } catch(error) {
+        console.log('Error while calling submitFeedback API', error);
     }
 }

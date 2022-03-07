@@ -12,15 +12,6 @@ const PreHeader = () => {
                 <div className=''>
                     <div className='' id='google_element'></div>
                 </div>
-                    {/* <input type="search" className="mt-1 form-control relative flex-auto min-w-0 block w-full px-3 py-0.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Choose language..." aria-label="Search" aria-describedby="button-addon2" />
-                        <i className='fas fa-search text-sm absolute top-1 right-2'></i> */}
-                {/* <div className='ml-auto'>
-                    <div className='relative'>
-                    <input type="search" className="mt-1 form-control relative flex-auto min-w-0 block w-full px-3 py-0.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Choose language..." aria-label="Search" aria-describedby="button-addon2" />
-                        <i className='fas fa-search text-sm absolute top-1 right-2'></i>
-                    </div>
-                </div> */}
-
             </div>
         </div>
     )
