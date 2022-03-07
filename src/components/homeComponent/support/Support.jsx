@@ -6,19 +6,19 @@ import vector33 from '../../../img/Vector33.png';
 
 const Support = () => {
     return (
-        <div className='h-2/5'>
+        <div className='h-2/5 p-9'>
             <div className='flex justify-center items-center'>
-                <div className='supportItem mx-5 p-9'>
+                <div className='supportItem mx-5 p-9 rounded-2xl'>
                     <img className='supportImg' src={vector11} alt="" />
                     <h3 className='text-lg font-semibold mt-5'>24*7 customer support</h3>
                     <p className='text-xs text-center font-normal'>We’re just one call away.</p>
                 </div>
-                <div className='supportItem mx-5 p-9'>
+                <div className='supportItem mx-5 p-9 rounded-2xl'>
                     <img className='supportImg' src={vector22} alt="" />
                     <h3 className='text-lg font-semibold mt-5'>24*7 customer support</h3>
                     <p className='text-xs text-center font-normal'>We’re just one call away.</p>
                 </div>
-                <div className='supportItem mx-5 p-9'>
+                <div className='supportItem mx-5 p-9 rounded-2xl'>
                     <img className='supportImg' src={vector33} alt="" />
                     <h3 className='text-lg font-semibold mt-5'>24*7 customer support</h3>
                     <p className='text-xs text-center font-normal'>We’re just one call away.</p>
