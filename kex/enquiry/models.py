@@ -1,6 +1,7 @@
 # Django imports
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from kex.equipment.models import Equipment
 
 from kex.users.admin import User
 
@@ -38,6 +39,8 @@ class PartnerDispute(models.Model):
     topic = models.PositiveIntegerField(choices=TOPIC)
     description = models.TextField(_("Description"), blank=False)
 
+    def __str__(self):
+        return str(self.name)
 
 class CancelForm(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -50,3 +53,32 @@ class CancelForm(models.Model):
     )
     cancel_reason = models.PositiveIntegerField(choices=CANCEL_REASON)
     description = models.TextField(_("Description"), blank=True)
+    
+    def __str__(self):
+        return str(self.booking_id)
+
+
+class ReportEquipment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
+    REPORT_REASON = (
+        (10, "Others"),
+        (20, "Belongs to another person"),
+        (30, "Is misleading in any way"),
+        (40, "harasses or advocates harassment of another person;"),
+    )
+    report_reason = models.PositiveIntegerField(choices=REPORT_REASON)
+    description = models.TextField(_("Description"), blank=True)
+    def __str__(self):
+        return str(self.user.first_name)
+
+
+class FeedbackForm(models.Model):
+    name = models.CharField(_("Name"), max_length=50, blank=False)
+    phone_number = models.CharField(
+        _("Phone Number"),
+        max_length=10,
+    )
+    description = models.TextField(_("Description"), blank=False)
+    def __str__(self):
+        return str(self.name)

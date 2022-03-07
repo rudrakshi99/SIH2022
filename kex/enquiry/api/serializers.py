@@ -1,7 +1,7 @@
 from django.forms import ValidationError
 from rest_framework import serializers
 from kex.booking.models import Booking
-from kex.enquiry.models import CancelForm, HelpCentre, PartnerDispute
+from kex.enquiry.models import CancelForm, HelpCentre, PartnerDispute, ReportEquipment,FeedbackForm
 from kex.equipment.models import Equipment
 from kex.users.models import User
 
@@ -59,3 +59,20 @@ class CancelFormSerializer(serializers.ModelSerializer):
             raise ValidationError("Booking Id doesn't exists for this user")
 
         return booking_id
+
+
+class ReportEquipmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReportEquipment
+        exclude = ["user"]
+
+    def create(self,validated_data):
+
+        report_equipment = ReportEquipment.objects.create(user=self.context["user"],**validated_data)
+        return report_equipment
+
+class FeedbackFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FeedbackForm
+        fields = "__all__"
+
