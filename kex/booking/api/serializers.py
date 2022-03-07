@@ -13,7 +13,15 @@ class BookingListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Booking
-        fields = ["id", "booking_id", "equipment", "status", "created_at"]
+        fields = [
+            "id",
+            "booking_id",
+            "equipment",
+            "status",
+            "created_at",
+            "start_date",
+            "end_date",
+        ]
 
 
 class BookingSerializer(serializers.ModelSerializer):
