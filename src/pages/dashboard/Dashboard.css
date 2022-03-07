@@ -73,3 +73,7 @@
     font-weight: 600;
     color: #524d4d;
 }
+
+.rdrDefinedRangesWrapper, .rdrCalendarWrapper {
+    z-index: 1;
+}

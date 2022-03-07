@@ -3,13 +3,18 @@ import './Dashboard.css';
 import ProductItem from '../../components/dashboardComponent/product/ProductItem';
 import Dropdown from '../../components/dropdown/Dropdown';
 import { getEquips, getEquipsList } from '../../api/equipments';
+import { DateRangePicker } from 'react-date-range';
 
 const Dashboard = () => {
     const [equipments, setEquipments] = useState(null);
     const [equipList, setEquipList] = useState([]);
     const [searchInput, setSearchInput] = useState('');
+    const [visible1, setVisible1] = useState(false);
+    const [visible2, setVisible2] = useState(false);
     const [change, setChange] = useState(false);
     const [perDay, setPerDay] = useState(10000);
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
     const [filteredEquipments, setFilteredEquipments] = useState(null);
     useEffect(() => {
       const getEquipments = async () => {
@@ -37,6 +42,12 @@ const Dashboard = () => {
         if(perDay)
             setFilteredEquipments(equipments?.filter(equipment => equipment?.daily_rental<=(perDay)));
     }, [change]);
+
+    const selectionRange = {
+        startDate: startDate,
+        endDate: endDate,
+        key: 'selection'
+    }
 
     return (
         <>
@@ -116,19 +127,39 @@ const Dashboard = () => {
                                 <p className='text-md pt-2 font-normal text-[#4F4F4F] pl-6'>From</p>
 
                                 <div className='flex justify-center items-center'>
-                                    <button className="bg-darkgreen hover:bg-green-700 text-white font-normal text-sm py-1 text-center w-1/2 my-4 px-2 rounded">
+                                    <button onClick={() => setVisible1(!visible1)} className="bg-darkgreen hover:bg-green-700 text-white font-normal text-sm py-1 text-center w-1/2 my-4 px-2 rounded">
                                         DD-MM-YYYY
                                     </button>
                                     <i className="ml-4 text-lg text-[#68AC5D] fa-solid fa-calendar"></i>
+                                </div>
+                                <div style={{ display: visible1 ? 'block' : 'none', height: '400px', width: '200px', 'zIndex': 1 }}>
+                                    <DateRangePicker style={{ height: '300px', width: '280px' }}
+                                        ranges={[selectionRange]}
+                                        minDate={new Date()}
+                                        // disabledDates={getDaysArray(new Date(),new Date())}
+                                        rangeColors={["#68AC5D"]}
+                                        // onChange={handleSelect}
+                                        // maxDate={new Date()}
+                                    />
                                 </div>
 
 
                                 <p className='text-md font-normal text-[#4F4F4F] pl-6'>To</p>
                                 <div className='flex justify-center items-center'>
-                                    <button className="bg-darkgreen hover:bg-green-700 text-white font-normal text-sm py-1 text-center w-1/2 my-4 px-2 rounded">
+                                    <button onClick={() => setVisible2(!visible2)} className="bg-darkgreen hover:bg-green-700 text-white font-normal text-sm py-1 text-center w-1/2 my-4 px-2 rounded">
                                         DD-MM-YYYY
                                     </button>
                                     <i className="ml-4 text-lg text-[#68AC5D] fa-solid fa-calendar"></i>
+                                </div>
+                                <div style={{ display: visible2 ? 'block' : 'none', height: '400px', width: '200px', 'zIndex': 1 }}>
+                                    <DateRangePicker style={{ height: '300px', width: '280px' }}
+                                        ranges={[selectionRange]}
+                                        minDate={new Date()}
+                                        // disabledDates={getDaysArray(new Date(),new Date())}
+                                        rangeColors={["#68AC5D"]}
+                                        // onChange={handleSelect}
+                                        // maxDate={new Date()}
+                                    />
                                 </div>
 
                             </div>

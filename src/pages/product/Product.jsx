@@ -7,7 +7,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker } from 'react-date-range';
 import { getEquip } from '../../api/equipments';
 import { createBooking } from '../../api/bookingAPI';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 
 const Product = () => {
@@ -16,6 +16,7 @@ const Product = () => {
     const [endDate, setEndDate] = useState(new Date());
     const [equipment, setEquipment] = useState(null);
     const params = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
       const getEquipment = async () => {
@@ -44,20 +45,27 @@ const Product = () => {
     // const formattedStartTime = format(new Date(startDate), "hh-mm-dd");
     // console.log(formattedStartDate, "format start date");
 
-    const bookingData = {
-        equipment: equipment?.id,
-        start_data: formattedStartDate,
-        end_date: formattedEndDate,
-        start_time: '22:22',
-        end_time: '01:01'
-    }
+    // const bookingData = {
+    //     equipment: equipment?.id,
+    //     start_data: formattedStartDate,
+    //     end_date: formattedEndDate,
+    //     start_time: '22:22',
+    //     end_time: '01:01'
+    // }
 
     const handleBooking = async () => {
         await createBooking(equipment?.id, formattedStartDate, formattedEndDate, "22:22", "01:01");
         // console.log(data);
+        navigate('/booking-history');
+        
     }
-
-
+    var getDaysArray = function(start, end) {
+        for(var arr=[],dt=start; dt<=end; dt.setDate(dt.getDate()+1)){
+            arr.push(new Date(dt));
+        }
+        return arr;
+    };
+    
 
     return (
         <div className=''>
@@ -169,8 +177,10 @@ const Product = () => {
                             <DateRangePicker style={{ height: '300px', width: '280px' }}
                                 ranges={[selectionRange]}
                                 minDate={new Date()}
+                                // disabledDates={getDaysArray(new Date(),new Date())}
                                 rangeColors={["#68AC5D"]}
                                 onChange={handleSelect}
+                                // maxDate={new Date()}
                             />
                         </div>
                         <button onClick={(e) => handleBooking(e)} className="bg-darkgreen hover:bg-[#8cdf80] text-white w-full font-semibold py-1 px-8 rounded">

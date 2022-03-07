@@ -82,7 +82,7 @@ function App() {
         <Route path="update-profile" element={<UpdateProfile />} />
         <Route path="product/:id" element={<Product />} />
         <Route path="contact" element={<ContactUs />} />
-        <Route path="bookingRequest" element={<BookingRequest />} />
+        <Route path="bookingRequest/:id" element={<BookingRequest />} />
         <Route path="chat" element={<Chat />} />
         <Route path="booking-history" element={<BookingHistory />} />
         <Route path="faq" element={<FAQ />} />

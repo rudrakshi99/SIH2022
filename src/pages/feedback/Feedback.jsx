@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { submitFeedback } from '../../api/equipments';
 import './Feedback.css';
 
@@ -10,6 +11,8 @@ const initial_values = {
 
 const Feedback = () => {
     const [feedback, setFeedback] = useState(initial_values);
+    const [success, setSuccess] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFeedback({ ...feedback, [e.target.name]: e.target.value });
@@ -17,11 +20,18 @@ const Feedback = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await submitFeedback(feedback);
-        // console.log(data);
+        const {data} =await submitFeedback(feedback);
+        console.log(data);
+
+        if(data.success && data.success === true) {
+            setSuccess(true);
+            setTimeout(() => {
+                setSuccess(false);
+                navigate('/dashboard');
+            }, 4000);
+        }
     }
 
-    console.log(feedback);
 
     return (
         <div>
@@ -62,6 +72,12 @@ const Feedback = () => {
                             </button>
                         </div>
                     </form>
+
+                    {
+                        // setTimeout(() => {
+                            success && <h1 className='text-md flex justify-center mt-6  text-darkgreen font-semibold'>Thanks for your feedback</h1>
+                        // }, 3000)
+                    }
             </div>
         </div>
 

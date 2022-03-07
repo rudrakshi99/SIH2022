@@ -4,19 +4,17 @@ import Cookies from "js-cookie";
 
 const url = "https://krishi-sadhan-app.herokuapp.com";
 
-export const getBooking = async ({ accessToken }) => {
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${accessToken}`,
-  };
+export const getBooking = async () => {
   try {
-    const res = await instance.get(`${url}/api/booking/`, { headers });
-    return Promise.resolve(res.data);
-  } catch (err) {
-    return Promise.reject(err.response?.data?.msg);
+      const headers = {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get('access-token')}`
+      };
+      return await instance.get('/api/booking/' , { headers });
+  } catch(error) {
+      console.log('Error while calling getBookings API', error);
   }
-};
-
+}
 
 
 export const createBooking = async (equipment, start_date, end_date, start_time, end_time) => {
@@ -38,31 +36,14 @@ export const createBooking = async (equipment, start_date, end_date, start_time,
 }
 
 
-
-// export const createBooking = async (
-//   equipment,
-//   start_date,
-//   end_date,
-//   start_time, end_time
-// ) => {
-//   try {
-//     const headers = {
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${Cookies.get('access-token')}`,
-//     };
-//     const res = await instance.post(
-//       `${url}/api/booking/create`,
-//       {
-//           equipment,
-//           start_date,
-//           end_date,
-//         start_time,
-//         end_time,
-//       },
-//       { headers }
-//     );
-//     return Promise.resolve(res.data);
-//   } catch (err) {
-//     return Promise.reject(err.response?.data?.msg);
-//   }
-// };
+export const getBookingDetail = async (id) => {
+    try {
+        const headers = {
+            "Content-Type": "application/json",
+            Authorization: `"Bearer ${Cookies.get('access-token')}`
+        };
+        return await instance.get(`/api/booking/detail/${id}/` , { headers });
+    } catch(error) {
+        console.log('Error while calling getBookingDetail API', error);
+    }
+}

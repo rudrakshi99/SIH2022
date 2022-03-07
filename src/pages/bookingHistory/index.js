@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
+import { format } from 'date-fns';
 
 //Functions
 import { getBooking } from "../../api/bookingAPI";
+import { useNavigate } from "react-router-dom";
 
 const BookingHistory = () => {
   const [tab, setTab] = useState(false);
+  const navigate = useNavigate();
   const [Data, setData] = useState([]);
   const [items, setItems] = useState(Data);
   const [all, setAll] = useState(true);
@@ -30,9 +33,11 @@ const BookingHistory = () => {
   useEffect(() => {
     async function Booking() {
       console.log();
-      const data = await getBooking({
-        accessToken: Cookies.get("access-token"),
-      });
+      // const data = await getBooking({
+      //   accessToken: Cookies.get("access-token"),
+      // });
+      const { data } = await getBooking();
+      console.log(data, 'getBooking');
       setData(data);
     }
     Booking();
@@ -68,11 +73,12 @@ const BookingHistory = () => {
       }
     }
   };
+  // const formattedStartDate = format(new Date(startDate), "yyyy-MM-dd");
 
   return (
     <div>
-      <div className="p-9 pt-0">
-        <div className="flex w-screen mb-7">
+      <div className="p-3 pt-0">
+        <div className="flex mb-7">
           <button
             className={`w-1/2 py-4 ${
               !tab && "text-[#68AC5D] border-b-[#68AC5D] border-b-2"
@@ -90,9 +96,9 @@ const BookingHistory = () => {
             Owner
           </button>
         </div>
-        <div className="flex">
+        <div className="flex max-w-7xl mx-auto">
           <div
-            className="flex flex-col rounded-b-3xl"
+            className="flex w-1/4 flex-col rounded-b-3xl"
             style={{ boxShadow: "0px 15px 15px rgba(104, 172, 93, 0.5)" }}
           >
             <div className="bg-[#68AC5D] p-6 rounded-t-3xl">
@@ -150,7 +156,18 @@ const BookingHistory = () => {
                   >
                     Per Day Price
                   </label>
-                  <input
+                  <input type="range" id="perDay" 
+                                        className="rangeInput form-range text-green-100 appearance-none w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
+                                        max={149000}
+                                        value={filter_data.per_day_price}
+                                        onChange={(e) =>
+                                          setFilterData({
+                                            ...filter_data,
+                                            per_day_price: e.target.value,
+                                          })
+                                        }
+                                    />
+                  {/* <input
                     type="range"
                     id="customRange1"
                     className="form-range w-full h-6 p-0 bg-tdansparent focus:outline-none focus:ring-0 focus:shadow-none"
@@ -163,7 +180,7 @@ const BookingHistory = () => {
                         per_day_price: e.target.value,
                       })
                     }
-                  />
+                  /> */}
                   <p>Rs 0 to {filter_data.per_day_price}</p>
                 </div>
                 <div>
@@ -173,7 +190,19 @@ const BookingHistory = () => {
                   >
                     Per Hour Price
                   </label>
-                  <input
+                  <input type="range" id="perDay" 
+                                        className="rangeInput form-range text-green-100 appearance-none w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
+                                        min={0}
+                    max={49827}
+                    value={filter_data.per_hour_price}
+                    onChange={(e) =>
+                      setFilterData({
+                        ...filter_data,
+                        per_hour_price: e.target.value,
+                      })
+                    }
+                                    />
+                  {/* <input
                     type="range"
                     id="customRange1"
                     className="form-range w-full h-6 p-0 bg-tdansparent focus:outline-none focus:ring-0 focus:shadow-none"
@@ -186,7 +215,7 @@ const BookingHistory = () => {
                         per_hour_price: e.target.value,
                       })
                     }
-                  />
+                  /> */}
                   <p>Rs 49 to {filter_data.per_hour_price}</p>
                 </div>
                 <div>
@@ -196,7 +225,19 @@ const BookingHistory = () => {
                   >
                     Distance from You
                   </label>
-                  <input
+                  <input type="range" id="perDay" 
+                                        className="rangeInput form-range text-green-100 appearance-none w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
+                                        min={0}
+                    max={149000}
+                    value={filter_data.price_per_km}
+                    onChange={(e) =>
+                      setFilterData({
+                        ...filter_data,
+                        price_per_km: e.target.value,
+                      })
+                    }
+                                    />
+                  {/* <input
                     type="range"
                     id="customRange1"
                     className="form-range w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none "
@@ -209,7 +250,7 @@ const BookingHistory = () => {
                         price_per_km: e.target.value,
                       })
                     }
-                  />
+                  /> */}
                   <p>Rs 0 to {filter_data.price_per_km}</p>
                 </div>
                 <h1 className="font-bold text-lg text-[#4F4F4F] underline mb-3 mt-6">
@@ -232,7 +273,7 @@ const BookingHistory = () => {
               </div>
             </div>
           </div>
-          <div className="w-full p-5 rounded-2xl border border-[#4F4F4F] m-2">
+          <div className="w-3/4 p-5 rounded-2xl border border-[#4F4F4F] m-2">
             {items !== [] ? (
               <div>
                 <h1 className="text-xl font-semibold text-[#4F4F4F]">
@@ -242,32 +283,32 @@ const BookingHistory = () => {
                   <table className="w-full mt-4">
                     <thead className="border-b bg-gray-200">
                       <tr>
-                        <th>Date</th>
-                        <th>Booking ID</th>
-                        <th>Equipment Name</th>
-                        <th>Manufacturer</th>
-                        <th>Request Status</th>
-                        <th>All Details</th>
+                        <th className="py-4">Date</th>
+                        <th className="py-4">Booking ID</th>
+                        <th className="py-4">Equipment Name</th>
+                        <th className="py-4">Manufacturer</th>
+                        <th className="py-4">Request Status</th>
+                        <th className="py-4">All Details</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {items.map((item, i) => {
+                      {Data?.map((item, i) => {
                         return (
                           <tr
                             key={i}
                             className="bg-white border-b text-center hover:bg-gray-100"
                           >
-                            <td className="py-1 text-lg">{item.start_date}</td>
+                            <td className="py-1 text-lg">{format(new Date(item.created_at), "yyyy-MM-dd")}</td>
                             <td className="py-1 text-lg">{item.booking_id}</td>
                             <td className="py-1 text-lg">
-                              {item.equipment_type}
+                              {item.equipment.title}
                             </td>
                             <td className="py-1 text-lg">
                               {item.equipment.manufacturer}
                             </td>
                             <td className="py-1 text-lg">{item.status}</td>
                             <td className="py-1 text-lg">
-                              <button className="text-blue-400 cursor-pointer">
+                              <button onClick={() => navigate(`/bookingRequest/${item.id}`)} className="text-blue-400 cursor-pointer">
                                 All Details
                               </button>
                             </td>
