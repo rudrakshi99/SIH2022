@@ -44,7 +44,7 @@ const UpdateForm = ({ onChange }) => {
   };
 
   return (
-    <div className="z-40 w-screen h-screen left-0 rounded-3xl absolute top-0 bg-white p-9">
+    <div className="z-40 w-full h-screen left-0 absolute top-0 bg-[#68ac5d] p-9">
       <div className="flex justify-end">
         <button
           type="button"
@@ -69,12 +69,12 @@ const UpdateForm = ({ onChange }) => {
           </svg>
         </button>
       </div>
-      <div className="text-center">
+      <div className="text-center bg-white my-9 rounded-xl p-9">
         <h1 className="text-2xl font-semibold">Edit your Information Here</h1>
         <form onSubmit={handleUpdateProfile}>
-          <div className="bg-white shadow rounded-lg p-6">
+          <div className="shadow rounded-lg p-6">
             <div className="grid lg:grid-cols-2 gap-6">
-              <div className="border focus-within:border-blue-500 focus-within:text-blue-500 transition-all duration-500 relative rounded p-1">
+              <div className=" focus-within:border-blue-500 focus-within:text-blue-500 transition-all duration-500 relative rounded p-1">
                 <div className="-mt-4 absolute tracking-wider px-1 uppercase text-xs">
                   <p>
                     <label for="name" className="bg-white text-gray-600 px-1">
@@ -97,7 +97,7 @@ const UpdateForm = ({ onChange }) => {
                   />
                 </p>
               </div>
-              <div className="border focus-within:border-blue-500 focus-within:text-blue-500 transition-all duration-500 relative rounded p-1">
+              <div className=" focus-within:border-blue-500 focus-within:text-blue-500 transition-all duration-500 relative rounded p-1">
                 <div className="-mt-4 absolute tracking-wider px-1 uppercase text-xs">
                   <p>
                     <label
@@ -123,7 +123,7 @@ const UpdateForm = ({ onChange }) => {
                   />
                 </p>
               </div>
-              <div className="border focus-within:border-blue-500 focus-within:text-blue-500 transition-all duration-500 relative rounded p-1">
+              <div className=" focus-within:border-blue-500 focus-within:text-blue-500 transition-all duration-500 relative rounded p-1">
                 <div className="-mt-4 absolute tracking-wider px-1 uppercase text-xs">
                   <p>
                     <label
@@ -149,7 +149,7 @@ const UpdateForm = ({ onChange }) => {
                   />
                 </p>
               </div>
-              <div className="border focus-within:border-blue-500 focus-within:text-blue-500 transition-all duration-500 relative rounded p-1">
+              <div className="bg-white focus-within:border-blue-500 focus-within:text-blue-500 transition-all duration-500 relative rounded p-1">
                 <div className="-mt-4 absolute tracking-wider px-1 uppercase text-xs">
                   <p>
                     <label
@@ -176,19 +176,17 @@ const UpdateForm = ({ onChange }) => {
                 </p>
               </div>
             </div>
-            <p className="text-center text-green-500 text-lg my-5">
-              {message}!
-            </p>
-            <div className="border-t mt-6 pt-3">
+            <p className="text-center text-green-500 text-lg my-5">{message}</p>
+            <div className="mt-6 pt-3">
               <button
                 type="submit"
-                className="rounded text-gray-100 px-3 py-1 bg-green-500 hover:shadow-inner hover:bg-blue-700 transition-all duration-300"
+                className="rounded text-gray-100 px-9 py-1 bg-[#68ac5d] hover:shadow-inner hover:bg-green-700 transition-all duration-300 text-xl"
               >
                 Save
               </button>
               <button
                 onClick={onChange((prev) => !prev)}
-                className="rounded ml-4 text-gray-100 px-3 py-1 bg-red-500 hover:shadow-inner hover:bg-blue-700 transition-all duration-300"
+                className="rounded ml-4 text-gray-100 px-9 py-1 bg-red-500 hover:shadow-inner hover:bg-red-700 transition-all duration-300 text-xl"
               >
                 Discard
               </button>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Sticky from "react-sticky-el";
 import Cookies from "js-cookie";
 
 //Components
@@ -129,47 +130,49 @@ const Login = () => {
   return (
     <div>
       {loading && <Loader />}
-      {showOTP && (
-        <div className="absolute my-20 z-40">
-          <div className="bg-gray-300 h-screen w-screen flex justify-center align-center p-9">
-            <div className=" rounded-xl bg-white w-1/4 h-auto p-9 ">
-              <form onSubmit={verify} className="flex flex-col ">
-                <h1 className="mb-5 text-center text-xl">
-                  Enter the OTP sent to your Registered Number
-                </h1>
-                <InputField
-                  placeholder="OTP"
-                  value={OTP}
-                  onChange={(e) => setOTP(e.target.value)}
-                  type="text"
-                  required={true}
-                />
-                <button
-                  className="px-6 py-1 mx-auto rounded-lg text-white text-lg font-semibold"
-                  style={{ backgroundColor: "#68AC5D" }}
-                  type="submit"
-                >
-                  Verify OTP
-                </button>
-                {success2 && (
-                  <p className="text-center text-green-400">
-                    OTP verified successfully!
-                  </p>
-                )}
-                {error && (
-                  <p className="text-center text-red-400">
-                    Wrong OTP, plase try again!
-                  </p>
-                )}
-              </form>
-              <p className="my-5 text-center">
-                Didn't recieve OTP?{" "}
-                <p className="text-blue-600 underline">Resend</p>
-              </p>
+      <Sticky>
+        {showOTP && (
+          <div className="absolute my-20 z-40">
+            <div className="bg-gray-300 h-screen w-screen flex justify-center align-center p-9">
+              <div className=" rounded-xl bg-white w-1/4 h-auto p-9 ">
+                <form onSubmit={verify} className="flex flex-col ">
+                  <h1 className="mb-5 text-center text-xl">
+                    Enter the OTP sent to your Registered Number
+                  </h1>
+                  <InputField
+                    placeholder="OTP"
+                    value={OTP}
+                    onChange={(e) => setOTP(e.target.value)}
+                    type="text"
+                    required={true}
+                  />
+                  <button
+                    className="px-6 py-1 mx-auto rounded-lg text-white text-lg font-semibold"
+                    style={{ backgroundColor: "#68AC5D" }}
+                    type="submit"
+                  >
+                    Verify OTP
+                  </button>
+                  {success2 && (
+                    <p className="text-center text-green-400">
+                      OTP verified successfully!
+                    </p>
+                  )}
+                  {error && (
+                    <p className="text-center text-red-400">
+                      Wrong OTP, plase try again!
+                    </p>
+                  )}
+                </form>
+                <p className="my-5 text-center">
+                  Didn't recieve OTP?{" "}
+                  <p className="text-blue-600 underline">Resend</p>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </Sticky>
       <div className={`${loading && "blur-sm"} flex flex-col`}>
         <div className="flex justify-center py-9 rounded-2xl">
           <div>

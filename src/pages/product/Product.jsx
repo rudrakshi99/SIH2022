@@ -193,7 +193,7 @@ const Product = () => {
                             Chat now <i className="pl-4 fa-solid fa-comment"></i>
                         </button>
                     </div>
-                    <p className='text-center'><i className="pr-2 text-red-500 fa-solid fa-flag"></i> <a className='text-red-500 font-semibold text-md underline-offset-2' href="/equipment-report">Report this equipment</a></p>
+                    <p className='text-center'><i className="pr-2 text-red-500 fa-solid fa-flag"></i> <a className='text-red-500 font-semibold text-md underline-offset-2' onClick={() => navigate(`/equipment-report/${equipment?.id}`)}>Report this equipment</a></p>
                 </div>
             </div>
         </div>

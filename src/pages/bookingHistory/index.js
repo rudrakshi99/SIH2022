@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import { format } from 'date-fns';
+import { format } from "date-fns";
 
 //Functions
-import { getBooking } from "../../api/bookingAPI";
+import { getBooking, getBookingOwner } from "../../api/bookingAPI";
 import { useNavigate } from "react-router-dom";
 
 const BookingHistory = () => {
@@ -30,16 +30,17 @@ const BookingHistory = () => {
   ];
   const filter_by_brands = ["Mahindra", "John Deer", "CLAAS"];
 
+  async function Booking() {
+    console.log();
+    // const data = await getBooking({
+    //   accessToken: Cookies.get("access-token"),
+    // });
+    const { data } = await getBooking();
+    console.log(data, "getBooking");
+    setData(data);
+  }
+
   useEffect(() => {
-    async function Booking() {
-      console.log();
-      // const data = await getBooking({
-      //   accessToken: Cookies.get("access-token"),
-      // });
-      const { data } = await getBooking();
-      console.log(data, 'getBooking');
-      setData(data);
-    }
     Booking();
   }, []);
 
@@ -76,6 +77,15 @@ const BookingHistory = () => {
     }
   };
   // const formattedStartDate = format(new Date(startDate), "yyyy-MM-dd");
+  async function BookingOwner() {
+    console.log();
+    // const data = await getBooking({
+    //   accessToken: Cookies.get("access-token"),
+    // });
+    const { data } = await getBookingOwner();
+    console.log(data, "getBooking");
+    setData(data);
+  }
 
   return (
     <div>
@@ -85,7 +95,10 @@ const BookingHistory = () => {
             className={`w-1/2 py-4 ${
               !tab && "text-[#68AC5D] border-b-[#68AC5D] border-b-2"
             } hover:bg-gray-200 text-xl font-bold`}
-            onClick={() => setTab(false)}
+            onClick={() => {
+              setTab(false);
+              Booking();
+            }}
           >
             Customer
           </button>
@@ -93,7 +106,10 @@ const BookingHistory = () => {
             className={`w-1/2 py-4 ${
               tab && "text-[#68AC5D] border-b-[#68AC5D] border-b-2"
             } hover:bg-gray-200 text-xl font-bold`}
-            onClick={() => setTab(true)}
+            onClick={() => {
+              setTab(true);
+              BookingOwner();
+            }}
           >
             Owner
           </button>
@@ -158,17 +174,19 @@ const BookingHistory = () => {
                   >
                     Per Day Price
                   </label>
-                  <input type="range" id="perDay" 
-                                        className="rangeInput form-range text-green-100 appearance-none w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
-                                        max={149000}
-                                        value={filter_data.per_day_price}
-                                        onChange={(e) =>
-                                          setFilterData({
-                                            ...filter_data,
-                                            per_day_price: e.target.value,
-                                          })
-                                        }
-                                    />
+                  <input
+                    type="range"
+                    id="perDay"
+                    className="rangeInput form-range text-green-100 appearance-none w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
+                    max={149000}
+                    value={filter_data.per_day_price}
+                    onChange={(e) =>
+                      setFilterData({
+                        ...filter_data,
+                        per_day_price: e.target.value,
+                      })
+                    }
+                  />
                   {/* <input
                     type="range"
                     id="customRange1"
@@ -192,9 +210,11 @@ const BookingHistory = () => {
                   >
                     Per Hour Price
                   </label>
-                  <input type="range" id="perDay" 
-                                        className="rangeInput form-range text-green-100 appearance-none w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
-                                        min={0}
+                  <input
+                    type="range"
+                    id="perDay"
+                    className="rangeInput form-range text-green-100 appearance-none w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
+                    min={0}
                     max={49827}
                     value={filter_data.per_hour_price}
                     onChange={(e) =>
@@ -203,7 +223,7 @@ const BookingHistory = () => {
                         per_hour_price: e.target.value,
                       })
                     }
-                                    />
+                  />
                   {/* <input
                     type="range"
                     id="customRange1"
@@ -227,9 +247,11 @@ const BookingHistory = () => {
                   >
                     Distance from You
                   </label>
-                  <input type="range" id="perDay" 
-                                        className="rangeInput form-range text-green-100 appearance-none w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
-                                        min={0}
+                  <input
+                    type="range"
+                    id="perDay"
+                    className="rangeInput form-range text-green-100 appearance-none w-full h-6 p-0 bg-transparent focus:outline-none focus:ring-0 focus:shadow-none"
+                    min={0}
                     max={149000}
                     value={filter_data.price_per_km}
                     onChange={(e) =>
@@ -238,7 +260,7 @@ const BookingHistory = () => {
                         price_per_km: e.target.value,
                       })
                     }
-                                    />
+                  />
                   {/* <input
                     type="range"
                     id="customRange1"
@@ -300,7 +322,9 @@ const BookingHistory = () => {
                             key={i}
                             className="bg-white border-b text-center hover:bg-gray-100"
                           >
-                            <td className="py-1 text-lg">{format(new Date(item.created_at), "yyyy-MM-dd")}</td>
+                            <td className="py-1 text-lg">
+                              {format(new Date(item.created_at), "yyyy-MM-dd")}
+                            </td>
                             <td className="py-1 text-lg">{item.booking_id}</td>
                             <td className="py-1 text-lg">
                               {item.equipment.title}
@@ -310,7 +334,12 @@ const BookingHistory = () => {
                             </td>
                             <td className="py-1 text-lg">{item.status}</td>
                             <td className="py-1 text-lg">
-                              <button onClick={() => navigate(`/bookingRequest/${item.id}`)} className="text-blue-400 cursor-pointer">
+                              <button
+                                onClick={() =>
+                                  navigate(`/bookingRequest/${item.id}`)
+                                }
+                                className="text-blue-400 cursor-pointer"
+                              >
                                 All Details
                               </button>
                             </td>
