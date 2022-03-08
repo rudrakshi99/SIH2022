@@ -8,7 +8,7 @@ from rest_framework.generics import (
     UpdateAPIView,
     RetrieveAPIView,
 )
-
+from django.db.models import Q
 
 from rest_framework.permissions import (
     AllowAny,
@@ -114,7 +114,9 @@ class BookingRetrieveAPIView(RetrieveAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self, *args, **kwargs):
-        queryset_list = self.queryset.filter(customer=self.request.user)
+        queryset_list = self.queryset.filter(
+            Q(customer=self.request.user) | Q(equipment__owner=self.request.user)
+        )
         return queryset_list
 
 
