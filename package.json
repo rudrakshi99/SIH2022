@@ -24,6 +24,7 @@
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
     "react-speech-recognition": "^3.9.0",
+    "react-sticky-el": "^2.0.9",
     "redux": "^4.1.2",
     "redux-logger": "^3.0.6",
     "web-vitals": "^2.1.4"

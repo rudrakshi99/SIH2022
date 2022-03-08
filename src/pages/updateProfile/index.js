@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Sticky from "react-sticky-el";
 //Components
 // import InputField from "../../components/input/InputField";
 import UpdateForm from "./UpdateForm";
@@ -15,16 +15,16 @@ const Profile = () => {
   const [edit, setEdit] = useState(false);
   return (
     <div>
-      {edit && <UpdateForm onChange={setEdit} />}
+      <Sticky>{edit && <UpdateForm onChange={setEdit} />}</Sticky>
       <div className="p-9">
-        <div className="p-9 shadow-lg rounded-2xl bg-white">
-          <h1 className="text-4xl text-[#4f4f4f] font-bold">Profile</h1>
-          <p className="text-xl text-[#4f4f4f] font-semibold my-4">
+        <div className="p-9 shadow-lg rounded-2xl bg-[#68AC5D]">
+          <h1 className="text-4xl text-white font-bold">Profile</h1>
+          <p className="text-xl text-white font-semibold my-4">
             View and Edit your profile.
           </p>
 
           <div className="h-full">
-            <div className="border-b-2 block md:flex">
+            <div className="border-b-2 block md:bg-[#68ac5d] flex">
               <div className="w-full md:w-2/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
                 <div className="flex justify-between">
                   <span className="text-xl font-semibold block">
@@ -51,7 +51,7 @@ const Profile = () => {
 
               <div className="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
                 <div className="rounded  shadow p-6">
-                  <div className="grid grid-cols-3 auto-cols-auto">
+                  <div className="grid grid-cols-2 auto-cols-auto gap-4">
                     <div className="pb-6">
                       <label
                         htmlFor="name"
@@ -59,10 +59,8 @@ const Profile = () => {
                       >
                         First Name
                       </label>
-                      <div className="flex">
-                        <p className="bg-gray-100 px-9 p-2">
-                          {user.first_name}
-                        </p>
+                      <div className="bg-gray-200 flex">
+                        <p className=" px-9 p-2 text-left">{user.first_name}</p>
                       </div>
                     </div>
                     <div className="pb-6">
@@ -72,8 +70,8 @@ const Profile = () => {
                       >
                         Last Name
                       </label>
-                      <div className="flex">
-                        <p className="bg-gray-100 px-9 p-2">{user.last_name}</p>
+                      <div className="flex bg-gray-200">
+                        <p className=" px-9 p-2">{user.last_name}</p>
                       </div>
                     </div>
                     <div className="pb-6">
@@ -83,8 +81,8 @@ const Profile = () => {
                       >
                         Email
                       </label>
-                      <div className="flex">
-                        <p className="bg-gray-100 px-9 p-2">{user.email}</p>
+                      <div className="bg-gray-200 flex">
+                        <p className=" px-9 p-2">{user.email}</p>
                       </div>
                     </div>
                     <div className="pb-6">
@@ -94,8 +92,8 @@ const Profile = () => {
                       >
                         Address
                       </label>
-                      <div className="flex">
-                        <p className="bg-gray-100 px-9 p-2 text-[#4f4f4f]">
+                      <div className="bg-gray-200 flex">
+                        <p className=" px-9 p-2 text-[#4f4f4f]">
                           {user.address === ""
                             ? "No Address added yet"
                             : user.address}
@@ -109,8 +107,8 @@ const Profile = () => {
                       >
                         City
                       </label>
-                      <div className="flex">
-                        <p className="bg-gray-100 px-9 p-2">
+                      <div className="bg-gray-200 flex">
+                        <p className=" px-9 p-2">
                           {user.city === "" ? "No City added yet" : user.city}
                         </p>
                       </div>
@@ -122,8 +120,8 @@ const Profile = () => {
                       >
                         State
                       </label>
-                      <div className="flex">
-                        <p className="bg-gray-100 px-9 p-2">
+                      <div className="bg-gray-200 flex">
+                        <p className=" px-9 p-2">
                           {user.state === "" ? "No State added yet" : user.city}
                         </p>
                       </div>
@@ -135,8 +133,8 @@ const Profile = () => {
                       >
                         Pincode
                       </label>
-                      <div className="flex">
-                        <p className="bg-gray-100 px-9 p-2">{user.pin_code}</p>
+                      <div className="bg-gray-200 flex">
+                        <p className=" px-9 p-2">{user.pin_code}</p>
                       </div>
                     </div>
                   </div>

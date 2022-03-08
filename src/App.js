@@ -37,6 +37,7 @@ import UpdateProfile from "./pages/updateProfile/index";
 import BookingHistory from "./pages/bookingHistory";
 import Feedback from "./pages/feedback/Feedback";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
+import EquipmentReport from "./pages/EquipmentReport";
 
 function App() {
   const authState = useSelector((state) => state.authReducer);
@@ -94,6 +95,7 @@ function App() {
         <Route path="partner-dispute" element={<PartnerDispute />} />
         <Route path="support" element={<SupportAdmin />} />
         <Route path="policy" element={<CancellationPolicy />} />
+        <Route path="equipment-report/:id" element={<EquipmentReport />} />
         <Route path="feedback" element={<Feedback />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>

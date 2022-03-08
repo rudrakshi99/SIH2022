@@ -3,9 +3,6 @@ import React, { useState } from "react";
 //COmponents
 import InputField from "../input/InputField";
 
-//Redux State
-import { useSelector } from "react-redux";
-
 //Functions
 import { postCancellationData } from "../../api/authAPI";
 
@@ -15,15 +12,12 @@ const CancellationForm = () => {
   const [description, setDescription] = useState("");
   const [message, setMessage] = useState("");
 
-  const tokenState = useSelector((state) => state.tokenReducer);
-
   async function submitCancellation(e) {
     e.preventDefault();
     const data = await postCancellationData({
       booking_id,
       cancel_reason,
       description,
-      token: tokenState.accessToken,
     });
     console.log(data);
     if (data.success) {

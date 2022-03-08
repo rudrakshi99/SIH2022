@@ -441,7 +441,9 @@ const Dashboard = () => {
                         <div className='w-1/4'>
                             <div className='bg-[#68AC5D] py-4 px-1 prFilter'>
                                 <h1 className='text-lg font-bold text-center text-white'>Product Filters</h1>
+                                
                             </div>
+                            
 
                             <div className='border py-6'>
                                 <span className='text-lg mb-4 font-semibold text-[#4F4F4F] border-b-2 border-[#68AC5D] pb-1 ml-6'>Categories:</span>

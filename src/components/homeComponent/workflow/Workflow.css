@@ -1,4 +1,10 @@
-.youtubeImg {
+/* .youtubeImg {
     height: 150px;
     width: 250px;
+} */
+
+.youtubeImg {
+    height: 450px;
+    width: 450px;
+    object-fit: contain;
 }

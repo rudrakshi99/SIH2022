@@ -1,6 +1,7 @@
 import React from 'react'
 import './Workflow.css';
 import Rectangle73 from '../../../img/Rectangle73.png';
+import videoPic from '../../../img/videoPic.png';
 
 const Workflow = () => {
     return (
@@ -20,7 +21,8 @@ const Workflow = () => {
                     </ul>
                 </div>
                 <div>
-                    <img src={Rectangle73} className='youtubeImg' alt="" />
+                    {/* <img src={Rectangle73} className='youtubeImg' alt="" /> */}
+                    <img src={videoPic} className='youtubeImg' alt="" />
                 </div>
             </div>
         </div>

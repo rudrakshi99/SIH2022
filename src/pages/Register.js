@@ -63,15 +63,18 @@ const Register = () => {
       });
       console.log(data);
       // useDispatch(getSaveProfileAction(data.data));
-      setSuccess(data.success);
-      setMessage(data.message);
-      setLoading(false);
-      navigate({
-        pathname: "../verify-otp",
-        search: `?${createSearchParams({
-          phone_number: phone_number,
-        })}`,
-      });
+      if (!data.email.success) {
+      } else {
+        setSuccess(data.success);
+        setMessage(data.message);
+        setLoading(false);
+        navigate({
+          pathname: "../verify-otp",
+          search: `?${createSearchParams({
+            phone_number: phone_number,
+          })}`,
+        });
+      }
     } catch (error) {
       error && setMessage("Server Issue, Try again later");
       console.log(error);
@@ -155,6 +158,9 @@ const Register = () => {
             >
               Register
             </button>
+            {!success && (
+              <p className="text-center text-green-400">{message}</p>
+            )}
             {success && (
               <p className="text-center text-green-400">
                 Registered successfully!
