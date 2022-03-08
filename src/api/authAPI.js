@@ -64,11 +64,11 @@ export const verifyOtp = async ({ phone_number, otp }) => {
   }
 };
 
-export const verifyOtpLogin = async ({ phone_number, OTP }) => {
+export const verifyOtpLogin = async ({ phone_number, otp }) => {
   try {
     const res = await axios.post(`${url}/users/login/verify-otp`, {
-      phone_number,
-      OTP,
+      phone_number: phone_number,
+      otp: otp,
     });
     return Promise.resolve(res.data);
   } catch (err) {
