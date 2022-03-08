@@ -2,3 +2,9 @@
     height: 60px;
     width: 60px;
 }
+
+@media screen and (max-width: 500px) {
+    .inPhone {
+        display: none;
+    }
+}

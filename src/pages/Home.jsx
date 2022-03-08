@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Ads from '../components/homeComponent/ads/Ads'
 import Equipments from '../components/homeComponent/equipments/Equipments'
 import Banner from '../components/homeComponent/banner/Banner'
@@ -10,6 +10,19 @@ import Support from '../components/homeComponent/support/Support'
 // import ContactUs from '../components/homeComponent/contactUs/ContactUs'
 
 const Home = () => {
+    const [latitude, setLatitude] = useState('');
+    const [longitude, setLongitude] = useState('');
+
+    useEffect(() => {
+      navigator.geolocation.getCurrentPosition((position) => {
+          setLatitude(position.coords.latitude);
+          setLongitude(position.coords.longitude);
+      })
+    }, [])
+
+    console.log(latitude, longitude);
+    
+
     return (
         <div style={{ overflow: 'hidden'}}>
             <Banner />
@@ -21,6 +34,7 @@ const Home = () => {
             <Equipments />
             {/* <Faqs /> */}
             {/* <ContactUs /> */}
+            
         </div>
     )
 }

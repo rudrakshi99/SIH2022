@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './BookingRequest.css';
 import pending from '../../img/Ellipse64.png';
 import accepted from '../../img/Accepted.png';
 import rejected from '../../img/Rejected.png';
 import completed from '../../img/completed.png';
 import progress from '../../img/Progress.png';
-import { BookingListRequest } from '../../api/bookingAPI';
+import { BookingListRequest, BookingUpdate } from '../../api/bookingAPI';
+import { useNavigate, useParams } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import axios from 'axios';
+
 
 const BookingRequest = () => {
 //     useEffect(() => {
@@ -15,6 +19,40 @@ const BookingRequest = () => {
 //       }
 //       getData();
 //     }, []);
+    const [output, setOutput] = useState(null);
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        if(!Cookies.get('access-token')) {
+            navigate('/');
+        }
+    }, []);
+    const params = useParams();
+    console.log(params);
+
+    // useEffect(() => {
+    //     const getDt = async () => {
+    //         const headers = {
+    //             "Content-Type": "application/json",
+    //             Authorization: `Bearer ${Cookies.get('access-token')}`
+    //         };
+    //         const {data} =  await axios.get(`https://krishi-sadhan-app.herokuapp.com/api/booking/detail/${params.id}` , { headers });
+    //         console.log(data);
+    //         setOutput(data);
+    //     }
+    //     getDt();
+    // }, [])
+    
+    console.log(output, "output");
+
+    const handleAccept = async (id, status) => {
+        // await BookingUpdate('Accepted', id);
+        const headers = {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get('access-token')}`
+        };
+        await axios.patch(`https://krishi-sadhan-app.herokuapp.com/api/booking/update/${id}/` , { status }, { headers });
+    }
     
     return (
         <div className='my-6'>
@@ -122,10 +160,10 @@ const BookingRequest = () => {
                         <div className=''>
                             <h1 className='text-xl font-semibold text-gray-600 my-6'>Accept / Reject Booking</h1>
                             <div className='flex justify-between'>
-                                <button className="-ml-10 mr-10 bg-[#F5F5FA] hover:bg-gray-200 text-green-400 font-bold py-1 px-8 rounded">
+                                <button onClick={(e) => handleAccept(params.id, 'Accepted')} className="-ml-10 mr-10 bg-[#F5F5FA] hover:bg-gray-200 text-green-400 font-bold py-1 px-8 rounded">
                                     Accept
                                 </button>
-                                <button className="ml-10 bg-[#F5F5FA] hover:bg-gray-200 text-red-400 font-bold py-1 px-8 rounded">
+                                <button onClick={(e) => handleAccept(params.id, 'Rejected')} className="ml-10 bg-[#F5F5FA] hover:bg-gray-200 text-red-400 font-bold py-1 px-8 rounded">
                                     Reject
                                 </button>
                             </div>
@@ -226,7 +264,7 @@ const BookingRequest = () => {
                                             862.56
                                         </td>
                                         <td className="text-[#68AC5D] font-medium text-center text-md px-6 py-4 whitespace-nowrap">
-                                            <a href="/details">View Details </a>
+                                            <button onClick={navigate(`/product/${params.id}`)}>View Details </button>
                                         </td>
                                     </tr>
                                 </tbody>

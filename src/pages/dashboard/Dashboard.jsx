@@ -327,7 +327,7 @@ const Dashboard = () => {
         const { data } = await getEquips();
         setEquipments(data);
         setFilteredEquipments(data);
-        // console.log(data);
+        console.log(data);
       }
       getEquipments();
     }, [])

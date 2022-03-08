@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sticky from "react-sticky-el";
+
 //Components
 // import InputField from "../../components/input/InputField";
 import UpdateForm from "./UpdateForm";
@@ -7,8 +8,16 @@ import UpdateForm from "./UpdateForm";
 import userIcon from "../../img/user_icon.svg";
 //Functions
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Profile = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(!Cookies.get('access-token')) {
+        navigate('/');
+    }
+  }, []);
   const authState = useSelector((state) => state.authReducer);
   const user = authState.user.data;
   console.log(user);

@@ -1,7 +1,16 @@
-import React from "react";
+import Cookies from "js-cookie";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import CancellationForm from "../../components/cancellationForm";
 
 const CancellationPolicy = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(!Cookies.get('access-token')) {
+        navigate('/');
+    }
+  }, []);
+  
   return (
     <div className="max-w-3xl flex flex-col mx-auto justify-center">
       <div className="my-10">

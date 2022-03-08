@@ -69,8 +69,8 @@ const Banner = () => {
             <h1 className="text-4xl font-bold text-gray-800"><span className="text-[#57914e]">Farmer’s Eqipments</span> at reasonable <br /> and affordable prices.</h1>
             <p className="text-lg font-normal mt-2 mb-4">Start now with just one click.</p>
             <div className="flex justify-center items-center mx-auto">
-              <button onClick={() => navigate('/dashboard')} className="shadow-md mr-3 bg-darkgreen hover:bg-[#64a55a] text-white font-normal w-[200px] py-2 px-2 rounded">
-                Book Now  <i className="pl-4 w-12 fa-solid fa-arrow-right-long"></i>
+              <button onClick={() => navigate('/dashboard')} className="shadow-md mr-3 tooltip bg-darkgreen hover:bg-[#64a55a] text-white font-normal w-[200px] py-2 px-2 rounded">
+                Book Now  <i className="pl-4 w-12 fa-solid fa-arrow-right-long"></i> <span className="tooltiptext text-md text-gray-600 font-medium">Book your slot for the equipment</span>
               </button>
               <i onClick={SpeechRecognition.startListening} className="text-darkgreen tooltip cursor-pointer text-2xl mr-5 fa-solid fa-microphone"><span className="tooltiptext">Search by Voice</span></i>
             </div>

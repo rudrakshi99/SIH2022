@@ -48,7 +48,7 @@ const Header = () => {
   const [show, setShow] = useState(false);
 
   return (
-    <div className="h-16">
+    <div className="h-16 inPhone">
       <div className="flex content-center">
           <div className="flex items-center cursor-pointer ml-auto lg:ml-32">
             <img
@@ -105,6 +105,7 @@ const Header = () => {
             </button>
           </div>
         ) : (
+          
           <div
             onMouseOver={(prev) => setShow(true)}
             onMouseLeave={(prev) => setShow(false)}
