@@ -47,3 +47,16 @@ export const getBookingDetail = async (id) => {
         console.log('Error while calling getBookingDetail API', error);
     }
 }
+
+
+export const BookingListRequest = async () => {
+    try {
+        const headers = {
+            "Content-Type": "application/json",
+            Authorization: `"Bearer ${Cookies.get('access-token')}`
+        };
+        return await instance.get('/api/booking/request/' , { headers });
+    } catch(error) {
+        console.log('Error while calling getBookingDetail API', error);
+    }
+}

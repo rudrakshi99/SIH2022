@@ -42,9 +42,9 @@ const CancellationForm = () => {
             Please read all the terms and conditions before continuing.
           </p>
         </div>
-        <div className="w-1/3 -translate-y-10 mx-auto">
+        <div className="w-3/4 -translate-y-10 mx-auto">
           <form
-            className="flex flex-col p-9 rounded-xl bg-white z-40"
+            className="flex flex-col p-9 max-w-7xl rounded-xl bg-white z-40"
             onSubmit={submitCancellation}
           >
             <h1 className="text-center text-xl mb-5">

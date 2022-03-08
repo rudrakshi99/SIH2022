@@ -10137,6 +10137,11 @@
     "lodash.throttle" "^4.1.1"
     "prop-types" "^15.7.2"
 
+"react-speech-recognition@^3.9.0":
+  "integrity" "sha512-K42atEDi6P6cIuDnqDG0guzKeLaPlxKjZebhoLbgaJAflzhikrUSQnncCDBE3KXSPk7ASfBoykz+uqp8sB8VFQ=="
+  "resolved" "https://registry.npmjs.org/react-speech-recognition/-/react-speech-recognition-3.9.0.tgz"
+  "version" "3.9.0"
+
 "react-spring@^9.2.2":
   "integrity" "sha512-GGKAqQQ790JLoA2SAUgdJErFRG8oFR6pzX8jnJoqORVWX5Wo9bJUWs4563f2oN19+yQkVhc77neAkqQ7GCN8Lw=="
   "resolved" "https://registry.npmjs.org/react-spring/-/react-spring-9.4.3.tgz"
@@ -10173,7 +10178,7 @@
     "resize-observer-polyfill" "^1.5.1"
     "scheduler" "0.13.3"
 
-"react@*", "react@^0.14 || ^15.0.0-rc || >=15.0", "react@^0.14.9 || ^15.3.0 || ^16.0.0", "react@^15.5.4 || ^16.0.0 || ^17.0.0", "react@^16.0.0", "react@^16.8.0  || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || ^17.0.1", "react@^16.8.0 || ^17.x", "react@^16.8.3 || ^17", "react@^17.0.2", "react@>= 16", "react@>= 16.3.0", "react@>= 16.8.0 || 17.x.x || 18.x.x", "react@>=16.0.0", "react@>=16.8", "react@>=16.9.0", "react@0.14 || 15 || 16 || 17", "react@17.0.2":
+"react@*", "react@^0.14 || ^15.0.0-rc || >=15.0", "react@^0.14.9 || ^15.3.0 || ^16.0.0", "react@^15.5.4 || ^16.0.0 || ^17.0.0", "react@^16.0.0", "react@^16.8.0  || ^17.0.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || ^17.0.1", "react@^16.8.0 || ^17.x", "react@^16.8.3 || ^17", "react@^17.0.2", "react@>= 16", "react@>= 16.3.0", "react@>= 16.8.0 || 17.x.x || 18.x.x", "react@>=16.0.0", "react@>=16.8", "react@>=16.8.0", "react@>=16.9.0", "react@0.14 || 15 || 16 || 17", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"

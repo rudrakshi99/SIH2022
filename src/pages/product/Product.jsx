@@ -9,12 +9,15 @@ import { getEquip } from '../../api/equipments';
 import { createBooking } from '../../api/bookingAPI';
 import { useNavigate, useParams } from 'react-router-dom';
 import { format } from 'date-fns';
+import instance from '../../api/config';
+import Cookies from "js-cookie";
 
 const Product = () => {
     const [visible, setVisible] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [equipment, setEquipment] = useState(null);
+    const [invalidDate, setInvalidDate] = useState([]);
     const params = useParams();
     const navigate = useNavigate();
 
@@ -60,11 +63,35 @@ const Product = () => {
         
     }
     var getDaysArray = function(start, end) {
-        for(var arr=[],dt=start; dt<=end; dt.setDate(dt.getDate()+1)){
+        for(var arr=[],dt=new Date(start); dt<=new Date(end); dt.setDate(dt.getDate()+1)){
             arr.push(new Date(dt));
         }
         return arr;
     };
+    var arr = [];
+
+    const fetchInvalid = () => {
+      const getBookingVadidity = async () => {
+        const headers = {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get('access-token')}`
+        };
+        const { data } = await instance.get(`/api/booking/?search=${equipment?.title}&ordering=start_date`, { headers });
+        console.log(data, 'invalid dates');
+        setInvalidDate(data);
+      }
+      getBookingVadidity();
+      
+    };
+
+    invalidDate?.map(booking => (
+        getDaysArray(booking.start_date, booking.end_date)?.map(item => (
+            arr.push(item)
+        ))
+
+      ))
+
+    
     
 
     return (
@@ -172,12 +199,13 @@ const Product = () => {
                 <div className='flex-1 w-32'>
                     <div className='border p-8 m-10'>
                         <h1 className='text-right text-lg font-bold border-b-2 pb-3'>Rs {equipment?.daily_rental} per day</h1>
-                        <button onClick={() => setVisible(!visible)} className='px-3 py-1 border my-4 w-full text-md font-semibold text-gray-800 cursor-pointer'>Check Availability <i className="pl-2 fa-solid fa-angles-down"></i></button>
+                        <button onClick={() => {setVisible(!visible);fetchInvalid()}} className='px-3 py-1 border my-4 w-full text-md font-semibold text-gray-800 cursor-pointer'>Check Availability <i className="pl-2 fa-solid fa-angles-down"></i></button>
                         <div style={{ display: !visible &&  'none' }}>
                             <DateRangePicker style={{ height: '300px', width: '280px' }}
                                 ranges={[selectionRange]}
                                 minDate={new Date()}
-                                // disabledDates={getDaysArray(new Date(),new Date())}
+                                // disabledDates={getDaysArray(invalidDate[1]?.start_date,invalidDate[1]?.end_date)}
+                                disabledDates={arr}
                                 rangeColors={["#68AC5D"]}
                                 onChange={handleSelect}
                                 // maxDate={new Date()}

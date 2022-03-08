@@ -1,7 +1,7 @@
 import "./App.css";
 import Home from "./pages/Home";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "./api/profileAPI";
 import {
@@ -10,7 +10,7 @@ import {
   getSaveTokenAction,
 } from "./redux/actions";
 // import ProtectedRoute from "./components/ProtectedRoute";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import SupportAdmin from "./components/ChatSupport/SupportAdmin/index";
 import SupportEngine from "./components/ChatSupport/SupportEngine/index";
 import Cookies from "js-cookie";
@@ -36,6 +36,7 @@ import CancellationPolicy from "./pages/cancellationPage/CancellationPolicy";
 import UpdateProfile from "./pages/updateProfile/index";
 import BookingHistory from "./pages/bookingHistory";
 import Feedback from "./pages/feedback/Feedback";
+import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 
 function App() {
   const authState = useSelector((state) => state.authReducer);
@@ -69,6 +70,10 @@ function App() {
 
   return (
     <>
+{/*       
+      <p id="transcript">Transcript: {transcript}</p>
+
+      <button onClick={SpeechRecognition.startListening}>Start</button> */}
       <PreHeader />
       <Header />
       <Routes>
@@ -92,6 +97,7 @@ function App() {
         <Route path="feedback" element={<Feedback />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
+        
       <Footer />
       <SupportEngine />
     </>

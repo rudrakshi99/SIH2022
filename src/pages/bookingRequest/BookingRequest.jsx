@@ -1,7 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './BookingRequest.css';
+import pending from '../../img/Ellipse64.png';
+import accepted from '../../img/Accepted.png';
+import rejected from '../../img/Rejected.png';
+import completed from '../../img/completed.png';
+import progress from '../../img/Progress.png';
+import { BookingListRequest } from '../../api/bookingAPI';
 
 const BookingRequest = () => {
+//     useEffect(() => {
+//       const getData = async () => {
+//         const { data } = await BookingListRequest();
+//         console.log(data && data);
+//       }
+//       getData();
+//     }, []);
+    
     return (
         <div className='my-6'>
             <div className='max-w-4xl mx-auto'>
@@ -121,13 +135,48 @@ const BookingRequest = () => {
 
                     {/* Stepper */}
 
-                    
-                    {/* <ul class="steps steps-vertical lg:steps-horizontal">
-                        <li class="step step-primary">Register</li>
-                        <li class="step step-primary">Choose plan</li>
-                        <li class="step">Purchase</li>
-                        <li class="step">Receive Product</li>
-                    </ul> */}
+
+                    <div className="p-5 mb-10">
+                        <div className="mx-14 p-4">
+                        <div className="flex items-center">
+                        <div className="flex items-center relative">
+                            <div className="rounded-full transition duration-500 ease-in-out h-12 w-12">
+                                <img src={pending} className="mb-10" width="100%" height="100%"></img>
+                            </div>
+                            <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-teal-600">Personal</div>
+                        </div>
+                        <div className="flex-auto border-t-2 transition duration-500 ease-in-out linebg"></div>
+                      
+                                <div className="flex items-center relative">
+                                    <div className="rounded-full transition duration-500 ease-in-out h-12 w-12">
+                                    <img src={accepted} className="mb-10" width="100%" height="100%"></img>
+                                    </div>
+                                    <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-teal-600">Personal</div>
+                                </div>
+                                <div className="flex-auto border-t-2 transition duration-500 ease-in-out linebg1"></div>
+                                <div className="flex items-center text-white relative">
+                                    <div className="rounded-full transition duration-500 ease-in-out h-12 w-12">
+                                    <img src={rejected} className="mb-10" width="100%" height="100%"></img>
+                                    </div>
+                                    <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-teal-600">Account</div>
+                                </div>
+                                <div className="flex-auto border-t-2 transition duration-500 ease-in-out linebg2"></div>
+                                  <div className="flex items-center text-gray-500 relative">
+                                    <div className="rounded-full transition duration-500 ease-in-out h-12 w-12 ">
+                                    <img src={progress} className="mb-10" width="100%" height="100%"></img>
+                                    </div>
+                                    <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-gray-500">Message</div>
+                                </div>
+                                <div className="flex-auto border-t-2 transition duration-500 ease-in-out linebg3"></div>
+                                <div className="flex items-center text-gray-500 relative">
+                                    <div className="rounded-full transition duration-500 ease-in-out h-12 w-12">
+                                    <img src={completed} className="mb-10" width="100%" height="100%"></img>
+                                    </div>
+                                    <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-gray-500">Confirm</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                     {/* product table */}

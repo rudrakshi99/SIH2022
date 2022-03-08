@@ -77,3 +77,37 @@
 .rdrDefinedRangesWrapper, .rdrCalendarWrapper {
     z-index: 1;
 }
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    /* border-bottom: 1px dotted black; */
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 160px;
+    height: 30px;
+    font-size: 10px;
+    background-color: rgb(221, 223, 221);
+    color: #000;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    text-align: left;
+    padding-left: 14px;
+    padding-bottom: 16px;
+    padding-top: 1px;
+    word-spacing: 4px;
+    letter-spacing: 1px;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
