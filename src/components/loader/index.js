@@ -1,12 +1,20 @@
 import React from "react";
+// import Lottie from "react-lottie";
+import * as animationData from "../../animations/tractor.json";
+
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: animationData.default,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 
 const Loader = () => {
   return (
-    <div className="absolute top-1/2 left-1/2 z-40">
-      <div
-        style={{ borderTopColor: "transparent" }}
-        className="w-16 h-16 border-4 border-blue-400 border-solid rounded-full animate-spin"
-      ></div>
+    <div style={{ marginTop: "10rem" }}>
+      {/* <Lottie options={defaultOptions} height={150} width={150} /> */}
     </div>
   );
 };
