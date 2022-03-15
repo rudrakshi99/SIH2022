@@ -98,7 +98,7 @@ const AddProduct = () => {
             <div className="w-1/2 md:w-1/2 px-3 border p-2">
               <label
                 for="exampleInputEmail1"
-                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2 text-gray-700"
+                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2"
               >
                 Title*
               </label>
@@ -117,7 +117,7 @@ const AddProduct = () => {
             <div className="w-1/2 md:w-1/2 px-3 border flex flex-col p-2">
               <label
                 for="exampleInputEmail1"
-                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2 text-gray-700"
+                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2"
               >
                 Manufacturer*
               </label>
@@ -140,7 +140,7 @@ const AddProduct = () => {
             <div className="w-1/2 md:w-1/2 px-3 border p-2">
               <label
                 for="exampleInputEmail1"
-                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2 text-gray-700"
+                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2"
               >
                 Description*
               </label>
@@ -159,7 +159,7 @@ const AddProduct = () => {
             <div className="w-1/2 md:w-1/2 px-3 border p-2">
               <label
                 for="exampleInputEmail1"
-                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2 text-gray-700"
+                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2"
               >
                 Daily Rental*
               </label>
@@ -177,7 +177,7 @@ const AddProduct = () => {
             <div className="w-1/2 md:w-1/2 px-3 border p-2">
               <label
                 for="exampleInputEmail1"
-                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2 text-gray-700"
+                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2"
               >
                 Hourly Rental*
               </label>
@@ -196,7 +196,7 @@ const AddProduct = () => {
             <div className="w-1/2 md:w-1/2 px-3 border p-2 flex flex-col">
               <label
                 for="exampleInputEmail1"
-                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2 text-gray-700"
+                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2"
               >
                 Equipment Type*
               </label>
@@ -220,7 +220,7 @@ const AddProduct = () => {
             <div className="w-1/2 md:w-1/2 px-3 border p-2">
               <label
                 for="exampleInputEmail1"
-                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2 text-gray-700"
+                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2"
               >
                 Manufacturing Year*
               </label>
@@ -238,7 +238,7 @@ const AddProduct = () => {
             <div className="w-1/2 md:w-1/2 px-3 border p-2">
               <label
                 for="exampleInputEmail1"
-                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2 text-gray-700"
+                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2"
               >
                 Model*
               </label>
@@ -257,7 +257,7 @@ const AddProduct = () => {
             <div className="w-1/2 md:w-1/2 px-3 border p-2">
               <label
                 for="exampleInputEmail1"
-                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2 text-gray-700"
+                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2"
               >
                 Condition*
               </label>
@@ -276,7 +276,7 @@ const AddProduct = () => {
             <div className="w-1/2 md:w-1/2 px-3 border p-2">
               <label
                 for="exampleInputEmail1"
-                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2 text-gray-700"
+                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2"
               >
                 Equipment Location*
               </label>
@@ -295,7 +295,7 @@ const AddProduct = () => {
             <div className="w-1/2 md:w-1/2 px-3 border p-2">
               <label
                 for="exampleInputEmail1"
-                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2 text-gray-700"
+                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2"
               >
                 HorsePower*
               </label>
@@ -314,7 +314,7 @@ const AddProduct = () => {
             <div className="w-1/2 md:w-1/2 px-3 border p-2">
               <label
                 for="exampleInputEmail1"
-                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2 text-gray-700"
+                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2"
               >
                 Height*
               </label>
@@ -332,7 +332,7 @@ const AddProduct = () => {
             <div className="w-1/2 md:w-1/2 px-3 border p-2">
               <label
                 for="exampleInputEmail1"
-                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2 text-gray-700"
+                className="form-label w-1/2 text-sm font-bold text-gray-500 inline-block pl-2 mb-2"
               >
                 Width*
               </label>
@@ -351,7 +351,7 @@ const AddProduct = () => {
             <div className="w-full md:w-1/2 px-3 mb-6 border p-2 md:mb-0">
               <label
                 for="exampleInputEmail1"
-                className="form-label text-lg bg-gray-200 hover:bg-gray-300 font-bold text-gray-500 inline-block pl-2 mb-2 text-gray-700"
+                className="form-label text-lg bg-gray-200 hover:bg-gray-300 font-bold text-gray-500 inline-block pl-2 mb-2"
                 onClick={() => setVisible(true)}
               >
                 Select Date Range
