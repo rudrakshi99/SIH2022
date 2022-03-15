@@ -7,6 +7,7 @@ import { DateRangePicker } from "react-date-range";
 import { createEquipment, getBrands, getEquips } from "../../api/equipments";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const AddProduct = () => {
   const [visible, setVisible] = useState(false);
@@ -33,6 +34,13 @@ const AddProduct = () => {
     width: 0,
     height: 0,
   });
+
+    useEffect(() => {
+        if(!Cookies.get('access-token')) {
+            navigate('/');
+        }
+    }, []);
+  
 
   useEffect(() => {
     const getEquipment = async () => {
