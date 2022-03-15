@@ -47,12 +47,12 @@ const Login = () => {
     setLoading(true);
     try {
       const data2 = await postLoginDataEmail({ email, password });
-      if (!data2.success) {
+      if (data2.success) {
         setLoading(false);
         setSuccess(true);
         setMessage(data2.message);
+        saveData(data2);
       }
-      saveData(data2);
       return;
     } catch (err) {
       setSuccess(false);

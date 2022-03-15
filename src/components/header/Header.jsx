@@ -3,43 +3,13 @@ import "./Header.css";
 import { useNavigate } from "react-router-dom";
 import logo from "../../img/logo.png";
 import { useSelector, useDispatch } from "react-redux";
-import {getLogoutAction} from '../../redux/actions'
+import { getLogoutAction } from "../../redux/actions";
 import Cookies from "js-cookie";
 
 //images
 import userIcon from "../../img/user_icon.svg";
 
 const Header = () => {
-    // const navigate = useNavigate();
-    // return (
-    //     <div className='h-16 z-50'>
-    //         <div className='flex justify-center items-around'>
-    //             <div className='flex-1'>
-    //             <Link to='/'>
-    //                 <div className='flex items-center justify-center lg:ml-20'>
-    //                     <img src={logo} className='logoWeb' alt="" />
-    //                     <h3 className='text-md font-bold opacity-[.70]'>Krishi <br /> Sadhan</h3>
-    //                 </div>
-    //             </Link>
-    //             </div>
-    //             <div className='flex-2 w-5/12'>
-    //                 <ul className='flex mt-4 justify-around items-center'>
-    //                     <Link to='/'><li className='text-lg cursor-pointer font-semibold text-darkgreen lg:ml-7 mr-7'>Home</li></Link>
-    //                     <Link to='/dashboard'><li className='text-lg cursor-pointer font-semibold text-darkgreen mr-7'>Dashboard</li></Link>
-    //                     <li className='text-lg cursor-pointer font-semibold text-darkgreen mr-7'>Our Services</li>
-    //                     <Link to='/help'><li className='text-lg cursor-pointer font-semibold text-darkgreen mr-7'>Help</li></Link>
-    //                     <Link to='/contact'><li className='text-lg cursor-pointer font-semibold text-darkgreen mr-7'>Contact Us</li></Link>
-    //                 </ul>
-    //             </div>
-    //             <div className='flex-1 flex justify-evenly items-center'>
-    //                 <button onClick={() => navigate('/login')} className="bg-darkgreen hover:bg-green-700 text-white font-bold py-1 px-8 rounded">
-    //                     Login
-    //                 </button>
-    //                 <button onClick={() => navigate('/register')} className="bg-darkgreen hover:bg-green-700 text-white font-bold py-1 px-8 rounded">
-    //                     Sign Up
-    //                 </button>
-    //             </div>
-    //         </div>
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const tokenState = useSelector((state) => state.tokenReducer);
@@ -50,17 +20,17 @@ const Header = () => {
   return (
     <div className="h-16 inPhone">
       <div className="flex content-center">
-          <div className="flex items-center cursor-pointer ml-auto lg:ml-32">
-            <img
-              onClick={() => navigate("/")}
-              src={logo}
-              className="logoWeb"
-              alt=""
-            />
-            <h3 className="text-md font-bold opacity-[.70]">
-              Krishi <br /> Sadhan
-            </h3>
-          </div>
+        <div className="flex items-center cursor-pointer ml-auto lg:ml-32">
+          <img
+            onClick={() => navigate("/")}
+            src={logo}
+            className="logoWeb"
+            alt=""
+          />
+          <h3 className="text-md font-bold opacity-[.70]">
+            Krishi <br /> Sadhan
+          </h3>
+        </div>
         <div className="flex-2 w-5/12 mx-auto">
           <ul className="flex mt-4 items-center">
             <li
@@ -69,11 +39,23 @@ const Header = () => {
             >
               Home
             </li>
-            <li className="text-lg cursor-pointer font-semibold text-darkgreen mx-6" onClick={() => navigate('/dashboard')}>
+            <li
+              className="text-lg cursor-pointer font-semibold text-darkgreen mx-6"
+              onClick={() => navigate("/dashboard")}
+            >
               Dashboard
             </li>
-            <li className="text-lg cursor-pointer font-semibold text-darkgreen mx-6" onClick={() => navigate('/booking-history')}>
+            <li
+              className="text-lg cursor-pointer font-semibold text-darkgreen mx-6"
+              onClick={() => navigate("/booking-history")}
+            >
               Bookings
+            </li>
+            <li
+              className="text-lg cursor-pointer font-semibold text-darkgreen mx-6"
+              onClick={() => navigate("/addProduct")}
+            >
+              Add Product
             </li>
             <li
               onClick={() => navigate("/help")}
@@ -105,7 +87,6 @@ const Header = () => {
             </button>
           </div>
         ) : (
-          
           <div
             onMouseOver={(prev) => setShow(true)}
             onMouseLeave={(prev) => setShow(false)}
@@ -138,7 +119,7 @@ const Header = () => {
                   onClick={() => {
                     Cookies.remove("access-token");
                     Cookies.remove("refresh-token");
-                    Cookies.remove('uuid');
+                    Cookies.remove("uuid");
                     dispatch(getLogoutAction());
                     navigate("/login");
                   }}

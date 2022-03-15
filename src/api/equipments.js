@@ -10,6 +10,15 @@ export const getEquips = async () => {
   }
 };
 
+export const getBrands = async () => {
+  try {
+    return await axios.get("/api/brand/");
+  } catch (error) {
+    console.log("Error while calling getEquips API", error);
+  }
+};
+// /api/brand/
+
 export const getEquip = async (id) => {
   try {
     return await axios.get(`/api/equipment/${id}`);
@@ -42,6 +51,56 @@ export const createEquipmentReport = async ({
         equipment,
         report_reason,
         description,
+      },
+      { headers }
+    );
+  } catch (error) {
+    console.log("Error while calling createBooking API", error);
+  }
+};
+
+export const createEquipment = async ({
+  owner,
+  manufacturer,
+  title,
+  description,
+  equipment_type,
+  available_start_time,
+  available_end_time,
+  equipment_location,
+  daily_rental,
+  hourly_rental,
+  manufacturing_year,
+  model,
+  condition,
+  horsepower,
+  width,
+  height,
+}) => {
+  try {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${Cookies.get("access-token")}`,
+    };
+    return await instance.post(
+      "/api/equipment/create/",
+      {
+        owner,
+        manufacturer,
+        title,
+        description,
+        equipment_type,
+        available_start_time,
+        available_end_time,
+        equipment_location,
+        daily_rental,
+        hourly_rental,
+        manufacturing_year,
+        model,
+        condition,
+        horsepower,
+        width,
+        height,
       },
       { headers }
     );
