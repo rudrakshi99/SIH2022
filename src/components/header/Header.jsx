@@ -35,37 +35,37 @@ const Header = () => {
           <ul className="flex mt-4 items-center">
             <li
               onClick={() => navigate("/")}
-              className="text-lg cursor-pointer font-semibold text-darkgreen lg:ml-7 mx-6"
+              className="text-lg cursor-pointer font-semibold text-darkgreen lg:ml-7 ml-6 mr-1.5"
             >
               Home
             </li>
             <li
-              className="text-lg cursor-pointer font-semibold text-darkgreen mx-6"
+              className="text-lg cursor-pointer font-semibold text-darkgreen ml-6 mr-1.5"
               onClick={() => navigate("/dashboard")}
             >
               Dashboard
             </li>
             <li
-              className="text-lg cursor-pointer font-semibold text-darkgreen mx-6"
+              className="text-lg cursor-pointer font-semibold text-darkgreen ml-6 mr-1.5"
               onClick={() => navigate("/booking-history")}
             >
               Bookings
             </li>
             <li
-              className="text-lg cursor-pointer font-semibold text-darkgreen mx-6"
+              className="text-lg cursor-pointer font-semibold text-darkgreen ml-6 mr-1.5"
               onClick={() => navigate("/addProduct")}
             >
               Add Product
             </li>
             <li
               onClick={() => navigate("/help")}
-              className="text-lg cursor-pointer font-semibold text-darkgreen mx-6"
+              className="text-lg cursor-pointer font-semibold text-darkgreen ml-6 mr-1.5"
             >
               Help
             </li>
             <li
               onClick={() => navigate("/contact")}
-              className="text-lg cursor-pointer font-semibold text-darkgreen mx-6"
+              className="text-lg cursor-pointer font-semibold text-darkgreen ml-6 mr-1.5"
             >
               Contact Us
             </li>

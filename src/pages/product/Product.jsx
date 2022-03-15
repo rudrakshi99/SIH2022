@@ -144,7 +144,7 @@ const Product = () => {
                             <h1 className='text-xl text-gray-800 font-bold'>{equipment?.title}</h1>
                         </div>
                         <div>
-                            <i className="text-red-500 fa-solid fa-thumbs-up"></i>
+                            <i className="text-red-500 fa-solid fa-thumbs-up ml-1.5 text-xl"></i>
                             <p className='text-red-500 text-xs'>Add to Wishlist</p>
                         </div>
                     </div>
@@ -189,7 +189,7 @@ const Product = () => {
                     </div>
 
                     <div className='py-6 flex justify-center border-b-2'>
-                        <a href="/provider" className='font-semibold text-sm text-green-700'>Know Your Provider <i className="pl-1 fa-solid fa-angle-right"></i></a>
+                        <a href="/update-profile" className='font-semibold text-sm text-green-700'>Know Your Provider <i className="pl-1 fa-solid fa-angle-right"></i></a>
                     </div>
 
                     <div className='border-b-2 mb-10 py-6'>
