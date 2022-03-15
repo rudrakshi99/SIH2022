@@ -14,16 +14,15 @@ class LocationBasedRecommendationView(APIView):
     def get(self, request, *args, **kwargs):
         content = []
         nomi = pgeocode.Nominatim("in")
-        for user in User.objects.filter(is_active=True, is_superuser=False):
-            location = nomi.query_postal_code(user.pin_code)
-            for equipment in Equipment.objects.filter(owner=user):
-                d = {
-                    "user_uuid": user.uuid,
-                    "pincode": user.pin_code,
-                    "latitude": location.latitude,
-                    "longitude": location.longitude,
-                    "equipment_id": equipment.eq_id,
-                }
-                content.append(d)
+        for equipment in Equipment.objects.all().select_related("owner"):
+            location = nomi.query_postal_code(equipment.owner.pin_code)
+            d = {
+                "user_uuid": equipment.owner.uuid,
+                "pincode": equipment.owner.pin_code,
+                "latitude": location.latitude,
+                "longitude": location.longitude,
+                "equipment_id": equipment.eq_id,
+            }
+            content.append(d)
 
         return Response(content)
