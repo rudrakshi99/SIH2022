@@ -91,6 +91,11 @@ const Product = () => {
 
       ))
 
+    const redirect = () => {
+        window.location.href = 'http://localhost:3001/login';
+        return null;
+    }
+
     
     
 
@@ -211,15 +216,33 @@ const Product = () => {
                                 // maxDate={new Date()}
                             />
                         </div>
-                        <button onClick={(e) => handleBooking(e)} className="bg-darkgreen hover:bg-[#8cdf80] text-white w-full font-semibold py-1 px-8 rounded">
-                            Book Now
-                        </button>
+                        {
+                            Cookies.get('access-token') ? (
+                                <button onClick={(e) => handleBooking(e)} className="bg-darkgreen hover:bg-[#8cdf80] text-white w-full font-semibold py-1 px-8 rounded">
+                                    Book Now
+                                </button>
+                            ) : (
+                                <button onClick={(e) => handleBooking(e)} className="bg-darkgreen opacity-50 cursor-not-allowed hover:bg-[#8cdf80] text-white w-full font-semibold py-1 px-8 rounded">
+                                    Book Now
+                                </button>
+                            )
+                        }
+                        
 
                         <p className='text-md font-bold text-gray-500 text-center pt-4 pb-8 border-b-2'>You won’t be charged yet</p>
 
-                        <button className="bg-blue-500 hover:bg-blue-400 mt-8 text-white w-full font-semibold py-1 px-8 rounded">
-                            Chat now <i className="pl-4 fa-solid fa-comment"></i>
-                        </button>
+                        {
+                            Cookies.get('access-token') ? (
+                                <button onClick={()=>redirect()} className="bg-blue-500 hover:bg-blue-400 mt-8 text-white w-full font-semibold py-1 px-8 rounded">
+                                    Chat now <i className="pl-4 fa-solid fa-comment"></i>
+                                </button>
+                            ) : (
+                                <button className="bg-blue-500 hover:bg-blue-400 cursor-not-allowed opacity-50 mt-8 text-white w-full font-semibold py-1 px-8 rounded">
+                                    Chat now <i className="pl-4 fa-solid fa-comment"></i>
+                                </button>
+                            )
+                        }                            
+                        
                     </div>
                     <p className='text-center'><i className="pr-2 text-red-500 fa-solid fa-flag"></i> <a className='text-red-500 font-semibold text-md underline-offset-2' onClick={() => navigate(`/equipment-report/${equipment?.id}`)}>Report this equipment</a></p>
                 </div>

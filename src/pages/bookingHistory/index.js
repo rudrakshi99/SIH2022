@@ -12,6 +12,11 @@ const BookingHistory = () => {
   const [Data, setData] = useState([]);
   const [items, setItems] = useState(Data);
   const [all, setAll] = useState(true);
+  useEffect(() => {
+    if(!Cookies.get('access-token')) {
+        navigate('/');
+    }
+  }, []);
   const [filter_data, setFilterData] = useState({
     per_day_price: 2000,
     per_hour_price: 2000,

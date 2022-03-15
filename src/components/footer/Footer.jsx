@@ -10,7 +10,7 @@ import footerBg from '../../img//footerBg.png'
 const Footer = () => {
     const navigate = useNavigate();
     return (
-        <div className='bg-darkgreen py-20'>
+        <div className='bg-darkgreen inPhone py-20'>
             <div className='flex justify-center items-center'>
                 <div className='flex-1 border-r-2 border-black-600'>
                     <div className='flex justify-center items-center mx-8 cursor-pointer' onClick={() => navigate('/')}>

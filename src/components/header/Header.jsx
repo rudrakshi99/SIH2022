@@ -18,9 +18,9 @@ const Header = () => {
   const [show, setShow] = useState(false);
 
   return (
-    <div className="lg:h-16 h-screen sticky">
-      <div className="flex flex-col lg:flex-row lg:content-center">
-        <div className="flex items-center cursor-pointer lg:ml-auto mr-auto lg:ml-32">
+    <div className="h-16 inPhone">
+      <div className="flex content-center">
+        <div className="flex items-center cursor-pointer ml-auto lg:ml-32">
           <img
             onClick={() => navigate("/")}
             src={logo}
@@ -31,8 +31,8 @@ const Header = () => {
             Krishi <br /> Sadhan
           </h3>
         </div>
-        <div className="flex-2 lg:w-1/2 w-11/12 mx-auto">
-          <ul className="flex flex-col lg:flex-row mt-4 lg:items-center items-start">
+        <div className="flex-2 w-5/12 mx-auto">
+          <ul className="flex mt-4 items-center">
             <li
               onClick={() => navigate("/")}
               className="text-lg cursor-pointer font-semibold text-darkgreen lg:ml-7 mx-6"
