@@ -63,7 +63,7 @@ const Register = () => {
       });
       console.log(data);
       // useDispatch(getSaveProfileAction(data.data));
-      if (!data.email.success) {
+      if (!data.success) {
       } else {
         setSuccess(data.success);
         setMessage(data.message);
