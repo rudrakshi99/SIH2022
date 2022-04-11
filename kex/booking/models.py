@@ -26,6 +26,12 @@ class Booking(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
+    RENTING_MODES = (("With Assistance", "With Assistance"), ("Self Use", "Self Use"))
+
+    renting_mode = models.CharField(
+        choices=RENTING_MODES, max_length=200, default="Self Use"
+    )
+
     def __str__(self):
         return self.customer.username + " - " + self.equipment.title
 

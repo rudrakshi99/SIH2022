@@ -21,6 +21,7 @@ class BookingListSerializer(serializers.ModelSerializer):
             "created_at",
             "start_date",
             "end_date",
+            "renting_mode",
         ]
 
 
@@ -90,6 +91,7 @@ class BookingCreateSerializer(serializers.ModelSerializer):
             "start_time",
             "end_time",
             "customer",
+            "renting_mode",
         ]
         read_only_fields = [
             "booking_id",
@@ -204,6 +206,7 @@ class BookingDetailSerializer(serializers.ModelSerializer):
             "status",
             "number_of_days",
             "owner",
+            "renting_mode",
         ]
 
     def get_total_daily_rent(self, obj):

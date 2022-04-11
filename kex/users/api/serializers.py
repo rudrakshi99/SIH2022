@@ -62,6 +62,7 @@ class UserSignupSerializer(serializers.ModelSerializer):
     phone_number = serializers.IntegerField(
         required=True, validators=[validator_mobile_number]
     )
+    aadhar_card_number = serializers.CharField(required=True)
     email = serializers.EmailField(required=False)
     password = serializers.CharField(required=True, write_only=True)
 
@@ -81,6 +82,7 @@ class UserSignupSerializer(serializers.ModelSerializer):
             "pin_code",
             "phone_number",
             "secondary_phone_number",
+            "aadhar_card_number",
         ]
         read_only_fields = ["id", "user_id", "uuid"]
 
