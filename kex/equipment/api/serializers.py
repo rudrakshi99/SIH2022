@@ -83,6 +83,7 @@ class EquipmentDetailSerializer(ModelSerializer):
             "available_end_time",
             "show_phone_number",
             "created_at",
+            "delivery_choice",
         ]
 
     def get_manufacturer(self, obj):
@@ -174,6 +175,7 @@ class EquipmentCreateSerializer(ModelSerializer):
             "available_end_time",
             "show_phone_number",
             "created_at",
+            "delivery_choice",
         ]
 
     def get_image_1(self, obj):

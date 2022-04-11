@@ -38,6 +38,10 @@ class User(AbstractUser):
 
     twilio_user_id = models.CharField(max_length=9, blank=True, null=True)
 
+    aadhaar_card_number = models.CharField(
+        _("AADHAR CARD number of User"), max_length=12, blank=True, null=True
+    )
+
     def tokens(self):
         refresh = RefreshToken.for_user(self)
         return {"refresh": str(refresh), "access": str(refresh.access_token)}

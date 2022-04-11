@@ -46,6 +46,11 @@ class Equipment(models.Model):
     show_phone_number = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    DELIVERY_CHOICES = (("Self", "Self"), ("Help Centre", "Help Centre"))
+    delivery_choice = models.CharField(
+        choices=DELIVERY_CHOICES, max_length=200, default="Self"
+    )
+
     def __str__(self):
         return self.title
 
