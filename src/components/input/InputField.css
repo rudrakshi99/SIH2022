@@ -1,4 +1,7 @@
 .input-style {
-  box-shadow: inset 0px 4px 4px rgba(104, 172, 93, 0.25);
-  background: #f1f1f1;
+  border: 1.5px solid #F1F1F1;
+box-sizing: border-box;
+box-shadow: inset 0px 4px 4px rgba(104, 172, 93, 0.25);
+border-radius: 4px;
+
 }

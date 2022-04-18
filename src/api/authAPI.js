@@ -2,7 +2,8 @@ import axios from "axios";
 import instance from "./config";
 import Cookies from "js-cookie";
 
-const url = "https://krishi-sadhan-app.herokuapp.com";
+// const url = "https://krishi-sadhan-app.herokuapp.com";
+const url = "http://localhost:5000";
 
 export const postRegisterData = async ({
   first_name,
@@ -10,7 +11,7 @@ export const postRegisterData = async ({
   password,
   last_name,
   pin_code,
-  phone_number,
+  phone_number
 }) => {
   try {
     const res = await axios.post(`${url}/users/signup/`, {
@@ -19,7 +20,7 @@ export const postRegisterData = async ({
       email,
       password,
       pin_code,
-      phone_number,
+      phone_number
     });
     return Promise.resolve(res.data);
   } catch (err) {
@@ -32,7 +33,7 @@ export const postLoginDataEmail = async ({ email, password }) => {
     console.log(email, password);
     const res = await instance.post(`/users/login/email`, {
       email,
-      password,
+      password
     });
     return Promise.resolve(res.data);
   } catch (err) {
@@ -44,7 +45,7 @@ export const postLoginDataEmail = async ({ email, password }) => {
 export const postLoginDataPhone = async ({ phone_number }) => {
   try {
     const res = await axios.post(`${url}/users/login/otp`, {
-      phone_number,
+      phone_number
     });
     return Promise.resolve(res.data);
   } catch (err) {
@@ -56,7 +57,7 @@ export const verifyOtp = async ({ phone_number, otp }) => {
   try {
     const res = await axios.post(`${url}/users/signup/verify-otp`, {
       phone_number,
-      otp,
+      otp
     });
     return Promise.resolve(res.data);
   } catch (err) {
@@ -68,7 +69,7 @@ export const verifyOtpLogin = async ({ phone_number, otp }) => {
   try {
     const res = await axios.post(`${url}/users/login/verify-otp`, {
       phone_number: phone_number,
-      otp: otp,
+      otp: otp
     });
     return Promise.resolve(res.data);
   } catch (err) {
@@ -80,7 +81,7 @@ export const renewAccessToken = async () => {
   const refresh_token = Cookies.get("refresh-token");
   try {
     const res = await axios.post(`${url}/api/token/refresh/`, {
-      refresh: refresh_token,
+      refresh: refresh_token
     });
     return Promise.resolve(res.data);
   } catch (err) {
@@ -112,7 +113,7 @@ export const resetPassword = async (password, accessToken) => {
       `${url}/api/auth/reset-password`,
       { password },
       {
-        headers: { Authorization: accessToken },
+        headers: { Authorization: accessToken }
       }
     );
     return Promise.resolve(res.data);
@@ -124,12 +125,12 @@ export const resetPassword = async (password, accessToken) => {
 export const updateProfile = async ({ formData, accessToken }) => {
   const headers = {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${accessToken}`
   };
   try {
     const uuid = Cookies.get("uuid");
     const res = await instance.put(`${url}/users/${uuid}/`, formData, {
-      headers,
+      headers
     });
     return Promise.resolve(res.data);
   } catch (err) {
@@ -143,7 +144,7 @@ export const updatePassword = async (password, accessToken) => {
       `${url}/api/auth/reset-password`,
       { password },
       {
-        headers: { Authorization: accessToken },
+        headers: { Authorization: accessToken }
       }
     );
     return Promise.resolve(res.data);
@@ -159,7 +160,7 @@ export const postDisputeData = async ({
   phone_number,
   description,
   topic,
-  equipment_id,
+  equipment_id
 }) => {
   try {
     const res = await axios.post(`${url}/enquiry/partner-dispute`, {
@@ -169,7 +170,7 @@ export const postDisputeData = async ({
       phone_number,
       description,
       topic,
-      equipment_id,
+      equipment_id
     });
     return Promise.resolve(res.data);
   } catch (err) {
@@ -181,19 +182,19 @@ export const postCancellationData = async ({
   booking_id,
   cancel_reason,
   description,
-  token,
+  token
 }) => {
   try {
     const headers = {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token
     };
     const res = await instance.post(
       `${url}/enquiry/cancel-form`,
       {
         booking_id,
         cancel_reason,
-        description,
+        description
       },
       { headers }
     );

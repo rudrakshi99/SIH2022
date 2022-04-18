@@ -6,16 +6,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { getLogoutAction } from "../../redux/actions";
 import Cookies from "js-cookie";
 
+import Login from "../../pages/Login";
+import Register from "../../pages/Register";
+
 //images
 import userIcon from "../../img/user_icon.svg";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const tokenState = useSelector((state) => state.tokenReducer);
+  // const tokenState = useSelector((state) => state.tokenReducer);
   const authState = useSelector((state) => state.authReducer);
 
   const [show, setShow] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
 
   return (
     <div className="h-16 inPhone">
@@ -35,37 +40,37 @@ const Header = () => {
           <ul className="flex mt-4 items-center">
             <li
               onClick={() => navigate("/")}
-              className="text-lg cursor-pointer font-semibold text-darkgreen lg:ml-7 ml-6 mr-1.5"
+              className="text-lg cursor-pointer font-semibold text-[#219653] hover:opacity-90 lg:ml-7 ml-6 mr-1.5"
             >
               Home
             </li>
             <li
-              className="text-lg cursor-pointer font-semibold text-darkgreen ml-6 mr-1.5"
+              className="text-lg cursor-pointer font-semibold text-[#219653] hover:opacity-90 ml-6 mr-1.5"
               onClick={() => navigate("/dashboard")}
             >
               Dashboard
             </li>
             <li
-              className="text-lg cursor-pointer font-semibold text-darkgreen ml-6 mr-1.5"
+              className="text-lg cursor-pointer font-semibold text-[#219653] hover:opacity-90 ml-6 mr-1.5"
               onClick={() => navigate("/booking-history")}
             >
               Bookings
             </li>
             <li
-              className="text-lg cursor-pointer font-semibold text-darkgreen ml-6 mr-1.5"
+              className="text-lg cursor-pointer font-semibold text-[#219653] hover:opacity-90 ml-6 mr-1.5"
               onClick={() => navigate("/addProduct")}
             >
               Add Product
             </li>
             <li
               onClick={() => navigate("/help")}
-              className="text-lg cursor-pointer font-semibold text-darkgreen ml-6 mr-1.5"
+              className="text-lg cursor-pointer font-semibold text-[#219653] hover:opacity-90 ml-6 mr-1.5"
             >
               Help
             </li>
             <li
               onClick={() => navigate("/contact")}
-              className="text-lg cursor-pointer font-semibold text-darkgreen ml-6 mr-1.5"
+              className="text-lg cursor-pointer font-semibold text-[#219653] hover:opacity-90 ml-6 mr-1.5"
             >
               Contact Us
             </li>
@@ -74,14 +79,14 @@ const Header = () => {
         {!Cookies.get("refresh-token") ? (
           <div className="flex items-center">
             <button
-              onClick={() => navigate("/login")}
-              className="bg-darkgreen hover:bg-green-700 text-white font-bold py-1 px-8 rounded mx-2"
+              onClick={() => setShowLogin(true)}
+              className="hover:bg-[#219653] bg-white border-2 transition border-[#219653] hover:text-white font-bold py-1 px-8 rounded mx-2"
             >
               Login
             </button>
             <button
-              onClick={() => navigate("/register")}
-              className="bg-darkgreen hover:bg-green-700 text-white font-bold py-1 px-8 rounded mx-4"
+              onClick={() => setShowRegister(true)}
+              className="hover:bg-[#219653] bg-white border-2 transition border-[#219653] hover:text-white font-bold py-1 px-8 rounded mx-4"
             >
               Sign Up
             </button>
@@ -132,6 +137,14 @@ const Header = () => {
           </div>
         )}
       </div>
+      {showLogin ? (
+        <div className="">
+          <Login onClick={setShowLogin} />
+        </div>
+      ) : (
+        <div></div>
+      )}
+      {showRegister ? <Register onClick={setShowRegister} /> : <div></div>}
     </div>
   );
 };

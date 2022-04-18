@@ -7,7 +7,7 @@ import { getProfile } from "./api/profileAPI";
 import {
   getLoginAction,
   getSaveProfileAction,
-  getSaveTokenAction,
+  getSaveTokenAction
 } from "./redux/actions";
 // import ProtectedRoute from "./components/ProtectedRoute";
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -36,7 +36,9 @@ import CancellationPolicy from "./pages/cancellationPage/CancellationPolicy";
 import UpdateProfile from "./pages/updateProfile/index";
 import BookingHistory from "./pages/bookingHistory";
 import Feedback from "./pages/feedback/Feedback";
-import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
+import SpeechRecognition, {
+  useSpeechRecognition
+} from "react-speech-recognition";
 import EquipmentReport from "./pages/EquipmentReport";
 
 function App() {
@@ -50,7 +52,7 @@ function App() {
     dispatch(
       getSaveTokenAction({
         accessToken: access,
-        refreshToken: refresh,
+        refreshToken: refresh
       })
     );
   }, [tokenState.token.accessToken]);
@@ -62,7 +64,7 @@ function App() {
       dispatch(getLoginAction());
       const data = await getProfile({
         uuid: uuid,
-        accessToken: access,
+        accessToken: access
       });
       console.log(data);
       dispatch(getSaveProfileAction(data));
@@ -71,7 +73,7 @@ function App() {
 
   return (
     <>
-{/*       
+      {/*       
       <p id="transcript">Transcript: {transcript}</p>
 
       <button onClick={SpeechRecognition.startListening}>Start</button> */}
@@ -99,7 +101,7 @@ function App() {
         <Route path="feedback" element={<Feedback />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
-        
+
       <Footer />
       <SupportEngine />
     </>
