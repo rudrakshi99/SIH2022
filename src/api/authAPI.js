@@ -2,8 +2,8 @@ import axios from "axios";
 import instance from "./config";
 import Cookies from "js-cookie";
 
-// const url = "https://krishi-sadhan-app.herokuapp.com";
-const url = "http://localhost:5000";
+const url = "https://krishi-sadhan-app.herokuapp.com";
+// const url = "http://localhost:5000";
 
 export const postRegisterData = async ({
   first_name,
