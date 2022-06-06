@@ -174,7 +174,7 @@ const Login = ({ onClick }) => {
                 required={true}
               />
               <button
-                className="px-6 py-1 mx-auto rounded-lg text-white text-lg font-semibold bg-[#68AC5D]"
+                className="px-6 py-1 mx-auto rounded-lg text-white text-lg font-semibold bg-[#219653] hover:opacity-90"
                 type="submit"
               >
                 Verify OTP
@@ -246,7 +246,7 @@ const Login = ({ onClick }) => {
                 type="password"
               />
               <button
-                className="px-6 py-1 w-32 mx-auto rounded-lg text-white text-xl font-semibold bg-[#68AC5D]"
+                className="px-6 py-1 w-32 mx-auto rounded-lg text-white text-xl font-semibold bg-[#219653] hover:opacity-90"
                 type="submit"
               >
                 Login
@@ -272,8 +272,7 @@ const Login = ({ onClick }) => {
                 type="text"
               />
               <button
-                className="px-6 py-1 mx-auto rounded-lg text-white text-xl font-semibold"
-                style={{ backgroundColor: "#68AC5D" }}
+                className="px-6 py-1 mx-auto rounded-lg text-white text-xl font-semibold bg-[#219653] hover:opacity-90"
                 onClick={() => handleLoginPhone()}
               >
                 Login with OTP

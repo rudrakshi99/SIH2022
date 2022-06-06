@@ -161,8 +161,7 @@ const Register = ({ onClick }) => {
               required={true}
             />
             <button
-              className="px-6 py-1 w-32 mx-auto rounded-lg text-white text-xl font-semibold"
-              style={{ backgroundColor: "#68AC5D" }}
+              className="px-6 py-1 w-32 mx-auto rounded-lg text-white text-xl font-semibold bg-[#219653] hover:opacity-90"
               type="submit"
             >
               Register

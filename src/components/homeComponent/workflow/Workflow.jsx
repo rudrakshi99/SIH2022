@@ -1,6 +1,6 @@
 import React from "react";
 import "./Workflow.css";
-import Rectangle73 from "../../../img/Rectangle73.png";
+// import Rectangle73 from "../../../img/Rectangle73.png";
 import videoPic from "../../../img/videoPic.png";
 
 const Workflow = () => {
@@ -14,22 +14,22 @@ const Workflow = () => {
       </p>
       <div className="flex justify-around mediaQuery items-center text-white">
         <div className="grow">
-          <ul className="list-decimal ml-4 list-inside">
-            <li className="text-2xl mr-4 my-2">Sign-up to the platform.</li>
-            <li className="text-2xl mr-4 my-1">
+          <ul className="list-decimal ml-[90px] list-inside">
+            <li className="text-2xl mr-4 my-4">Sign-up to the platform.</li>
+            <li className="text-2xl mr-4 my-3">
               Post your ad for the off-season.
             </li>
-            <li className="text-2xl mr-4 my-2">Provide equipment details.</li>
-            <li className="text-2xl mr-4 my-1">
+            <li className="text-2xl mr-4 my-4">Provide equipment details.</li>
+            <li className="text-2xl mr-4 my-3">
               Explore and filter lists of equipment.
             </li>
-            <li className="text-2xl mr-4 my-2">
+            <li className="text-2xl mr-4 my-4">
               Check an available time slot.
             </li>
-            <li className="text-2xl mr-4 my-1">
+            <li className="text-2xl mr-4 my-3">
               Chat with the owner and make a booking..
             </li>
-            <li className="text-2xl mr-4 my-2">Stay updated by SMS.</li>
+            <li className="text-2xl mr-4 my-4">Stay updated by SMS.</li>
           </ul>
         </div>
         <div className="h-1/2 w-1/2">

@@ -37,7 +37,7 @@ const Header = () => {
           </h3>
         </div>
         <div className="flex-2 w-5/12 mx-auto">
-          <ul className="flex mt-4 items-center">
+          <ul className="flex mt-4 items-around">
             <li
               onClick={() => navigate("/")}
               className="text-lg cursor-pointer font-semibold text-[#219653] hover:opacity-90 lg:ml-7 ml-6 mr-1.5"
@@ -52,12 +52,6 @@ const Header = () => {
             </li>
             <li
               className="text-lg cursor-pointer font-semibold text-[#219653] hover:opacity-90 ml-6 mr-1.5"
-              onClick={() => navigate("/booking-history")}
-            >
-              Bookings
-            </li>
-            <li
-              className="text-lg cursor-pointer font-semibold text-[#219653] hover:opacity-90 ml-6 mr-1.5"
               onClick={() => navigate("/addProduct")}
             >
               Add Product
@@ -68,25 +62,19 @@ const Header = () => {
             >
               Help
             </li>
-            <li
-              onClick={() => navigate("/contact")}
-              className="text-lg cursor-pointer font-semibold text-[#219653] hover:opacity-90 ml-6 mr-1.5"
-            >
-              Contact Us
-            </li>
           </ul>
         </div>
         {!Cookies.get("refresh-token") ? (
           <div className="flex items-center">
             <button
               onClick={() => setShowLogin(true)}
-              className="hover:bg-[#219653] bg-white border-2 transition border-[#219653] hover:text-white font-bold py-1 px-8 rounded mx-2"
+              className="hover:bg-[#219653] bg-white border-2 transition border-[#219653] text-[#219653] hover:text-white font-bold py-1 px-8 rounded mx-2"
             >
               Login
             </button>
             <button
               onClick={() => setShowRegister(true)}
-              className="hover:bg-[#219653] bg-white border-2 transition border-[#219653] hover:text-white font-bold py-1 px-8 rounded mx-4"
+              className="hover:bg-[#219653] bg-white border-2 transition border-[#219653] text-[#219653] hover:text-white font-bold py-1 px-8 rounded mx-4"
             >
               Sign Up
             </button>
