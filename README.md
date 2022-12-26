@@ -20,6 +20,10 @@
 12. Support Centre
 13. Chat with owner and customer.
 
+# Demo Video
+
+<a href="https://drive.google.com/file/d/1vL8wKLcrvzAUCyXGC0f-EqEByYfxmlMo/view"> <img src="https://user-images.githubusercontent.com/55245862/209521089-a7767feb-cc86-46ed-bc4b-150288d4b60c.png" alt="Demo Video" height='250' width='400'/> </a>
+
 
 ## Technology Stack to be used:
 
