@@ -31,7 +31,7 @@
 
 ## Technology Stack:
 - **Frontend**: React, Redux
-- **Backend**: Django, Django Rest Framework
+- **Backend**: Django Rest Framework
 - **IDE**: VS Code
 - **Design**: Figma, Canva
 - **API Testing & Documentation**: Postman, Swagger
