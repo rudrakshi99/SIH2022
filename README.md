@@ -10,26 +10,25 @@
 1. Login/Sign Up.
 2. JWT Authentication.
 3. OTP Verification.
-4. Add Equipment details related to various categories like Crop Protection, Harvesting Equipment,etc
-5. Search equipments of a particular category using the title.
+4. Add Equipment details related to various categories like Crop Protection, Harvesting Equipment, etc
+5. Search equipment of a particular category using the title.
 6. Filter equipment based on their category, price, availability, etc.
-7. Book and rent equipment for off-season.
+7. Book and rent equipment for the off-season.
 8. Track booking requests.
 10. View the list of comments and replies related to particular posts.
 11. LimitOffsetPagination for custom pagination style.
 12. Support Centre
-13. Chat with owner and customer.
+13. Chat with the owner and customer.
 
 # Demo Video
 
 <a href="https://youtu.be/JG91XGtaDck"> <img src="https://user-images.githubusercontent.com/55245862/209521089-a7767feb-cc86-46ed-bc4b-150288d4b60c.png" alt="Demo Video" height='250' width='400'/> </a>
 
 
-## Technology Stack to be used:
+## Technology Stack:
 
 <img src="https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white"/> <img src="https://img.shields.io/badge/css3%20-%231572B6.svg?&style=for-the-badge&logo=css3&logoColor=white"/> <img src="https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/> <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"/>  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/> <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white"/> <img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white"/>  <img src="https://img.shields.io/badge/markdown-%23000000.svg?&style=for-the-badge&logo=markdown&logoColor=white"/><img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/> <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white"/>
 
-## Technology Stack:
 - **Frontend**: React, Redux
 - **Backend**: Django Rest Framework
 - **IDE**: VS Code
